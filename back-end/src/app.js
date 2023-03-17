@@ -3,6 +3,7 @@ const cors = require("cors");
 const ResponseError = require("./errors/ResponseError");
 const { connectDb } = require("./dbConnect");
 const UserRouter = require("./routers/userRouter");
+const questionRouter = require("./routers/questionRouter");
 
 connectDb();
 
@@ -12,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/users", UserRouter);
 app.use("/classRoom", UserRouter);
-app.use("/question", UserRouter);
+app.use("/question", questionRouter);
 
 app.use("*", (err, req, res, next) => {
   if (err instanceof ResponseError) {
