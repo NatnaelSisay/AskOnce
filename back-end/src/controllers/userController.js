@@ -1,7 +1,21 @@
 const { createUser } = require("../respository/userRepository");
 const { hashPassword } = require("../hashPassword");
 const { signJwt } = require("../jwtUtil");
-
+module.exports.loginController = async (req, res, next) => {
+  try {
+    const user = req.validatedUser;
+    const token = signJwt({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      _id: user._id,
+    });
+    res.statusCode = 200;
+    res.json({ token: token });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports.signupController = async (req, res, next) => {
   try {

@@ -1,12 +1,11 @@
 const { userModel } = require("../models/userModel");
 
 module.exports.createUser = async (data) => {
-  const password = "hashedPassword";
   const newUser = new userModel({
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
-    password: password,
+    password: data.password,
     role: data.role,
   });
   const result = await newUser.save();
