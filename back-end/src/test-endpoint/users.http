@@ -6,7 +6,8 @@ Content-Type: application/json
     "lastName": "tester",
     "email": "tester@gmail.com",
     "password": "testertest",
-    "role": "student",
+    "passwordConfirmation": "testertest",
+    "role": "STUDENT"
 }
 
 ###
@@ -14,9 +15,6 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "firstName": "tester",
-    "lastName": "tester",
     "email": "tester@gmail.com",
-    "password": "testertest",
-    "role": "student",
+    "password": "testertest"
 }
