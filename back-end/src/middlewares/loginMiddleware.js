@@ -12,6 +12,7 @@ module.exports.logginMiddleware = async (req, _, next) => {
       if (!user) {
         return Promise.reject("User not registered with this email");
       }
+      user = user.toObject();
       const password = req.body.password;
       const result = await compareHash(password, user.password);
       if (!result) return Promise.reject("Wrong password");

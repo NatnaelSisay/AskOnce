@@ -8,6 +8,7 @@ module.exports.loginController = async (req, res, next) => {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
+      role: user.role,
       _id: user._id,
     });
     res.statusCode = 200;
@@ -25,6 +26,7 @@ module.exports.signupController = async (req, res, next) => {
     const result = await createUser(newUser);
     const token = signJwt({
       email: result.email,
+      role: result.role,
       firstName: result.firstName,
       lastName: result.lastName,
       _id: result._id,
