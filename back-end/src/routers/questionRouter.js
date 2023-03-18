@@ -11,24 +11,10 @@ const { authMiddleWare } = require("../middlewares/authMiddleware");
 const AnswerRouter = require("./answerRouter");
 const answerRouter = require("./answerRouter");
 
-QuestionRouter.get(
-  "/:classRoomId",
-  authMiddleWare(),
-  getAllQuestionInClassRoom
-);
+QuestionRouter.get("/",authMiddleWare(),getAllQuestionInClassRoom);
 QuestionRouter.post("/", authMiddleWare(), express.json(), createQuestion);
-QuestionRouter.get(
-  "/",
-  authMiddleWare(),
-  express.json(),
-  searchForQuestionsByTitle
-);
-QuestionRouter.get(
-  "/:tag",
-  authMiddleWare(),
-  express.json(),
-  getAllQuestionsForATag
-);
+QuestionRouter.get("/",authMiddleWare(),express.json(),searchForQuestionsByTitle);
+QuestionRouter.get("/:tag",authMiddleWare(),express.json(),getAllQuestionsForATag);
 QuestionRouter.delete("/:questionid", authMiddleWare(), deleteQuestion);
 QuestionRouter.use("/:questionId/answers", authMiddleWare(), AnswerRouter);
 

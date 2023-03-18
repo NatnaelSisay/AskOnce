@@ -1,7 +1,16 @@
 const mongoose = require("mongoose");
-const { userSchema } = require("./userModel");
+const { leanUserSchema } = require("./leanUserSchema");
 
+const answerSchema = new mongoose.Schema({
+  user: {
+    leanUserSchema
+  },
+  answer: {
+    type: String,
+    required: true,
+  }
 
+});
 const questionSchema = new mongoose.Schema({
   question: {
     type: String,
@@ -14,18 +23,21 @@ const questionSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  // answers: [answerSchema],
-  askedBy: userSchema,
+   answers: [answerSchema],
+  askedBy: {
+    type:leanUserSchema,
+    required: true},
   classroomId: String
 });
-const answerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  answeredBy: userSchema,
-  followUp: [questionSchema],
-});
+// const answerSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   answeredBy: userSchema,
+//   followUp: [questionSchema],
+// });
+
 
 
 module.exports = mongoose.model("Question", questionSchema);
