@@ -1,0 +1,66 @@
+GET http://localhost:3000/class-room/
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+
+###
+GET http://localhost:3000/class-room/123
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+
+###
+POST http://localhost:3000/class-room/
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+Content-Type: application/json
+
+{
+    "name": "TestClass",
+
+    "professor": {
+        "firstName": "professor",
+        "lastName": "professor",
+        "email": "professor@gmail.com",
+        "password": "professortest",
+        "passwordConfirmation": "professortest",
+        "role": "PROFESSOR"
+    },
+
+    "students": [{
+        "firstName": "tester",
+        "lastName": "tester",
+        "email": "tester@gmail.com",
+        "password": "testertest",
+        "passwordConfirmation": "testertest",
+        "role": "STUDENT"
+    }
+  ]
+}
+
+###
+PUT http://localhost:3000/class-room/123
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+Content-Type: application/json
+
+{
+    "name": "TestClass",
+
+    "professor": {
+        "firstName": "professor",
+        "lastName": "professor",
+        "email": "professor@gmail.com",
+        "password": "professortest",
+        "passwordConfirmation": "professortest",
+        "role": "PROFESSOR"
+    },
+
+    "students": [{
+        "firstName": "tester",
+        "lastName": "tester",
+        "email": "tester@gmail.com",
+        "password": "testertest",
+        "passwordConfirmation": "testertest",
+        "role": "STUDENT"
+    }
+  ]
+}
+
+###
+DELETE  http://localhost:3000/class-room/123
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg

@@ -10,6 +10,4 @@ const classRoomSchema = new mongoose.Schema({
   students: [userSchema],
 });
 
-
-
 module.exports = mongoose.model("ClassRoom", classRoomSchema);
