@@ -4,6 +4,7 @@ const ResponseError = require("./errors/ResponseError");
 const { connectDb } = require("./dbConnect");
 const UserRouter = require("./routers/userRouter");
 const questionRouter = require("./routers/questionRouter");
+const ClassRoomRouter = require("./routers/classRoomRouter");
 
 connectDb();
 
@@ -12,8 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/users", UserRouter);
-app.use("/classRoom", questionRouter);
-app.use("/:classroomId/questions", questionRouter);
+app.use("/classRoom", ClassRoomRouter);
 app.use("*", (err, req, res, next) => {
   if (err instanceof ResponseError) {
     res.statusCode = err.statusCode;
