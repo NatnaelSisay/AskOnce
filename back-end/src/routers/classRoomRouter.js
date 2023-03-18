@@ -16,7 +16,7 @@ const {
 const ClassRoomRouter = new express.Router();
 
 ClassRoomRouter.use("/:classroomId/questions", QuestionRouter);
-ClassRoomRouter.use("/:classroomId/memeber/", StudentsRouter);
+ClassRoomRouter.use("/:class_id/students/", StudentsRouter);
 
 ClassRoomRouter.use(authMiddleWare(ROLES_ENUM.professor));
 ClassRoomRouter.get("/", getClassRooms); // admin should have this priviledge
