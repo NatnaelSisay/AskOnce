@@ -1,0 +1,47 @@
+POST http://localhost:3000/questions
+Content-Type: application/json
+
+{
+  "question": "What is 1 + 1?",
+  "description": "I'm not sure if it's 2 or 3",
+    "tag": ["some", "tags", "here"]
+}
+###
+GET http://localhost:3000/questions/all
+###
+GET http://localhost:3000/questions
+Content-Type: application/json
+
+{
+  "tag": "math"
+}
+
+
+
+
+
+# classroom students
+###
+GET http://localhost:3000/classRoom/64152b96cbc5750d75efb4cb/students?limit=10&page=2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpbnNhZUBtaXUuZWR1Iiwicm9sZSI6IlNUVURFTlQiLCJmaXJzdE5hbWUiOiJUaW5zYWUiLCJsYXN0TmFtZSI6IllhcmVkIiwiX2lkIjoiNjQxNTJiZDJmYjUyMjUyZjMyYzZjYjZmIiwiaWF0IjoxNjc5MTA5MDc0fQ.NGPkMg3UZpyceVupy69ILhieKg--Z3KKH8pQSyLaRbs
+
+###
+
+
+
+POST http://localhost:3000/classRoom/64152b96cbc5750d75efb4cb/students/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtaXUuZWR1Iiwicm9sZSI6IlBST0ZFU1NPUiIsImZpcnN0TmFtZSI6IkFzYWFkIiwibGFzdE5hbWUiOiJTYWFkIiwiX2lkIjoiNjQxNGQ4NWVmYTg0MjA0ODk3YzAxYzYzIiwiaWF0IjoxNjc5MDg3NzExfQ.0GfbgXm2TNhCAhRUL2tOvvZV9ciEAVsHTxV8v35dZqU
+
+{ "_id": "64152b96cbc5750d75efb4cb",
+	"role":"STUD ENT",
+	"email":"tinsae@miu.edu",
+	"firstName":"Tinsae",
+	"lastName":"Yared"
+}
+
+###
+delete http://localhost:3000/classRoom/64152b96cbc5750d75efb4cb/students/64152b96cbc5750d75efb4cb HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtaXUuZWR1Iiwicm9sZSI6IlBST0ZFU1NPUiIsImZpcnN0TmFtZSI6IkFzYWFkIiwibGFzdE5hbWUiOiJTYWFkIiwiX2lkIjoiNjQxNGQ4NWVmYTg0MjA0ODk3YzAxYzYzIiwiaWF0IjoxNjc5MDg3NzExfQ.0GfbgXm2TNhCAhRUL2tOvvZV9ciEAVsHTxV8v35dZqU
