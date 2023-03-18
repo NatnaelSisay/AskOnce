@@ -1,19 +1,20 @@
-const { listenerCount } = require("../models/classRoomModel");
 const ClassRoomModel = require("../models/classRoomModel");
 
 module.exports.getAllClassesForUser = async (user_id) => {
   const result = await ClassRoomModel.find({
-    $or: [{ "professor._id": user_id }, { "students._id": user_id }],
+    $and: [
+      {
+        $or: [{ "professor._id": user_id }, { "students._id": user_id }],
+      },
+      { deletedAt: null },
+    ],
   });
   return result;
 };
 
-module.exports.getClassRoomById = async (classroom_id, user_id) => {
+module.exports.getClassRoomById = async (classroom_id) => {
   return await ClassRoomModel.findOne({
-    $and: [
-      { _id: classroom_id },
-      { $or: [{ "professor._id": user_id }, { "students._id": user_id }] },
-    ],
+    $and: [{ _id: classroom_id }, { deletedAt: null }],
   });
 };
 

@@ -40,10 +40,7 @@ const getClassRoomById = async (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decode = decodeJwt(token);
 
-    const result = await ClassRoomRepository.getClassRoomById(
-      classroom_id,
-      decode._id
-    );
+    let result = await ClassRoomRepository.getClassRoomById(classroom_id);
     if (!result) {
       return next(
         new ResponseError(400, {
@@ -51,9 +48,24 @@ const getClassRoomById = async (req, res, next) => {
         })
       );
     }
+    result = result.toObject();
+
+    const isProfessor = decode._id === result.professor._id;
+    const student = result.students.find(
+      (student) => student._id === decode._id
+    );
+
+    if (!isProfessor && !student) {
+      return next(
+        new ResponseError(403, {
+          message: `Access Denied`,
+        })
+      );
+    }
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

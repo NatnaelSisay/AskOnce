@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const { connectDb } = require("../dbConnect");
-const { userSchema } = require("./userModel");
 
 const classRoomSchema = new mongoose.Schema({
   name: {
