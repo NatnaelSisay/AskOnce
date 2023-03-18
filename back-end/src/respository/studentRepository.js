@@ -17,7 +17,7 @@ module.exports.addStudent = async (classId, student) => {
   await classRoomModel.findOneAndUpdate(
     { _id: classId },
     {
-      $push: {
+      $addToSet: {
         students: {
           _id: student._id,
           firstName: student.firstName,

@@ -4,7 +4,6 @@ const { verifyJwt } = require("../jwtUtil");
 
 module.exports.authMiddleWare = (role) => async (req, res, next) => {
   try {
-    console.log("decoded");
     const reqJwt = req.headers?.authorization?.split(" ")[1];
     const decoded = verifyJwt(reqJwt);
     if (role) {
