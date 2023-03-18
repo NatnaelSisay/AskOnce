@@ -22,7 +22,7 @@ module.exports.createAnswer = async (req, res, next) => {
   try {
     const {classroomId, questionId } = req.params;
     const answer = req.body;
-    const result = await pushAnswer(classroomId questionId, answer);
+    const result = await pushAnswer(classroomId, questionId, answer);
 
     res.json({
       success: true,
