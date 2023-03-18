@@ -1,67 +1,28 @@
 GET http://localhost:3000/class-room/
-Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 
 ###
-GET http://localhost:3000/class-room/641534dfe0785de1f1df1979
-Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+GET http://localhost:3000/class-room/6415dccede202601ad5e6d63
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 
 ###
 POST http://localhost:3000/class-room/
-Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 Content-Type: application/json
 
 {
-    "name": "TestClass",
-
-    "professor": {
-        "firstName": "professor",
-        "lastName": "professor",
-        "email": "professor@gmail.com",
-        "password": "professortest",
-        "passwordConfirmation": "professortest",
-        "role": "PROFESSOR"
-    },
-
-    "students": [{
-        "firstName": "tester",
-        "lastName": "tester",
-        "email": "tester@gmail.com",
-        "password": "testertest",
-        "passwordConfirmation": "testertest",
-        "role": "STUDENT"
-    }
-  ],
-  "questions": []
+    "name": "FPpP"
 }
 
 ###
-PUT http://localhost:3000/class-room/641534dfe0785de1f1df1979
-Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+PUT http://localhost:3000/class-room/6415dccede202601ad5e6d63
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 Content-Type: application/json
 
 {
-    "name": "MWA",
-
-    "professor": {
-        "firstName": "professor",
-        "lastName": "professor",
-        "email": "professor@gmail.com",
-        "password": "professortest",
-        "passwordConfirmation": "professortest",
-        "role": "PROFESSOR"
-    },
-
-    "students": [{
-        "firstName": "tester",
-        "lastName": "tester",
-        "email": "tester@gmail.com",
-        "password": "testertest",
-        "passwordConfirmation": "testertest",
-        "role": "STUDENT"
-    }
-  ]
+    "name": "WAAA"
 }
 
 ###
-DELETE  http://localhost:3000/class-room/641534dfe0785de1f1df1979
-Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxMDg5NzJ9.i2y_x26SOKELrpliEQt8_qBLvi72XqVd8wb47N1tiWg
+DELETE  http://localhost:3000/class-room/6415dccede202601ad5e6d64
+Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0

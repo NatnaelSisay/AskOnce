@@ -14,10 +14,14 @@
  */
 const ClassRoomModel = require("../models/classRoomModel");
 const ResponseError = require("../errors/ResponseError");
+const ClassRoomRepository = require("../respository/classRoomRepository");
+const { decodeJwt } = require("../jwtUtil");
 
-const getClassRooms = async (req, res, next) => {
+const getClassRoomsForUser = async (req, res, next) => {
   try {
-    const result = await ClassRoomModel.find({});
+    const token = req.headers.authorization.split(" ")[1];
+    const decode = decodeJwt(token);
+    const result = await ClassRoomRepository.getAllClassesForUser(decode._id);
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     next(error);
@@ -33,7 +37,13 @@ const getClassRoomById = async (req, res, next) => {
       );
     }
 
-    const result = await ClassRoomModel.findOne({ _id: classroom_id });
+    const token = req.headers.authorization.split(" ")[1];
+    const decode = decodeJwt(token);
+
+    const result = await ClassRoomRepository.getClassRoomById(
+      classroom_id,
+      decode._id
+    );
     if (!result) {
       return next(
         new ResponseError(400, {
@@ -50,16 +60,13 @@ const getClassRoomById = async (req, res, next) => {
 
 const addClassRoom = async (req, res, next) => {
   try {
-    let result = await ClassRoomModel.findOne({
-      name: req.body?.name,
-    });
+    const token = req.headers.authorization.split(" ")[1];
+    const decode = decodeJwt(token);
 
-    if (result) {
-      return res.json({ success: true, data: result });
-    } else {
-      const newClassRoom = new ClassRoomModel(req.body);
-      result = await newClassRoom.save();
-    }
+    const result = await ClassRoomRepository.addClassRoom(
+      req.body.name,
+      decode
+    );
 
     res.json({ success: true, data: result });
   } catch (error) {
@@ -76,9 +83,9 @@ const updateClassRoom = async (req, res, next) => {
       );
     }
 
-    const result = await ClassRoomModel.updateOne(
-      { _id: classroom_id },
-      { $set: { name: req.body.name } }
+    const result = await ClassRoomRepository.updateClassRoom(
+      classroom_id,
+      req.body
     );
 
     res.status(200).json({ success: true, data: result });
@@ -96,10 +103,7 @@ const deleteClassRoom = async (req, res, next) => {
       );
     }
 
-    const result = await ClassRoomModel.updateOne(
-      { _id: classroom_id },
-      { $set: { deletedAt: Date.now().toString() } }
-    );
+    const result = await ClassRoomRepository.deleteClassRoom(classroom_id);
 
     if (!result.acknowledged) {
       return next(
@@ -116,7 +120,7 @@ const deleteClassRoom = async (req, res, next) => {
 };
 
 module.exports = {
-  getClassRooms,
+  getClassRoomsForUser,
   getClassRoomById,
   addClassRoom,
   updateClassRoom,

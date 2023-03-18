@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { connectDb } = require("../dbConnect");
 const { userSchema } = require("./userModel");
-connectDb();
 
 const classRoomSchema = new mongoose.Schema({
   name: {
@@ -37,6 +36,7 @@ const classRoomSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        sparse: true,
       },
       firstName: {
         type: String,
@@ -50,6 +50,7 @@ const classRoomSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        sparse: true,
       },
 
       role: {
@@ -58,6 +59,7 @@ const classRoomSchema = new mongoose.Schema({
       },
     },
   ],
+  deletedAt: Number,
 });
 
 module.exports = mongoose.model("ClassRoom", classRoomSchema);
