@@ -19,7 +19,7 @@ QuestionRouter.post("/", authMiddleWare(), express.json(), createQuestion);
 QuestionRouter.get("/search",authMiddleWare(),express.json(),searchForQuestionsByTitle);
 QuestionRouter.get("/:tag",authMiddleWare(),express.json(),getAllQuestionsForATag);
 QuestionRouter.delete("/:questionId", authMiddleWare(), deleteQuestion);
-QuestionRouter.use("/:questionId/answers", AnswerRouter);
+QuestionRouter.use("/:questionId/answers",authMiddleWare(), AnswerRouter);
 
 
 module.exports = QuestionRouter;
