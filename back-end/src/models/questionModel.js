@@ -3,7 +3,8 @@ const { leanUserSchema } = require("./leanUserSchema");
 
 const answerSchema = new mongoose.Schema({
   user: {
-    leanUserSchema
+    leanUserSchema,
+    
   },
   answer: {
     type: String,
@@ -26,9 +27,12 @@ const questionSchema = new mongoose.Schema({
    answers: [answerSchema],
   askedBy: {
     type:leanUserSchema,
-    required: true},
-  classroomId: String
+    required: false},
+  classroomId: String,
+  deletedAt: Date,
 });
+questionSchema.index({ question: "text" });
+
 // const answerSchema = new mongoose.Schema({
 //   name: {
 //     type: String,

@@ -2,6 +2,8 @@ const {
   findAllQuestions,
   createQuestion,
   findQuestionsByTags,
+  deleteAquestion,
+  findAquestionsByTitle
 } = require("../respository/questionRepository");
 
 module.exports.getAllQuestionInClassRoom = async (req, res, next) => {
@@ -19,9 +21,9 @@ module.exports.getAllQuestionInClassRoom = async (req, res, next) => {
 };
 module.exports.createQuestion = async (req, res, next) => {
   try {
-    const { classroomId } = req.params;
+    // const { classroomId } = req.params;
     const data = req.body;
-
+      
     const result = await createQuestion(data);
 
     res.json({
@@ -34,8 +36,9 @@ module.exports.createQuestion = async (req, res, next) => {
 };
 module.exports.searchForQuestionsByTitle = async (req, res, next) => {
   try {
-    const { classroomId } = req.params;
-    const title = req.body.title;
+    // const { classroomId } = req.params;
+    const {title} = req.query;
+    console.log(title);
     const result = await findAquestionsByTitle(title);
 
     res.json({
@@ -48,9 +51,10 @@ module.exports.searchForQuestionsByTitle = async (req, res, next) => {
 };
 module.exports.deleteQuestion = async (req, res, next) => {
   try {
-    const { classroomId } = req.params;
-    const id = req.params.id;
-    const result = await deleteAquestion(id);
+    // const { classroomId } = req.params;
+    const {questionId} = req.params
+    console.log(questionId);
+    const result = await deleteAquestion(questionId);
 
     res.json({
       success: true,
@@ -62,8 +66,9 @@ module.exports.deleteQuestion = async (req, res, next) => {
 };
 module.exports.getAllQuestionsForATag = async (req, res, next) => {
   try {
-    const { classroomId } = req.params;
-    const tag = req.body.tag;
+    const { tag } = req.params;
+    
+    console.log(tag);
     const result = await findQuestionsByTags(tag);
 
     res.json({

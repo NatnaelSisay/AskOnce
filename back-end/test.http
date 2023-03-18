@@ -1,17 +1,35 @@
-POST http://localhost:3000/
+POST http://localhost:3000/questions/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 Content-Type: application/json
 
 {
   "question": "What is 1 + 1?",
   "description": "I'm not sure if it's 2 or 3",
-    "tag": ["some", "tags", "here"]
+    "tags": ["some", "tags", "here"],
+    
+    "answers":[]
+    
 }
 ###
-GET http://localhost:3000/questions/all
-###
-GET http://localhost:3000/questions
-Content-Type: application/json
+GET http://localhost:3000/questions/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
-{
-  "tag": "math"
-}
+###
+GET http://localhost:3000/questions/math
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
+
+Content-Type: application/json
+###
+GET http://localhost:3000/questions/search?title=1+1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
+
+###
+DELETE  http://localhost:3000/questions/6415e1993c26a56978d689a1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
+
+###
+GET http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
+
+###
+POST  http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers

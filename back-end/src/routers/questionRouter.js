@@ -1,5 +1,5 @@
 const express = require("express");
-const QuestionRouter = express.Router();
+
 const {
   getAllQuestionInClassRoom,
   createQuestion,
@@ -9,13 +9,17 @@ const {
 } = require("../controllers/questionController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const AnswerRouter = require("./answerRouter");
-const answerRouter = require("./answerRouter");
+
+const QuestionRouter = express.Router({ mergeParams: true});
+const dumRouter = express.Router({ mergeParams: true});
+
 
 QuestionRouter.get("/",authMiddleWare(),getAllQuestionInClassRoom);
 QuestionRouter.post("/", authMiddleWare(), express.json(), createQuestion);
-QuestionRouter.get("/",authMiddleWare(),express.json(),searchForQuestionsByTitle);
+QuestionRouter.get("/search",authMiddleWare(),express.json(),searchForQuestionsByTitle);
 QuestionRouter.get("/:tag",authMiddleWare(),express.json(),getAllQuestionsForATag);
-QuestionRouter.delete("/:questionid", authMiddleWare(), deleteQuestion);
-QuestionRouter.use("/:questionId/answers", authMiddleWare(), AnswerRouter);
+QuestionRouter.delete("/:questionId", authMiddleWare(), deleteQuestion);
+QuestionRouter.use("/:questionId/answers", AnswerRouter);
+
 
 module.exports = QuestionRouter;
