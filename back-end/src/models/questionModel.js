@@ -9,7 +9,8 @@ const answerSchema = new mongoose.Schema({
   answer: {
     type: String,
     required: true,
-  }
+  },
+  deletedAt: Date,
 
 });
 const questionSchema = new mongoose.Schema({

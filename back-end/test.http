@@ -33,3 +33,15 @@ GET http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
 
 ###
 POST  http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
+Content-Type:  application/json
+
+{
+    "user":{
+        "firstName": "tester",
+        "lastName": "tester",
+        "email": "some@email.com"},
+    "answer": "2"
+    
+}
+###
+DELETE http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers/64160a0af452b39f381ae33c

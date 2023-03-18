@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/users", UserRouter);
 app.use("/classRoom", ClassRoomRouter);
-app.use("/questions", questionRouter);
+//app.use("/questions", questionRouter);
 app.use("*", (err, req, res, next) => {
   if (err instanceof ResponseError) {
     res.statusCode = err.statusCode;
