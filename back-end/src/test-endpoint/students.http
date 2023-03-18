@@ -1,25 +1,3 @@
-POST http://localhost:3000/questions
-Content-Type: application/json
-
-{
-  "question": "What is 1 + 1?",
-  "description": "I'm not sure if it's 2 or 3",
-    "tag": ["some", "tags", "here"]
-}
-###
-GET http://localhost:3000/questions/all
-###
-GET http://localhost:3000/questions
-Content-Type: application/json
-
-{
-  "tag": "math"
-}
-
-
-
-
-
 # classroom students
 ###
 GET http://localhost:3000/classRoom/64152b96cbc5750d75efb4cb/students?limit=10&page=2
