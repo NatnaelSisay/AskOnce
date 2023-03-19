@@ -7,7 +7,7 @@ import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { AuthService } from './auth.service';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [LoginComponent, AuthComponent, SignupComponent],
   imports: [
@@ -15,6 +15,8 @@ import { AuthService } from './auth.service';
     FormsModule,
     ReactiveFormsModule,
     AuthMaterialUiModule,
+    MatSnackBarModule,
+    
 
     RouterModule.forChild([
       { path: '', component: AuthComponent },
