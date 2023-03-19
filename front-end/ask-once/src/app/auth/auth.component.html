@@ -1,0 +1,5 @@
+<div>
+
+    <div *ngIf="showLogin; else signup"><app-login/></div>
+    <ng-template #signup ><app-signup/></ng-template>
+</div>

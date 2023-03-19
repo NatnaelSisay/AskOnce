@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="form">
+    <form [formGroup]="loginForm">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input matInput type="text" formControlName="email" />
+          <button mat-icon-button matSuffix>
+            <mat-icon>{{ "email" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword"
+          >
+            <mat-icon>{{
+              hidePassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" (click)="login()" >Login</button>
+      <p class="message">
+        Don't have an account?
+        <a (click)="authService.showSignup()">register</a>
+      </p>
+    </form>
+  </div>
+</div>

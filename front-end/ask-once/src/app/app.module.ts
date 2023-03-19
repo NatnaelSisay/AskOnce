@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, inject, Inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -18,6 +18,9 @@ import{RouterModule} from '@angular/router';
 import { DiscussionComponent } from './discussion/discussion.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { AnwserComponent } from './anwser/anwser.component';
+import readTokenFromStorage from './utils/readTokenFromStorage';
+import { Router } from '@angular/router';
+const getBaseUrl = () => 'http://localhost:3000';
 
 
 @NgModule({
@@ -29,11 +32,11 @@ import { AnwserComponent } from './anwser/anwser.component';
     MembersComponent,
     DiscussionComponent,
     ClassroomComponent,
-    AnwserComponent,
+    AnwserComponent,],
 
-  ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -42,13 +45,22 @@ import { AnwserComponent } from './anwser/anwser.component';
     MatListModule,
     MatDividerModule,
     MatIconModule,
-    RouterModule.forChild([
-      {path: 'question', component:DiscussionComponent },
-      {path: 'classroom', component:ClassroomComponent}
-    ])
+    HttpClientModule,
+
 
   ],
-  providers: [],
-  bootstrap: [AppComponent,DiscussionComponent]
+  providers: [
+    { provide: 'BASE_URL', useFactory: getBaseUrl },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (router = inject(Router)) => {
+        const token = readTokenFromStorage();
+        if (token === null) {
+          router.navigateByUrl('/auth');
+        }
+      },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
