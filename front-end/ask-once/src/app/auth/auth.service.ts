@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, retry, throwError } from 'rxjs';
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import ILoginResponse from './interface/ILoginResponse';
+import ILoginResponse from '../interface/ILoginResponse';
 
 @Injectable({
   providedIn: 'any',
@@ -40,7 +40,9 @@ export class AuthService {
       return throwError(() => ['network error']);
     }
     if (error.status === 400) {
-      return throwError(() => error.error.errors.map((e: any) => e.msg));
+      return throwError(() =>
+        error.error.errors.map((e: any) => e.param + ' : ' + e.msg)
+      );
     }
     return throwError(() => [
       'Something bad happened; please try again later.',
@@ -57,20 +59,22 @@ export class AuthService {
   }
 
   signup(
-    fistName: string,
+    firstName: string,
     lastName: string,
     email: string,
     password: string,
     passwordConfirmation: string,
     role: string
   ) {
-    return this.http.post(`${this.baseUrl}/users/signup`, {
-      fistName,
-      lastName,
-      email,
-      password,
-      passwordConfirmation,
-      role,
-    });
+    return this.http
+      .post<ILoginResponse>(`${this.baseUrl}/users/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+        passwordConfirmation,
+        role,
+      })
+      .pipe(retry(3), catchError(this.handleError));
   }
 }
