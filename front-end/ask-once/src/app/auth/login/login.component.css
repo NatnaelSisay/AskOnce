@@ -1,0 +1,25 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.form {
+  margin: auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+
+.message {
+  margin: 15px 0 0;
+  font-size: 1em;
+}
+.message a {
+  font-size: 1em;
+  color: indigo;
+  text-decoration: none;
+}
