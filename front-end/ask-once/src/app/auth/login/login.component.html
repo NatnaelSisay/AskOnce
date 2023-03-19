@@ -12,21 +12,23 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
+        <input matInput [type]="hidePassword ? 'password' : 'text'" />
         <button
           mat-icon-button
           matSuffix
-          (click)="hide = !hide"
+          (click)="hidePassword = !hidePassword"
           [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
+          [attr.aria-pressed]="hidePassword"
         >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
         </button>
       </mat-form-field>
     </div>
     <button mat-raised-button color="primary">Login</button>
     <p class="message">
-      Don't have an account? <a routerLink="/signup">register</a>
+      Don't have an account? <a (click)="authService.showSignup()">register</a>
     </p>
   </div>
 </div>

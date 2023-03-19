@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [LoginComponent, AuthComponent, SignupComponent],
@@ -14,10 +15,12 @@ import { SignupComponent } from './signup/signup.component';
     FormsModule,
     ReactiveFormsModule,
     AuthMaterialUiModule,
+
     RouterModule.forChild([
       { path: '', component: AuthComponent },
       { path: '**', redirectTo: '' },
     ]),
   ],
+  providers: [AuthService],
 })
 export class AuthModule {}
