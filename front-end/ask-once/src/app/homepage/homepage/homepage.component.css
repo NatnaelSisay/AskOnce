@@ -1,5 +1,6 @@
 .homepage {
   background-color: #1a2238;
+  min-height: 100vh;
 }
 
 .container {
@@ -26,7 +27,7 @@
 
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 2em;
 }

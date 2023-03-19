@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageMaterialModules } from './homepage-material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [HomepageComponent],
   imports: [
     CommonModule,
     HomepageMaterialModules,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',

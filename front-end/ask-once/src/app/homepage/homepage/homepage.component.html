@@ -1,7 +1,7 @@
 <div class="homepage">
   <mat-toolbar color="primary" class="nav">
     <div class="container nav-content">
-      <span>{{ user?.firstName }} {{ user?.lastName }} </span>
+      <span>Welcome, {{ user?.firstName }} </span>
       <button mat-icon-button>
         <mat-icon>logout</mat-icon>
       </button>
@@ -9,16 +9,18 @@
   </mat-toolbar>
 
   <div class="container main-content">
-    <div class="card" routerLink="" *ngFor="let item of classRooms">
-      <a [routerLink]="'class-room/' + item.name" class="classroom-card">
-        <mat-card class="example-card">
+    <div class="card" routerLink="" *ngFor="let class of classRooms">
+      <a [routerLink]="'class-room/' + class._id" class="classroom-card">
+        <mat-card class="">
           <mat-card-header>
-            <mat-card-subtitle>{{ item.professor }}</mat-card-subtitle>
-            <mat-card-title>{{ item.name }}</mat-card-title>
+            <mat-card-subtitle>{{
+              class.professor.firstName
+            }}</mat-card-subtitle>
+            <mat-card-title>{{ class.name }}</mat-card-title>
           </mat-card-header>
+          <mat-divider></mat-divider>
           <mat-card-content>
-            <p>{{ item.name }}</p>
-            <mat-divider></mat-divider>
+            <p>Number Of Questions: {{ class.students.length }}</p>
           </mat-card-content>
         </mat-card>
       </a>

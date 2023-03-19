@@ -1,136 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import IUser from 'src/app/interface/IUser';
+import { ClassRoom } from '../interfaces/classRoom.interface';
+import { User } from '../interfaces/user.interface';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent {
-  classRooms = [
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Moder web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Moder web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Moder web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-    {
-      name: 'Modern web application development discussion room',
-      professor: 'John Doe',
-      students: 200,
-    },
-  ];
+export class HomepageComponent implements OnInit {
+  http = inject(DataService);
+  classRooms: ClassRoom[] = [];
 
-  user?: IUser = {
+  ngOnInit() {
+    this.http.getClassRooms().subscribe((res) => {
+      this.classRooms = res;
+    });
+
+    this.http.getUser().subscribe((res) => {
+      this.user = res;
+    });
+  }
+
+  user?: User = {
     _id: '1',
     firstName: 'John',
     lastName: 'Doe',
