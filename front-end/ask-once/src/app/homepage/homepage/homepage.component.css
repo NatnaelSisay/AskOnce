@@ -1,0 +1,33 @@
+.container {
+  width: 100vw;
+}
+.nav {
+  position: fixed;
+  z-index: 99;
+}
+.nav-content {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+  max-width: 1024px;
+}
+
+.content {
+  margin: auto;
+  position: relative;
+  max-width: 1024px;
+  height: 100vh;
+  padding-top: 5em;
+  background-color: white;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.fab-button {
+  position: absolute;
+  bottom: 8em;
+  right: 0;
+  margin: 1rem;
+}
