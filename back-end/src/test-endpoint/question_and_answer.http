@@ -1,4 +1,4 @@
-POST http://localhost:3000/questions/
+POST http://localhost:3000/class-room/64152b652e66a08b1e5e03de/questions/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 Content-Type: application/json
 
@@ -11,11 +11,11 @@ Content-Type: application/json
     
 }
 ###
-GET http://localhost:3000/questions/
+GET http://localhost:3000/class-room/64152b652e66a08b1e5e03de/questions/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
-GET http://localhost:3000/questions/math
+GET http://localhost:3000/class-room/64152b652e66a08b1e5e03de/questions/some
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 Content-Type: application/json
