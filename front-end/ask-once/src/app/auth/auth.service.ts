@@ -6,7 +6,7 @@ import { AuthModule } from './auth.module';
   providedIn: 'any',
 })
 export class AuthService {
-  private showingLogin = new BehaviorSubject(true);
+  private showingLogin = new BehaviorSubject(false);
   showLogin$ = this.showingLogin.asObservable();
   showSignup() {
     this.showingLogin.next(false);
