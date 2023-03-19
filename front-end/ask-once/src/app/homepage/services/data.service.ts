@@ -18,7 +18,8 @@ export class DataService {
     role: 'student',
   };
 
-  classRoomSubject: Subject<ClassRoom[]> = new Subject<ClassRoom[]>();
+  classRoomSubject = new Subject<ClassRoom[]>();
+  userSubject = new Subject<User>();
 
   constructor() {}
 
@@ -36,9 +37,9 @@ export class DataService {
   getUser(): Observable<User> {
     this.http.get<User>('http://localhost:3000/user').subscribe((res) => {
       this.user = res;
-      this.classRoomSubject.next(this.classRooms);
+      this.userSubject.next(this.user);
     });
 
-    return of(this.user);
+    return this.userSubject.asObservable();
   }
 }
