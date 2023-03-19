@@ -1,17 +1,16 @@
-<div class="container">
+<div class="homepage">
   <mat-toolbar color="primary" class="nav">
-    <div class="nav-content">
+    <div class="container nav-content">
       <span>{{ user?.firstName }} {{ user?.lastName }} </span>
-      <span class="spacer"></span>
       <button mat-icon-button>
         <mat-icon>logout</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 
-  <div class="content">
-    <div class="main-content">
-      <div class="card" *ngFor="let item of classRooms">
+  <div class="container main-content">
+    <div class="card" routerLink="" *ngFor="let item of classRooms">
+      <a [routerLink]="'class-room/' + item.name" class="classroom-card">
         <mat-card class="example-card">
           <mat-card-header>
             <mat-card-subtitle>{{ item.professor }}</mat-card-subtitle>
@@ -22,7 +21,7 @@
             <mat-divider></mat-divider>
           </mat-card-content>
         </mat-card>
-      </div>
+      </a>
     </div>
     <button mat-fab (click)="onAddButtonClick()" class="fab-button">
       <mat-icon>add</mat-icon>

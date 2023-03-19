@@ -1,33 +1,60 @@
-.container {
-  width: 100vw;
-}
-.nav {
-  position: fixed;
-  z-index: 99;
-}
-.nav-content {
-  display: flex;
-  width: 100%;
-  margin: auto;
-  justify-content: space-between;
-  max-width: 1024px;
+.homepage {
+  background-color: #1a2238;
 }
 
-.content {
-  margin: auto;
-  position: relative;
+.container {
   max-width: 1024px;
-  height: 100vh;
-  padding-top: 5em;
-  background-color: white;
+  margin: 0 auto;
 }
-.spacer {
-  flex: 1 1 auto;
+
+.nav {
+  position: fixed;
+  z-index: 2;
+}
+
+.nav-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-content {
+  padding-top: 5em;
+
+  position: relative;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.card {
+  width: 30%;
+}
+
+.card > a {
+  color: black;
 }
 
 .fab-button {
-  position: absolute;
+  position: fixed;
   bottom: 8em;
-  right: 0;
-  margin: 1rem;
+  right: 15%;
+
+  width: 80px;
+  height: 80px;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+  .main-content {
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }
