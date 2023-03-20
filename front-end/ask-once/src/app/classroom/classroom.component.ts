@@ -71,6 +71,9 @@ export class ClassroomComponent {
   }
   showAns(ques: IQuestion) {
     this.dialog.open(DiscussionDialogComponent, {
+      panelClass: 'dialog-responsive',
+      width: '75%',
+      height: '100%',
       data: { question: ques },
     });
   }
