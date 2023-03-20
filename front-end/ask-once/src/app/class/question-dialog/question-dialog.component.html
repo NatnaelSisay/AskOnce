@@ -1,13 +1,19 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Create a new Question.</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput >
-  </mat-form-field>
+
+  <form action="" [formGroup]="QuestionForm">
+    <mat-form-field appearance="fill" class="w-full" >
+      <mat-label>title</mat-label>
+      <input matInput type="text" value="" formControlName="title"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>description</mat-label>
+      <input matInput type="text" class="h-32" formControlName="description"/>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()" color="warn">cancel</button>
+  <button mat-button  cdkFocusInitial color="primary" (click)="submit()">submit</button>
 </div>
 

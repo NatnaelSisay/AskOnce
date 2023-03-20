@@ -8,6 +8,9 @@ import { QuestionDialogComponent } from './question-dialog/question-dialog.compo
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatFormFieldModule,
     CommonModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+
     RouterModule.forChild([
       { path: '', component: ClassroomComponent },
       { path: 'question', component: DiscussionComponent },

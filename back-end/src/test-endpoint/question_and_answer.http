@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "question": "What is 1 + 1?",
   "description": "I'm not sure if it's 2 or 3",
-    "tags": ["some", "tags", "here"],
+    "tags": ["newTag", "tags", "here"],
     
     "answers":[],
     "askedBy":{

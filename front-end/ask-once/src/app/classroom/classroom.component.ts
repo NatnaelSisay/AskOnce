@@ -4,8 +4,13 @@ import { QuestionService } from '../class/question.service';
 import { Router } from '@angular/router';
 import IUser from '../interface/IUser';
 import IQuestion from '../interface/IQuestion';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-classroom',
@@ -13,13 +18,6 @@ import { QuestionDialogComponent } from '../class/question-dialog/question-dialo
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
-
-  animal: string="animal"
-  name: string="name"
-
-
-
-
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
@@ -35,15 +33,17 @@ export class ClassroomComponent {
   questions?: IQuestion[];
   tags!: string[];
 
-  constructor(public dialog:MatDialog) {}
+  constructor(public dialog: MatDialog) {}
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
-      data: {name: this.name, animal: this.animal},
+      width: '500px',
+      height: 'px',
+      
+
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
   tagger(tag: string) {}

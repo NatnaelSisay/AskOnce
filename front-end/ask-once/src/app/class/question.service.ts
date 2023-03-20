@@ -18,6 +18,20 @@ export class QuestionService {
   loadAllTags(){
     return this.http.get('http://localhost:3000/questions/tags/list')
   }
+  addNewQuestion(data :{title: string, descritption: string}){
+    const reqFile={...data,
+          tags:[],
+          answers:[],
+          askedBy:{
+            _id:1,
+            firstName:"john",
+            lastName:"Doe",
+            email:"johnDoe@email.com",
+            role:"student"
+        }
+        }
+    return this.http.post('http://localhost:3000/questions',reqFile);
+  }
 }
 
 
