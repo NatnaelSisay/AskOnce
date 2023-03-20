@@ -1,6 +1,6 @@
 # classroom students
 ###
-GET http://localhost:3000/classRoom/64152b96cbc5750d75efb4cb/students?limit=10&page=2
+GET http://localhost:3000/class-room/64152b652e66a08b1e5e03de/students?limit=10&page=2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpbnNhZUBtaXUuZWR1Iiwicm9sZSI6IlNUVURFTlQiLCJmaXJzdE5hbWUiOiJUaW5zYWUiLCJsYXN0TmFtZSI6IllhcmVkIiwiX2lkIjoiNjQxNTJiZDJmYjUyMjUyZjMyYzZjYjZmIiwiaWF0IjoxNjc5MTA5MDc0fQ.NGPkMg3UZpyceVupy69ILhieKg--Z3KKH8pQSyLaRbs
 
