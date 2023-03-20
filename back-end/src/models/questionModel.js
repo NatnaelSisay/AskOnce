@@ -2,9 +2,8 @@ const mongoose = require("mongoose");
 const { leanUserSchema } = require("./leanUserSchema");
 
 const answerSchema = new mongoose.Schema({
-  user: {
-    leanUserSchema,
-  },
+  user: leanUserSchema,
+
   answer: {
     type: String,
     required: true,

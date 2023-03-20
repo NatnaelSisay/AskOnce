@@ -70,12 +70,19 @@ module.exports.findAllAnswers = async (classroomId, questionId) => {
   return result;
 };
 module.exports.pushAnswer = async (classroomId, questionId, answer) => {
+  console.log(answer);
   const result = await questionsModel.findOneAndUpdate(
     { _id: questionId, classroomId },
     { $push: { answers: answer } },
     {
       returnDocument: "after",
-      projection: { answers: 1, _id: 0 },
+      projection: {
+        _id: 0,
+        answers: 0,
+        answer: {
+          $arrayElemAt: ["$answers", -1],
+        },
+      },
     }
   );
   return result;
