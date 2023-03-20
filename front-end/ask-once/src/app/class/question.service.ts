@@ -9,8 +9,8 @@ export class QuestionService {
   http = inject(HttpClient);
   constructor() {}
 
-  loadQuestions() {
-    return this.http.get('http://localhost:3000/questions');
+  loadQuestions(clasroomId: string) {
+    return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions');
   }
   searchQuestions(key :string){
     return this.http.get('http://localhost:3000/questions/search?title='+key)
@@ -18,8 +18,9 @@ export class QuestionService {
   loadAllTags(){
     return this.http.get('http://localhost:3000/questions/tags/list')
   }
-  addNewQuestion(title: string, description:string,tags :string[]){
+  addNewQuestion(title: string, description:string,tags :string[],clasroomId :string){
     const reqFile={
+
           question:title,
           description:description,
           tags:tags,
@@ -32,7 +33,7 @@ export class QuestionService {
             role:"student"
         }
         }
-    return this.http.post('http://localhost:3000/questions',reqFile);
+    return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions',reqFile);
 
   }
   tagFilteredQuestions(tags :string[]){

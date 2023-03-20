@@ -77,11 +77,12 @@ export class QuestionDialogComponent {
       .addNewQuestion(
         this.QuestionForm.get('title')?.value ?? '',
         this.QuestionForm.get('description')?.value ?? '',
-        this.tags
+        this.tags,
+        this.data.classroom_id
       )
       .subscribe({
         next: (data: any) => {
-          
+
           this.dialogRef.close({
             _id: data.data._id,
             question: this.QuestionForm.get('title')?.value ?? '',
