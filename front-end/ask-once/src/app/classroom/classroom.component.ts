@@ -40,7 +40,7 @@ export class ClassroomComponent {
 
   constructor(public dialog: MatDialog) {
     this.activatedRouter.params.subscribe((params:any) => {
-
+      console.log(params.classroom_id);
      this.classRoomId=params.classroom_id
     });
 
