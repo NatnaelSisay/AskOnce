@@ -58,7 +58,7 @@
         {{ answer.answer }}
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="isProfessor()">
       <button mat-button>Delete</button>
     </mat-card-actions>
   </mat-card>

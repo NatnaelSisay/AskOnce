@@ -34,6 +34,14 @@ export class DiscussionService {
       }>(this.baseUrl + `/questions/${questionId}/answers`)
       .pipe(retry(3), catchError(this.handleError));
   }
+  // deleteAnswer(questionId: string, answerId: string, classroomId: string) {
+  //   return this.http
+  //     .get<{
+  //       success: true;
+  //       data: { answers: IAnswerData[] };
+  //     }>(this.baseUrl + `/questions/${questionId}/answers`)
+  //     .pipe(retry(3), catchError(this.handleError));
+  // }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

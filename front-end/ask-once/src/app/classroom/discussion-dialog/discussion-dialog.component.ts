@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DiscussionService } from './discussion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import IAnswerData from 'src/app/interface/IAnswerData';
+import amIProfessor from 'src/app/utils/amIProfessor';
 
 @Component({
   selector: 'app-discussion-dialog',
@@ -75,5 +76,9 @@ export class DiscussionDialogComponent {
         this.formGroup.enable();
       }
     }, 1000);
+  }
+
+  isProfessor() {
+    return amIProfessor();
   }
 }
