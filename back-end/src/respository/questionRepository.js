@@ -51,6 +51,7 @@ module.exports.deleteAquestion = async (classroomId, id) => {
 module.exports.getAllTags = async (classroomId) => {
   const result = await questionsModel.aggregate([
     { $match: { classroomId } },
+    {$match: {deletedAt: {$exists: false}}},
     { $unwind: "$tags" },
     { $group: { _id: null, tags: { $addToSet: "$tags" } } },
     { $project: { _id: 0 } },
