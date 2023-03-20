@@ -3,12 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageMaterialModules } from './homepage-material.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppGuardInterceptor } from '../app-guard.interceptor';
+import { CreatClassRoomComponent } from './homepage/createClassRoom/createClassRoom.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HomepageComponent],
+  declarations: [HomepageComponent, CreatClassRoomComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     HomepageMaterialModules,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',
@@ -25,6 +31,13 @@ import { HomepageMaterialModules } from './homepage-material.module';
         redirectTo: '',
       },
     ]),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppGuardInterceptor,
+      multi: true,
+    },
   ],
 })
 export class HomepageModule {}

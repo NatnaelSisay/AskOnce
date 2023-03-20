@@ -11,7 +11,7 @@ import {
 } from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
 import { FormBuilder, Validators } from '@angular/forms';
-import { I } from '@angular/cdk/keycodes';
+import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 
 @Component({
   selector: 'app-classroom',
@@ -47,9 +47,9 @@ export class ClassroomComponent {
     dialogRef.afterClosed().subscribe((result) => {
 
       if(result!=null || result!=undefined)
-      this.questions?.unshift(result);
+      this.questions?.unshift(result);});
 
-    });
+
   }
   tagger(tag: string) {}
 
@@ -79,7 +79,12 @@ export class ClassroomComponent {
     });
   }
   showAns(ques: IQuestion) {
-    ques.showAnswers = !ques.showAnswers;
+    this.dialog.open(DiscussionDialogComponent, {
+      panelClass: 'dialog-responsive',
+      width: '75%',
+      height: '100%',
+      data: { question: ques },
+    });
   }
   addTagFilter(tag: string) {
     if(!this.tagFilters.includes(tag)) {

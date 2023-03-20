@@ -1,12 +1,11 @@
-import IUser from "./IUser";
+import IUser from './IUser';
 
 export default interface IQuestion {
   _id: string;
   question: string;
   tags: string[];
   description: string;
-  askedBy:IUser
-  answers: any[]
-  showAnswers:boolean
-
+  askedBy: IUser;
+  answers: any[];
+  showAnswers: boolean;
 }

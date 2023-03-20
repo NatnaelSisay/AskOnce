@@ -1,4 +1,7 @@
-const { createUser } = require("../respository/userRepository");
+const {
+  createUser,
+  searchUserByFirstNameOrEmail,
+} = require("../respository/userRepository");
 const { hashPassword } = require("../hashPassword");
 const { signJwt } = require("../jwtUtil");
 module.exports.loginController = async (req, res, next) => {
@@ -33,6 +36,17 @@ module.exports.signupController = async (req, res, next) => {
     });
     res.statusCode = 201;
     res.json({ token: token });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+module.exports.searchUser = async (req, res, next) => {
+  try {
+    const { search } = req.query;
+    const result = await searchUserByFirstNameOrEmail(search);
+    res.statusCode = 200;
+    res.json(result);
   } catch (error) {
     console.log(error);
     next(error);
