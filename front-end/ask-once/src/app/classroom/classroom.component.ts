@@ -87,7 +87,7 @@ export class ClassroomComponent {
       panelClass: 'dialog-responsive',
       width: '75%',
       height: '100%',
-      data: { question: ques },
+      data: { question: ques, classId: this.classRoomId },
     });
   }
   addTagFilter(tag: string) {
@@ -121,7 +121,7 @@ export class ClassroomComponent {
         this.questions = res.data as IQuestion[];
       });
     this.questionService.loadAllTags().subscribe((res: any) => {
-      this.tags = res?.data[0].tags as string[];
+      this.tags = res.data[0].tags as string[];
     });
   }
 
