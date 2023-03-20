@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, of, BehaviorSubject } from 'rxjs';
 
 //
 import IClassRoom from '../..//interface/IClassRoom.interface';
@@ -12,16 +12,19 @@ import IUser from '../../interface/IUser';
 export class DataService {
   http = inject(HttpClient);
   classRooms: IClassRoom[] = [];
-  user: IUser = {
-    _id: '1',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'asdasdasd',
-    role: 'student',
-  };
+  user?: IUser;
 
-  classRoomSubject = new Subject<IClassRoom[]>();
-  userSubject = new Subject<IUser>();
+  classRoomSubject = new BehaviorSubject<IClassRoom[]>([]);
+  userSubject = new BehaviorSubject<IUser>({
+    _id: '64152b652e66a08b1e5e03de',
+    firstName: 'professor',
+    lastName: 'professor',
+    email: 'professor@gmail.com',
+    role: 'PROFESSOR',
+  });
+
+  classRoom$ = this.classRoomSubject.asObservable();
+  user$ = this.userSubject.asObservable();
 
   constructor() {}
 
