@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { QeustionCardComponent } from './qeustion-card/qeustion-card.component';
-import { MatCardModule } from '@angular/material/card';
+import { MatCard, MatCardModule } from '@angular/material/card';
 import { TagsComponent } from './tags/tags.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MembersComponent } from './members/members.component';
@@ -24,6 +24,7 @@ import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestIntercep
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
 import { DiscussionDialogComponent } from './classroom/discussion-dialog/discussion-dialog.component';
+import { MatInputModule } from '@angular/material/input';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -47,10 +48,12 @@ const getBaseUrl = () => 'http://localhost:3000';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
+    MatInputModule,
     MatChipsModule,
     MatListModule,
     MatDividerModule,
     MatIconModule,
+    MatCardModule,
     HttpClientModule,
   ],
   providers: [
