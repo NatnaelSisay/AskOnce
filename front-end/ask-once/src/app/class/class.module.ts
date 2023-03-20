@@ -2,22 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ClassroomComponent } from '../classroom/classroom.component';
-import { DiscussionComponent } from '../discussion/discussion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionDialogComponent } from './question-dialog/question-dialog.component';
-
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    QuestionDialogComponent,
-
-  ],
+  declarations: [QuestionDialogComponent],
   imports: [
+    MatIconModule,
     HttpClientModule,
     MatFormFieldModule,
     CommonModule,
@@ -25,11 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatChipsModule,
 
-    RouterModule.forChild([
-      { path: '', component: ClassroomComponent },
-      { path: 'question', component: DiscussionComponent },
-    ]),
+    RouterModule.forChild([{ path: '', component: ClassroomComponent }]),
   ],
 })
 export class ClassModule {}

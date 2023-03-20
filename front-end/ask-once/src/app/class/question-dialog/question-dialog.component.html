@@ -10,8 +10,31 @@
       <mat-label>description</mat-label>
       <input matInput type="text" class="h-32" formControlName="description"/>
     </mat-form-field>
+
+    <mat-form-field class="example-chip-list"  class="w-full">
+      <mat-label>Inser Tags for your questions</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter tags">
+        <mat-chip-row *ngFor="let tag of tags"
+                      (removed)="remove(tag)"
+                      [editable]="true"
+                      (edited)="edit(tag, $event)"
+                      [aria-description]="'press enter to edit ' + tag">
+          {{tag}}
+          <button matChipRemove [attr.aria-label]="'remove ' + tag">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="New Tag..."
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)"/>
+      </mat-chip-grid>
+    </mat-form-field>
   </form>
 </div>
+
+
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" color="warn">cancel</button>
   <button mat-button  cdkFocusInitial color="primary" (click)="submit()">submit</button>

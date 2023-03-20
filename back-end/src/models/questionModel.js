@@ -31,6 +31,7 @@ const questionSchema = new mongoose.Schema({
     required: false},
   classroomId: String,
   deletedAt: Date,
+  
 });
 questionSchema.index({ question: "text" });
 

@@ -18,12 +18,14 @@ export class QuestionService {
   loadAllTags(){
     return this.http.get('http://localhost:3000/questions/tags/list')
   }
-  addNewQuestion(data :{title: string, descritption: string}){
-    const reqFile={...data,
-          tags:[],
+  addNewQuestion(title: string, description:string,tags :string[]){
+    const reqFile={
+          question:title,
+          description:description,
+          tags:tags,
           answers:[],
           askedBy:{
-            _id:1,
+            _id:"1",
             firstName:"john",
             lastName:"Doe",
             email:"johnDoe@email.com",
@@ -31,7 +33,16 @@ export class QuestionService {
         }
         }
     return this.http.post('http://localhost:3000/questions',reqFile);
+
   }
+  tagFilteredQuestions(tags :string[]){
+    return this.http.post('http://localhost:3000/questions/tagfiltred',{tags:tags})
+
+  }
+  deleteQuestion(id :string){
+    return this.http.delete('http://localhost:3000/questions/'+id)
+  }
+
 }
 
 

@@ -11,6 +11,7 @@ import {
 } from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { I } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-classroom',
@@ -18,6 +19,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+  tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
@@ -38,19 +40,22 @@ export class ClassroomComponent {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
       width: '500px',
       height: 'px',
-      
+
 
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+
+      if(result!=null || result!=undefined)
+      this.questions?.unshift(result);
+
     });
   }
   tagger(tag: string) {}
 
   onKey(event: any) {
     this.searchKey = event.target.value as string;
-    console.log(this.searchKey);
+
   }
   answer_router() {
     this.router.navigateByUrl('question');
@@ -60,13 +65,14 @@ export class ClassroomComponent {
       .searchQuestions(this.searchKey)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
-        console.log(this.questions);
+
       });
   }
+
   ngOnInit() {
     this.questionService.loadQuestions().subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
-      console.log(res);
+
       this.questionService.loadAllTags().subscribe((res: any) => {
         this.tags = res.data[0].tags as string[];
       });
@@ -75,4 +81,39 @@ export class ClassroomComponent {
   showAns(ques: IQuestion) {
     ques.showAnswers = !ques.showAnswers;
   }
+  addTagFilter(tag: string) {
+    if(!this.tagFilters.includes(tag)) {
+      this.tagFilters.push(tag);
+    }else{
+      this.tagFilters = this.tagFilters.filter((t) => t !== tag);
+    }
+    console.log(this.tagFilters);
+    if(this.tagFilters.length !== 0){
+
+    this.questionService.tagFilteredQuestions(this.tagFilters).subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+  }else{
+    this.questionService.loadQuestions().subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+
+  }
+}
+deleteQuestion(id :string){
+  this.questionService.deleteQuestion(id).subscribe((res: any) => {
+    console.log(res);
+  });
+  this.questionService.loadQuestions().subscribe((res: any) => {
+    this.questions = res.data as IQuestion[];});
+    this.questionService.loadAllTags().subscribe((res: any) => {
+      this.tags = res.data[0].tags as string[];
+    });
+}
+
+addLikes(){
+
+}
 }
