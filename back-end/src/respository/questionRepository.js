@@ -1,53 +1,64 @@
 const questionsModel = require("../models/questionModel");
 
 module.exports.findAllQuestions = async (classroomId) => {
-  const result = await questionsModel.find({ classroomId,
-    deletedAt: { $exists: false } });
+  const result = await questionsModel.find({
+    classroomId,
+    deletedAt: { $exists: false },
+  });
   return result;
 };
-module.exports.findQuestionsByTags = async (classroomId,tag) => {
+module.exports.findQuestionsByTags = async (classroomId, tag) => {
   const result = await questionsModel.find({
     classroomId,
     deletedAt: { $exists: false },
     tags: { $in: [tag] },
   });
-  
+
   return result;
 };
-module.exports.createQuestion = async (classroomId,data) => {
+module.exports.createQuestion = async (classroomId, data) => {
   const newQuestion = new questionsModel({
     question: data.question,
     tags: data.tags,
     description: data?.description,
-    // classroomId:classroomId,
+    
     answers: [],
     askedBy: data.askedBy,
-    classroomId:classroomId,
+    classroomId: classroomId,
+    
   });
-  
+
   const result = await newQuestion.save();
 
   return result.toObject();
 };
-module.exports.findAquestionsByTitle = async (classroomId,title) => {
+module.exports.findAquestionsByTitle = async (classroomId, title) => {
   const result = await questionsModel.find({
     classroomId,
     deletedAt: { $exists: false },
     $text: { $search: title },
   });
-  
+
   return result;
 };
-module.exports.deleteAquestion = async (classroomId,id) => {
+module.exports.deleteAquestion = async (classroomId, id) => {
   // const result= await questionsModel.findByIdAndDelete(id);
   const result = await questionsModel.updateOne(
-    { _id: id ,
-    classroomId},
+    { _id: id, classroomId },
     { $set: { deletedAt: Date.now() } }
   );
   return result;
 };
-module.exports.findAllAnswers = async (classroomId,questionId) => {
+module.exports.getAllTags = async (classroomId) => {
+  const result=await questionsModel.aggregate([
+    {$match:{classroomId}},
+    { $unwind: "$tags" },
+    { $group: { _id: null, tags: { $addToSet: "$tags" } } },
+    {$project:{_id:0}}
+  ]);
+  return result;
+};
+module.exports.findAllAnswers = async (classroomId, questionId) => {
   const result = await questionsModel.find(
     {
       deletedAt: { $exists: false },
@@ -59,10 +70,9 @@ module.exports.findAllAnswers = async (classroomId,questionId) => {
   );
   return result;
 };
-module.exports.pushAnswer = async (classroomId,questionId, answer) => {
+module.exports.pushAnswer = async (classroomId, questionId, answer) => {
   const result = await questionsModel.updateOne(
-    { _id: questionId,
-    classroomId },
+    { _id: questionId, classroomId },
     { $push: { answers: answer } }
   );
   return result;
