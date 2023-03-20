@@ -42,8 +42,14 @@
   <mat-card *ngFor="let answer of answers" class="answer-card">
     <mat-card-header>
       <mat-card-title
-        >{{ answer.user.firstName }} {{ answer.user.lastName }}</mat-card-title
-      >
+        >{{ answer.user.firstName }} {{ answer.user.lastName }}
+
+        <mat-icon
+          fontIcon="check_circle"
+          color="primary"
+          *ngIf="answer.user.role === 'Professor'"
+        ></mat-icon>
+      </mat-card-title>
       <mat-card-subtitle>{{ answer.user.email }} </mat-card-subtitle>
     </mat-card-header>
 

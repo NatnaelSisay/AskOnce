@@ -20,7 +20,7 @@ import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
 import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
@@ -61,7 +61,7 @@ const getBaseUrl = () => 'http://localhost:3000';
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
