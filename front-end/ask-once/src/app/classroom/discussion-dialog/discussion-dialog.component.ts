@@ -55,11 +55,18 @@ export class DiscussionDialogComponent {
           )
           .subscribe({
             next: (value) => {
-              console.log(value);
+              let i = this.answers.findIndex(
+                (answer) => answer.user.role === 'STUDENT'
+              );
+              if (i !== -1) {
+                this.answers.splice(i, 0, value.data.answer);
+              } else {
+                this.answers.push(value.data.answer);
+              }
+
               this.formGroup.enable();
             },
             error: (err) => {
-              console.log(err);
               this.formGroup.enable();
               this._snackBar.open(err[0]);
             },
