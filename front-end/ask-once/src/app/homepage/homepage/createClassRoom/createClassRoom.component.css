@@ -1,0 +1,14 @@
+.container {
+  height: 500px;
+  width: 500px;
+}
+.title {
+  padding: 20px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  justify-content: center;
+  align-items: center;
+}

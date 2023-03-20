@@ -2,7 +2,7 @@ import { APP_INITIALIZER, inject, Inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,9 +20,10 @@ import { ClassroomComponent } from './classroom/classroom.component';
 import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
-import { AppGuardInterceptor } from './app-guard.interceptor';
-import {MatButtonModule} from '@angular/material/button';
+import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
 
+import { AppGuardInterceptor } from './app-guard.interceptor';
+import { MatButtonModule } from '@angular/material/button';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -36,7 +37,6 @@ const getBaseUrl = () => 'http://localhost:3000';
     DiscussionComponent,
     ClassroomComponent,
     AnwserComponent,
-
   ],
 
   imports: [
@@ -65,10 +65,10 @@ const getBaseUrl = () => 'http://localhost:3000';
       },
     },
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AppGuardInterceptor,
-      multi:true,
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppGuardInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

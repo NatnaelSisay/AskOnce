@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="title">
+    <h1 mat-dialog-title>Create a class room</h1>
+  </div>
+
+  <div class="content">
+    <form [formGroup]="createClassForm">
+      <div>
+        <mat-form-field class="example-form-field">
+          <mat-label>Class name</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Search member</mat-label>
+
+          <input
+            type="text"
+            placeholder="Search by name | email"
+            matInput
+            [formControl]="searchFormControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            (optionSelected)="optionSelected($event)"
+            [displayWith]="itemDisplayFn"
+          >
+            <mat-option
+              *ngFor="let user of searchResult | async"
+              [value]="user"
+            >
+              {{ user.firstName }}
+              {{ user.lastName }}
+              {{ user.email }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="createClass()"
+      >
+        Create class
+      </button>
+    </form>
+
+    <mat-list>
+      <mat-list-item *ngFor="let user of selectedUsers?.value">
+        <button mat-icon-button (click)="removeUser(user)">
+          <mat-icon>close</mat-icon>
+        </button>
+        {{ user.firstName }}
+        {{ user.lastName }}
+        {{ user.email }}</mat-list-item
+      >
+    </mat-list>
+  </div>
+</div>

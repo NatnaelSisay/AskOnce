@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import IUser from 'src/app/interface/IUser';
+
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
 
 @Component({
   selector: 'app-homepage',
@@ -7,6 +14,7 @@ import IUser from 'src/app/interface/IUser';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent {
+  dialog = inject(MatDialog);
   classRooms = [
     {
       name: 'Modern web application development discussion room',
@@ -138,5 +146,10 @@ export class HomepageComponent {
     role: 'student',
   };
 
-  onAddButtonClick() {}
+  onAddButtonClick() {
+    const dialogRef = this.dialog.open(CreatClassRoomComponent, {});
+    console.log('asdsadasdasdasd');
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
 }

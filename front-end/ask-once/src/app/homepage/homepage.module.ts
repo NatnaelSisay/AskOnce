@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageMaterialModules } from './homepage-material.module';
+import { CreatClassRoomComponent } from './homepage/createClassRoom/createClassRoom.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HomepageComponent],
+  declarations: [HomepageComponent, CreatClassRoomComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     HomepageMaterialModules,
     RouterModule.forChild([
       {
