@@ -42,6 +42,20 @@ module.exports.deleteAnswer = async (req, res, next) => {
     const { classroomId, questionId, answerId } = req.params;
     const result = await pullAnswer(classroomId, questionId, answerId);
 
+    if (result.matchedCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "Answer not found",
+      });
+      return;
+    }
+    if (result.modifiedCount === 0) {
+      res.status(400).json({
+        success: false,
+        message: "Answer already deleted",
+      });
+      return;
+    }
     res.json({
       success: true,
       data: result,

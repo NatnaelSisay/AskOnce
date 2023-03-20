@@ -2,16 +2,16 @@
   <mat-card class="top-card">
     <mat-card-header>
       <mat-card-subtitle>
-        {{ question.question.askedBy.firstName }}
-        {{ question.question.askedBy.lastName }}
-        {{ question.question.askedBy.email }}</mat-card-subtitle
+        {{ data.question.askedBy.firstName }}
+        {{ data.question.askedBy.lastName }}
+        {{ data.question.askedBy.email }}</mat-card-subtitle
       >
-      <mat-card-title>{{ question.question.question }}</mat-card-title>
+      <mat-card-title>{{ data.question.question }}</mat-card-title>
     </mat-card-header>
 
     <form [formGroup]="formGroup">
       <mat-card-content>
-        {{ question.question.description }}
+        {{ data.question.description }}
         <mat-divider> </mat-divider>
         <mat-form-field class="textArea">
           <mat-label>Leave a comment</mat-label>
@@ -58,8 +58,8 @@
         {{ answer.answer }}
       </p>
     </mat-card-content>
-    <mat-card-actions *ngIf="isProfessor()">
-      <button mat-button>Delete</button>
+    <mat-card-actions *ngIf="canDelete(answer)">
+      <button mat-button (click)="deleteAnswer(answer)">Delete</button>
     </mat-card-actions>
   </mat-card>
   <br />

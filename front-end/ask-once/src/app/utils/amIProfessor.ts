@@ -1,11 +1,7 @@
-import jwt_decode from 'jwt-decode';
-import IUser from '../interface/IUser';
+import userFromToken from './decodeJwt';
 import readTokenFromStorage from './readTokenFromStorage';
 const amIProfessor = () => {
-  const token = readTokenFromStorage();
-  if (!token) return false;
-  const decoded = jwt_decode<IUser>(token);
-  return decoded.role === 'PROFESSOR';
+  return userFromToken().role === 'PROFESSOR';
 };
 
 export default amIProfessor;

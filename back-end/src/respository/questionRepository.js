@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const questionsModel = require("../models/questionModel");
 
 module.exports.findAllQuestions = async (classroomId) => {
@@ -46,6 +47,7 @@ module.exports.deleteAquestion = async (classroomId, id) => {
     { _id: id, classroomId },
     { $set: { deletedAt: Date.now() } }
   );
+  
   return result;
 };
 module.exports.getAllTags = async (classroomId) => {
@@ -59,15 +61,15 @@ module.exports.getAllTags = async (classroomId) => {
   return result;
 };
 module.exports.findAllAnswers = async (classroomId, questionId) => {
-  const result = await questionsModel.findOne(
-    {
-      deletedAt: { $exists: false },
-      _id: questionId,
-      classroomId,
-      "answers.deletedAt": { $exists: false },
-    },
-    { answers: 1, _id: 0 }
-  );
+  const result = await questionsModel.aggregate([
+    [
+      { $match: { _id: new mongoose.Types.ObjectId(questionId) } },
+      { $unwind: "$answers" },
+      { $match: { "answers.deletedAt": { $exists: false } } },
+      { $group: { _id: "$_id", answers: { $push: "$answers" } } },
+    ],
+  ]);
+
   return result;
 };
 module.exports.pushAnswer = async (classroomId, questionId, answer) => {
