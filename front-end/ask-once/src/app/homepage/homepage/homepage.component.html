@@ -1,28 +1,29 @@
-<div class="container">
+<div class="homepage">
   <mat-toolbar color="primary" class="nav">
-    <div class="nav-content">
-      <span>{{ user?.firstName }} {{ user?.lastName }} </span>
-      <span class="spacer"></span>
+    <div class="container nav-content">
+      <span>Welcome, {{ user?.firstName }} </span>
       <button mat-icon-button>
         <mat-icon>logout</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 
-  <div class="content">
-    <div class="main-content">
-      <div class="card" *ngFor="let item of classRooms">
-        <mat-card class="example-card">
+  <div class="container main-content">
+    <div class="card" routerLink="" *ngFor="let class of classRooms">
+      <a [routerLink]="'class-room/' + class._id" class="classroom-card">
+        <mat-card class="">
           <mat-card-header>
-            <mat-card-subtitle>{{ item.professor }}</mat-card-subtitle>
-            <mat-card-title>{{ item.name }}</mat-card-title>
+            <mat-card-subtitle>{{
+              class.professor.firstName
+            }}</mat-card-subtitle>
+            <mat-card-title>{{ class.name }}</mat-card-title>
           </mat-card-header>
+          <mat-divider></mat-divider>
           <mat-card-content>
-            <p>{{ item.name }}</p>
-            <mat-divider></mat-divider>
+            <p>Number Of Questions: {{ class.students.length }}</p>
           </mat-card-content>
         </mat-card>
-      </div>
+      </a>
     </div>
     <button mat-fab (click)="onAddButtonClick()" class="fab-button">
       <mat-icon>add</mat-icon>

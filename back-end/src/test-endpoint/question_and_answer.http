@@ -8,13 +8,6 @@ Content-Type: application/json
     "tags": ["some", "tags", "here"],
     
     "answers":[],
-    "askedBy":{
-        "_id":1,
-        "firstName":"john",
-        "lastName":"Doe",
-        "email":"johnDoe@email.com",
-        "role":"student"
-    }
     
 }
 ###
