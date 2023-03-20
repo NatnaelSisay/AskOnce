@@ -30,6 +30,7 @@ const questionSchema = new mongoose.Schema({
   },
   classroomId: String,
   deletedAt: Date,
+  
 });
 questionSchema.index({ question: "text" });
 

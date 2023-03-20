@@ -9,8 +9,8 @@ export class QuestionService {
   http = inject(HttpClient);
   constructor() {}
 
-  loadQuestions() {
-    return this.http.get('http://localhost:3000/questions');
+  loadQuestions(clasroomId: string) {
+    return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions');
   }
   searchQuestions(key :string,clasroomId: string){
     return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions/search?title='+key)
@@ -36,11 +36,11 @@ export class QuestionService {
     return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions',reqFile);
 
   }
-  tagFilteredQuestions(tags :string[],clasroomId :string){
+  tagFilteredQuestions(tags :string[],clasroomId: string){
     return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions/tagfiltred',{tags:tags})
 
   }
-  deleteQuestion(id :string,clasroomId:string){
+  deleteQuestion(id :string,clasroomId: string){
     return this.http.delete('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id)
   }
 

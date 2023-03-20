@@ -9,8 +9,8 @@
   </mat-toolbar>
 
   <div class="container main-content">
-    <div class="card" routerLink="" *ngFor="let class of classRooms">
-      <a [routerLink]="'class-room/' + class._id" class="classroom-card">
+    <div class="card" routerLink="" *ngFor="let class of classRooms" >
+      <a [routerLink]="'classroom/' + class._id" class="classroom-card">
         <mat-card class="">
           <mat-card-header>
             <mat-card-subtitle>{{

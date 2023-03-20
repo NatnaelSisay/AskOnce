@@ -1,11 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { QuestionService } from '../class/question.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import IUser from '../interface/IUser';
 import IQuestion from '../interface/IQuestion';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 
 @Component({
@@ -14,9 +19,10 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
-  animal: string = 'animal';
-  name: string = 'name';
+  classRoomId!: string;
+  activatedRouter= inject(ActivatedRoute);
 
+  tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
@@ -32,22 +38,33 @@ export class ClassroomComponent {
   questions?: IQuestion[];
   tags!: string[];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    this.activatedRouter.params.subscribe((params:any) => {
+
+     this.classRoomId=params.classroom_id
+    });
+
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
-      data: { name: this.name, animal: this.animal },
+      width: '500px',
+      height: 'px',
+      data:{classroom_id:this.classRoomId}
+
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+
+      if(result!=null || result!=undefined)
+      this.questions?.unshift(result);});
+
+
   }
   tagger(tag: string) {}
 
   onKey(event: any) {
     this.searchKey = event.target.value as string;
-    console.log(this.searchKey);
+
   }
   answer_router() {
     this.router.navigateByUrl('question');
@@ -57,11 +74,12 @@ export class ClassroomComponent {
       .searchQuestions(this.searchKey,this.classRoomId)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
-        console.log(this.questions);
+
       });
   }
+
   ngOnInit() {
-    this.questionService.loadQuestions().subscribe((res: any) => {
+    this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
 
       this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
