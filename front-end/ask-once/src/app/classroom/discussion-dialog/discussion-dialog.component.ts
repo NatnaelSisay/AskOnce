@@ -7,6 +7,8 @@ import { DiscussionService } from './discussion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import IAnswerData from 'src/app/interface/IAnswerData';
 import amIProfessor from 'src/app/utils/amIProfessor';
+import userFromToken from 'src/app/utils/decodeJwt';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-discussion-dialog',
@@ -19,6 +21,7 @@ export class DiscussionDialogComponent {
   });
   tinyApi = TINY_API_KEY;
   answers: IAnswerData[] = [];
+
   constructor(
     private _snackBar: MatSnackBar,
     private discussionService: DiscussionService,
@@ -28,7 +31,9 @@ export class DiscussionDialogComponent {
     try {
       this.discussionService.getAnswers(this.question.question._id).subscribe({
         next: (value) => {
-          this.answers = value.data.answers;
+          console.log(value);
+
+          this.answers = value.data[0].answers;
         },
         error: (err) => {
           console.log(err);
@@ -78,7 +83,21 @@ export class DiscussionDialogComponent {
     }, 1000);
   }
 
-  isProfessor() {
-    return amIProfessor();
+  canDelete(answer: IAnswerData) {
+    return amIProfessor() || userFromToken()._id === answer.user._id;
+  }
+  deleteAnswer(answer: IAnswerData) {
+    if (this.canDelete(answer)) {
+      this.discussionService
+        .deleteAnswer(this.question.question._id, answer._id)
+        .subscribe({
+          next: (value) => {
+            this.answers = this.answers.filter((a) => answer._id !== a._id);
+          },
+          error: (err) => {
+            this._snackBar.open(err[0]);
+          },
+        });
+    }
   }
 }
