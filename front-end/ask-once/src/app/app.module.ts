@@ -24,6 +24,7 @@ import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestIntercep
 
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -52,6 +53,7 @@ const getBaseUrl = () => 'http://localhost:3000';
     MatDividerModule,
     MatIconModule,
     HttpClientModule,
+    MatFormFieldModule,
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
