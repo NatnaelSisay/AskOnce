@@ -5,10 +5,10 @@ import IQuestion from 'src/app/interface/IQuestion';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DiscussionService } from './discussion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import IAnswerData from 'src/app/interface/IAnswerData';
 import amIProfessor from 'src/app/utils/amIProfessor';
 import userFromToken from 'src/app/utils/decodeJwt';
 import { ActivatedRoute } from '@angular/router';
+import { IAnswerData } from 'src/app/interface/IAnswerData';
 
 @Component({
   selector: 'app-discussion-dialog',
@@ -26,21 +26,27 @@ export class DiscussionDialogComponent {
     private _snackBar: MatSnackBar,
     private discussionService: DiscussionService,
     public dialogRef: MatDialogRef<DiscussionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public question: { question: IQuestion }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { question: IQuestion; classId: string }
   ) {
     try {
-      this.discussionService.getAnswers(this.question.question._id).subscribe({
-        next: (value) => {
-          console.log(value);
+      this.discussionService
+        .getAnswers(this.data.question._id, this.data.classId)
+        .subscribe({
+          next: (value) => {
+            console.log(typeof value.data);
+            if (value.data.length === 0) {
+              return;
+            }
 
-          this.answers = value.data[0].answers;
-        },
-        error: (err) => {
-          console.log(err);
-          this.formGroup.enable();
-          this._snackBar.open(err[0]);
-        },
-      });
+            this.answers = value.data[0].answers;
+          },
+          error: (err) => {
+            console.log(err);
+            this.formGroup.enable();
+            this._snackBar.open(err[0]);
+          },
+        });
     } catch (error) {
       this.formGroup.enable();
     }
@@ -56,11 +62,14 @@ export class DiscussionDialogComponent {
       try {
         this.discussionService
           .createAnswer(
-            this.question.question._id,
-            this.formGroup.controls.answer.value!
+            this.data.question._id,
+            this.formGroup.controls.answer.value!,
+            this.data.classId
           )
           .subscribe({
             next: (value) => {
+              console.log(value);
+
               let i = this.answers.findIndex(
                 (answer) => answer.user.role === 'STUDENT'
               );
@@ -89,7 +98,7 @@ export class DiscussionDialogComponent {
   deleteAnswer(answer: IAnswerData) {
     if (this.canDelete(answer)) {
       this.discussionService
-        .deleteAnswer(this.question.question._id, answer._id)
+        .deleteAnswer(this.data.question._id, answer._id, this.data.classId)
         .subscribe({
           next: (value) => {
             this.answers = this.answers.filter((a) => answer._id !== a._id);

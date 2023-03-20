@@ -1,7 +1,14 @@
 import IUser from './IUser';
 
-export default interface IAnswerData {
+export interface IAnswerData {
   _id: string;
   answer: string;
   user: IUser;
+}
+
+export interface IGetAnswers {
+  success: boolean;
+  data: {
+    answers: IAnswerData[];
+  }[];
 }
