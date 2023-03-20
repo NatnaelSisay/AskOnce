@@ -21,11 +21,10 @@ module.exports.createQuestion = async (classroomId, data) => {
     question: data.question,
     tags: data.tags,
     description: data?.description,
-    
+
     answers: [],
     askedBy: data.askedBy,
     classroomId: classroomId,
-    
   });
 
   const result = await newQuestion.save();
@@ -50,11 +49,11 @@ module.exports.deleteAquestion = async (classroomId, id) => {
   return result;
 };
 module.exports.getAllTags = async (classroomId) => {
-  const result=await questionsModel.aggregate([
-    {$match:{classroomId}},
+  const result = await questionsModel.aggregate([
+    { $match: { classroomId } },
     { $unwind: "$tags" },
     { $group: { _id: null, tags: { $addToSet: "$tags" } } },
-    {$project:{_id:0}}
+    { $project: { _id: 0 } },
   ]);
   return result;
 };
@@ -71,9 +70,13 @@ module.exports.findAllAnswers = async (classroomId, questionId) => {
   return result;
 };
 module.exports.pushAnswer = async (classroomId, questionId, answer) => {
-  const result = await questionsModel.updateOne(
+  const result = await questionsModel.findOneAndUpdate(
     { _id: questionId, classroomId },
-    { $push: { answers: answer } }
+    { $push: { answers: answer } },
+    {
+      returnDocument: "after",
+      projection: { answers: 1, _id: 0 },
+    }
   );
   return result;
 };

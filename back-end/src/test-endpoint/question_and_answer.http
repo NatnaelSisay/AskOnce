@@ -39,15 +39,12 @@ GET http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
-POST  http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
+POST  http://localhost:3000/questions/64188957eb655f8f27b83ed1/answers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 Content-Type:  application/json
 
 {
-    "user":{
-        "firstName": "tester",
-        "lastName": "tester",
-        "email": "some@email.com"},
+ 
     "answer": "2"
     
 }
