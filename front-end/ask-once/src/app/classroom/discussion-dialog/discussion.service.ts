@@ -36,8 +36,6 @@ export class DiscussionService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
-
     if (error.status === 0) {
       return throwError(() => ['network error']);
     }
