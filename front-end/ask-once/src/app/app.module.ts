@@ -20,11 +20,14 @@ import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
 import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
 import { DiscussionDialogComponent } from './classroom/discussion-dialog/discussion-dialog.component';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -55,6 +58,10 @@ const getBaseUrl = () => 'http://localhost:3000';
     MatIconModule,
     MatCardModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
