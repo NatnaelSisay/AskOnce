@@ -1,5 +1,31 @@
 <div class="max-w-xs border p-3 rounded-xl">
-  <p>members:</p>
+  <p>Members</p>
+  <div>
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        placeholder="Add member"
+        [formControl]="searchFormControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto="matAutocomplete"
+        [displayWith]="displayFunction"
+        (optionSelected)="optionSelected($event)"
+      >
+        <mat-option
+          *ngFor="let option of filterdOptions | async"
+          [value]="option"
+          class="flex justify-between align-center"
+        >
+          {{ option.firstName }} |
+          {{ option.email }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
   <div>
     <mat-list>
       <div class="flex pt-2">

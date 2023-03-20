@@ -33,4 +33,11 @@ export class CreateClassRoomService {
       'Something bad happened; please try again later.',
     ]);
   }
+
+  addNewMember(member: IUser) {
+    const url = `${this.baseUrl}/class-room/classroom-id/students`;
+    this.http
+      .post<IUser>(url, member)
+      .pipe(retry(3), catchError(this.handleError));
+  }
 }

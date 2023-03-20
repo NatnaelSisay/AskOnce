@@ -25,6 +25,10 @@ import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestIntercep
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -46,6 +50,7 @@ const getBaseUrl = () => 'http://localhost:3000';
     BrowserAnimationsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatCardModule,
     MatChipsModule,
@@ -54,6 +59,9 @@ const getBaseUrl = () => 'http://localhost:3000';
     MatIconModule,
     HttpClientModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
