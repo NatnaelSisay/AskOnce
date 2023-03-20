@@ -62,17 +62,9 @@ export class CreatClassRoomComponent {
     return '';
   }
   createClass() {
-    console.log('------------------------------ one');
-    console.log(
-      '------------------------------ one',
-      this.createClassForm.valid,
-      this.createClassForm.controls.name.value
-    );
-
     if (!this.createClassForm.valid) {
       return;
     }
-    console.log('------------------------------ two');
     this.createClassRoomService
       .createClassRoom(
         this.createClassForm.controls.name.value!,
@@ -80,9 +72,7 @@ export class CreatClassRoomComponent {
       )
       .subscribe({
         next: (value) => {
-          console.log('------------------------------ three');
-
-          this.dialogRef.close();
+          this.dialogRef.close(value);
           this.createClassForm.enable();
         },
         error: (err) => {

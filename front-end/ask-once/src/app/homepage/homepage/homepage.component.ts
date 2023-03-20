@@ -42,6 +42,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   onAddButtonClick() {
     const dialogRef = this.dialog.open(CreatClassRoomComponent, {});
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      this.classRooms = [result.data, ...this.classRooms];
+    });
   }
 }
