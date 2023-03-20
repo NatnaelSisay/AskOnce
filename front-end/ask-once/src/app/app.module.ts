@@ -15,7 +15,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { DiscussionComponent } from './discussion/discussion.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
@@ -24,6 +23,7 @@ import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestIntercep
 
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
+import { DiscussionDialogComponent } from './classroom/discussion-dialog/discussion-dialog.component';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -34,9 +34,9 @@ const getBaseUrl = () => 'http://localhost:3000';
     QeustionCardComponent,
     TagsComponent,
     MembersComponent,
-    DiscussionComponent,
     ClassroomComponent,
     AnwserComponent,
+    DiscussionDialogComponent,
   ],
 
   imports: [
