@@ -54,7 +54,7 @@ export class ClassroomComponent {
   }
   search() {
     this.questionService
-      .searchQuestions(this.searchKey)
+      .searchQuestions(this.searchKey,this.classRoomId)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
         console.log(this.questions);
@@ -63,8 +63,8 @@ export class ClassroomComponent {
   ngOnInit() {
     this.questionService.loadQuestions().subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
-      console.log(res);
-      this.questionService.loadAllTags().subscribe((res: any) => {
+
+      this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
         this.tags = res.data[0].tags as string[];
       });
     });
@@ -77,4 +77,39 @@ export class ClassroomComponent {
       data: { question: ques },
     });
   }
+  addTagFilter(tag: string) {
+    if(!this.tagFilters.includes(tag)) {
+      this.tagFilters.push(tag);
+    }else{
+      this.tagFilters = this.tagFilters.filter((t) => t !== tag);
+    }
+    console.log(this.tagFilters);
+    if(this.tagFilters.length !== 0){
+
+    this.questionService.tagFilteredQuestions(this.tagFilters,this.classRoomId).subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+  }else{
+    this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+
+  }
+}
+deleteQuestion(id :string){
+  this.questionService.deleteQuestion(id,this.classRoomId).subscribe((res: any) => {
+    console.log(res);
+  });
+  this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
+    this.questions = res.data as IQuestion[];});
+    this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
+      this.tags = res.data[0].tags as string[];
+    });
+}
+
+addLikes(){
+
+}
 }
