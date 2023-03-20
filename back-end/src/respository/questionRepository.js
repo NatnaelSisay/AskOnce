@@ -58,7 +58,7 @@ module.exports.getAllTags = async (classroomId) => {
   return result;
 };
 module.exports.findAllAnswers = async (classroomId, questionId) => {
-  const result = await questionsModel.find(
+  const result = await questionsModel.findOne(
     {
       deletedAt: { $exists: false },
       _id: questionId,
