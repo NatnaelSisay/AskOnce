@@ -1,4 +1,4 @@
-POST http://localhost:3000/questions/
+POST http://localhost:3000/class-room/6415e2d16452b251cfe91dda/questions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 Content-Type: application/json
 
@@ -7,11 +7,11 @@ Content-Type: application/json
   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget dolor et elit interdum suscipit vitae vitae nisi. Mauris dapibus sit amet quam sit amet sodales. Maecenas ut leo a lectus commodo tincidunt. Fusce odio velit, lobortis in egestas vel, fringilla vitae metus. Donec at diam ut nisl tempus tempus. In ut nulla commodo, cursus turpis ac, rhoncus sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer lacinia aliquam scelerisque. Integer id purus quis nisi gravida convallis. Phasellus eget gravida quam. Nunc vulputate mollis neque sed consequat. Curabitur pellentesque neque nec ex suscipit facilisis. Nulla eu neque eu urna volutpat tincidunt ac et arcu. Integer diam mi, mollis vel odio quis, hendrerit finibus justo. Vestibulum laoreet condimentum nisl et faucibus.",
     "tags": ["some", "tags", "here"],
     
-    "answers":[],
+    "answers":[]
     
 }
 ###
-GET http://localhost:3000/questions
+GET http://localhost:3000/class-room/6415e2d16452b251cfe91dda/questions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
