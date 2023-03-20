@@ -77,7 +77,8 @@ const addClassRoom = async (req, res, next) => {
 
     const result = await ClassRoomRepository.addClassRoom(
       req.body.name,
-      decode
+      decode,
+      req.body.students
     );
 
     res.json({ success: true, data: result });

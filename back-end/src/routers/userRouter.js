@@ -3,12 +3,14 @@ const { ROLES_ENUM } = require("../constants");
 const {
   loginController,
   signupController,
+  searchUser,
 } = require("../controllers/userController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const { logginMiddleware } = require("../middlewares/loginMiddleware");
 const { signupMiddleware } = require("../middlewares/signupMiddleware");
 const UserRouter = new express.Router();
 
+UserRouter.get("/", authMiddleWare(), searchUser);
 UserRouter.post("/login", logginMiddleware, loginController);
 UserRouter.post("/signup", signupMiddleware, signupController);
 

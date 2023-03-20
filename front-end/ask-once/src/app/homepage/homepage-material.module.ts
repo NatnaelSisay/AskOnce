@@ -6,6 +6,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
 
 const modules = [
   MatToolbarModule,
@@ -13,7 +18,11 @@ const modules = [
   MatButtonModule,
   MatCardModule,
   MatDividerModule,
-  MatGridListModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatAutocompleteModule,
+  MatListModule,
 ];
 
 @NgModule({
