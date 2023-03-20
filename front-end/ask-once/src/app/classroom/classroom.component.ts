@@ -19,6 +19,7 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+  classRoomId!: string;
   activatedRouter= inject(ActivatedRoute);
 
   tagFilters: string[] = [];
@@ -38,9 +39,9 @@ export class ClassroomComponent {
   tags!: string[];
 
   constructor(public dialog: MatDialog) {
-    this.activatedRouter.params.subscribe((params) => {
-      console.log(params);
+    this.activatedRouter.params.subscribe((params:any) => {
 
+     this.classRoomId=params.classroom_id
     });
 
   }
@@ -48,7 +49,7 @@ export class ClassroomComponent {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
       width: '500px',
       height: 'px',
-
+      data:{classroom_id:this.classRoomId}
 
     });
 
@@ -78,7 +79,7 @@ export class ClassroomComponent {
   }
 
   ngOnInit() {
-    this.questionService.loadQuestions().subscribe((res: any) => {
+    this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
 
       this.questionService.loadAllTags().subscribe((res: any) => {
@@ -108,7 +109,7 @@ export class ClassroomComponent {
 
     });
   }else{
-    this.questionService.loadQuestions().subscribe((res: any) => {
+    this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
 
     });
@@ -119,7 +120,7 @@ deleteQuestion(id :string){
   this.questionService.deleteQuestion(id).subscribe((res: any) => {
     console.log(res);
   });
-  this.questionService.loadQuestions().subscribe((res: any) => {
+  this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
     this.questions = res.data as IQuestion[];});
     this.questionService.loadAllTags().subscribe((res: any) => {
       this.tags = res.data[0].tags as string[];
