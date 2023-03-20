@@ -34,10 +34,12 @@ export class CreateClassRoomService {
     ]);
   }
 
-  addNewMember(member: IUser) {
-    const url = `${this.baseUrl}/class-room/classroom-id/students`;
-    this.http
-      .post<IUser>(url, member)
-      .pipe(retry(3), catchError(this.handleError));
+  addNewMember(member: IUser, classRoomId?: string) {
+    const url = `${this.baseUrl}/class-room/${classRoomId}/students`;
+    // this.http
+    //   .post<IUser>(url, member)
+    //   .pipe(retry(3), catchError(this.handleError));
+    console.log(url);
+    console.log(member);
   }
 }

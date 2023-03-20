@@ -1,8 +1,7 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatOptionSelectionChange } from '@angular/material/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CreateClassRoomService } from '../homepage/homepage/createClassRoom/create-class-room.service';
 import IUser from '../interface/IUser';
 
@@ -12,6 +11,7 @@ import IUser from '../interface/IUser';
   styleUrls: ['./members.component.css'],
 })
 export class MembersComponent implements OnInit {
+  @Input() classRoomId?: string;
   searchFormControl = new FormControl<string>('');
   searchService = inject(CreateClassRoomService);
 
@@ -26,6 +26,8 @@ export class MembersComponent implements OnInit {
   }
 
   optionSelected(option: MatAutocompleteSelectedEvent) {
+    const member = option.option.value as IUser;
+    this.searchService.addNewMember(member, this.classRoomId);
     console.log(option);
   }
 
