@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageMaterialModules } from './homepage-material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppGuardInterceptor } from '../app-guard.interceptor';
 
 @NgModule({
   declarations: [HomepageComponent],
@@ -27,6 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
         redirectTo: '',
       },
     ]),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppGuardInterceptor,
+      multi: true,
+    },
   ],
 })
 export class HomepageModule {}

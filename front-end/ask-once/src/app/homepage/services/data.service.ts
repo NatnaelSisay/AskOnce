@@ -3,7 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, Subject, of, BehaviorSubject } from 'rxjs';
 
 //
-import IClassRoom from '../..//interface/IClassRoom.interface';
+import IClassRoom, {
+  IClassRoomSuccessReponse,
+} from '../..//interface/IClassRoom.interface';
 import IUser from '../../interface/IUser';
 
 @Injectable({
@@ -30,9 +32,9 @@ export class DataService {
 
   getClassRooms(): Observable<IClassRoom[]> {
     this.http
-      .get<IClassRoom[]>('http://localhost:3000/class-room')
+      .get<IClassRoomSuccessReponse>('http://localhost:3000/class-room')
       .subscribe((res) => {
-        this.classRooms = res;
+        this.classRooms = res.data;
         this.classRoomSubject.next(this.classRooms);
       });
 
@@ -40,11 +42,18 @@ export class DataService {
   }
 
   getUser(): Observable<IUser> {
-    this.http.get<IUser>('http://localhost:3000/user').subscribe((res) => {
-      this.user = res;
-      this.userSubject.next(this.user);
-    });
-
+    // this.http.get<IUser>('http://localhost:3000/user').subscribe((res) => {
+    //   this.user = res;
+    //   this.userSubject.next(this.user);
+    // });
+    this.user = {
+      _id: '64152b652e66a08b1e5e03de',
+      firstName: 'professor',
+      lastName: 'professor',
+      email: 'professor@gmail.com',
+      role: 'PROFESSOR',
+    };
+    this.userSubject.next(this.user);
     return this.userSubject.asObservable();
   }
 }

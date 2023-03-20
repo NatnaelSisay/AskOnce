@@ -6,3 +6,8 @@ export default interface IClassRoom {
   name: string;
   students: [IUser];
 }
+
+export interface IClassRoomSuccessReponse {
+  success: boolean;
+  data: [IClassRoom];
+}
