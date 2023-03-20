@@ -1,3 +1,4 @@
+const { model } = require("mongoose");
 const { userModel } = require("../models/userModel");
 
 module.exports.createUser = async (data) => {
@@ -20,5 +21,15 @@ module.exports.getUserByEmail = async (email, includePassword = false) => {
   const result = await userModel
     .findOne({ email: email })
     .select([includePassword ? "+password" : "-password"]);
+  return result;
+};
+
+module.exports.searchUserByFirstNameOrEmail = async (searchTerm) => {
+  const result = await userModel.find({
+    $or: [
+      { firstName: { $regex: `^${searchTerm}`, $options: "i" } },
+      { email: { $regex: `^${searchTerm}`, $options: "i" } },
+    ],
+  });
   return result;
 };
