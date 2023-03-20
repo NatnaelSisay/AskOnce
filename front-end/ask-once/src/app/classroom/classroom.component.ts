@@ -40,7 +40,8 @@ export class ClassroomComponent {
 
   constructor(public dialog: MatDialog) {
     this.activatedRouter.params.subscribe((params: any) => {
-      this.classRoomId = params.classroom_id;
+      console.log(params.classroom_id);
+      this.classRoomId = params.classroom_id
     });
   }
   openDialog(): void {
@@ -55,7 +56,7 @@ export class ClassroomComponent {
         this.questions?.unshift(result);
     });
   }
-  tagger(tag: string) {}
+  tagger(tag: string) { }
 
   onKey(event: any) {
     this.searchKey = event.target.value as string;
@@ -65,7 +66,7 @@ export class ClassroomComponent {
   }
   search() {
     this.questionService
-      .searchQuestions(this.searchKey)
+      .searchQuestions(this.searchKey, this.classRoomId)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
       });
@@ -77,10 +78,10 @@ export class ClassroomComponent {
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
 
-        this.questionService.loadAllTags().subscribe((res: any) => {
+        this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
           this.tags = res.data[0].tags as string[];
         });
-      });
+      })
   }
   showAns(ques: IQuestion) {
     this.dialog.open(DiscussionDialogComponent, {
@@ -98,32 +99,30 @@ export class ClassroomComponent {
     }
     console.log(this.tagFilters);
     if (this.tagFilters.length !== 0) {
-      this.questionService
-        .tagFilteredQuestions(this.tagFilters)
-        .subscribe((res: any) => {
-          this.questions = res.data as IQuestion[];
-        });
+
+      this.questionService.tagFilteredQuestions(this.tagFilters, this.classRoomId).subscribe((res: any) => {
+        this.questions = res.data as IQuestion[];
+
+      });
     } else {
-      this.questionService
-        .loadQuestions(this.classRoomId)
-        .subscribe((res: any) => {
-          this.questions = res.data as IQuestion[];
-        });
+      this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
+        this.questions = res.data as IQuestion[];
+
+      });
+
     }
   }
   deleteQuestion(id: string) {
-    this.questionService.deleteQuestion(id).subscribe((res: any) => {
+    this.questionService.deleteQuestion(id, this.classRoomId).subscribe((res: any) => {
       console.log(res);
     });
-    this.questionService
-      .loadQuestions(this.classRoomId)
-      .subscribe((res: any) => {
-        this.questions = res.data as IQuestion[];
-      });
-    this.questionService.loadAllTags().subscribe((res: any) => {
+    this.questionService.loadQuestions(this.classRoomId).subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+    });
+    this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
       this.tags = res.data[0].tags as string[];
     });
   }
 
-  addLikes() {}
+  addLikes() { }
 }
