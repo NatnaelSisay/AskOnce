@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import IUser from 'src/app/interface/IUser';
-import { ClassRoom } from '../interfaces/classRoom.interface';
-import { User } from '../interfaces/user.interface';
+
+import IClassRoom from '../../interface/IClassRoom.interface';
+import IUser from '../..//interface/IUser';
+
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { DataService } from '../services/data.service';
 })
 export class HomepageComponent implements OnInit {
   http = inject(DataService);
-  classRooms: ClassRoom[] = [];
+  classRooms: IClassRoom[] = [];
 
   ngOnInit() {
     this.http.getClassRooms().subscribe((res) => {
@@ -23,7 +24,7 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  user?: User = {
+  user?: IUser = {
     _id: '1',
     firstName: 'John',
     lastName: 'Doe',
