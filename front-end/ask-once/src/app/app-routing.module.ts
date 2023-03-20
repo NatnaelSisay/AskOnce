@@ -13,7 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'classroom',
+    path: 'classroom/:classroom-id',pathMatch: 'full',
+
     loadChildren: () => import('./class/class.module').then((m) => m.ClassModule),
   },
 ];

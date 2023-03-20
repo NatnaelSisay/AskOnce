@@ -4,26 +4,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { QeustionCardComponent } from './qeustion-card/qeustion-card.component';
+
 import { MatCard, MatCardModule } from '@angular/material/card';
-import { TagsComponent } from './tags/tags.component';
+
 import { MatChipsModule } from '@angular/material/chips';
 import { MembersComponent } from './members/members.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+
 import { ClassroomComponent } from './classroom/classroom.component';
-import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
+import { AppGuardInterceptor } from './app-guard.interceptor';
+import { MatButtonModule } from '@angular/material/button';
 import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { AppGuardInterceptor } from './app-guard.interceptor';
-import { MatButtonModule } from '@angular/material/button';
 import { DiscussionDialogComponent } from './classroom/discussion-dialog/discussion-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,12 +33,10 @@ const getBaseUrl = () => 'http://localhost:3000';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    QeustionCardComponent,
-    TagsComponent,
+
     MembersComponent,
     ClassroomComponent,
-    AnwserComponent,
+
     DiscussionDialogComponent,
   ],
 

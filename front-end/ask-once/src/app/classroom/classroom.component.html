@@ -2,7 +2,7 @@
 
   <!-- HEADERRRRRRR -->
 
-  <div class=" bg-indigo-800  ">
+  <div class=" bg-indigo-800 sticky top-0 z-20">
     <div class="w-full flex py-5 px-10 space-x-3 max-w-5xl mx-auto items-center ">
       <div class="flex flex-1  justify-between space-x-40 items-center">
         <h1 class=" text-xl text-white">Modern Web Programing-Assad Saad</h1>
@@ -30,58 +30,74 @@
 
       <div>
         <div class="mb-10">
-          <div *ngFor="let ques of questions" class=" pb-3">
-            <mat-card>
-              <mat-card-header>
-                <div>
-                  <div>
-                    <p class="text-gray-400">{{user?.firstName}}</p>
-                  </div>
-                  <mat-card-title>{{ques?.question}}</mat-card-title>
-                  <!-- <mat-card-subtitle>{{Date.now()}}</mat-card-subtitle> -->
-                </div>
-              </mat-card-header>
-              <mat-card-content>{{ques?.description}}</mat-card-content>
-              <div class="pl-3 pt-2 flex items-center space-x-2">
-                <mat-chip *ngFor="let tag of ques.tags">#{{tag}}</mat-chip>
-
-              </div>
-
-              <mat-card-actions>
-                <div class="space-x-10">
-                  <button mat-icon-button color="primary">
-                    <mat-icon>favorite</mat-icon>
-                  </button>
+          <div *ngIf="questions?.length===0  else bod">
+              <p class="h-full text-center">no questions</p>
+          </div>
+          <ng-template #bod>
 
 
-                  <button mat-button (click)="showAns(ques)">
-                    <mat-icon>question_answer</mat-icon>
-                  </button>
-
-
-                </div>
-              </mat-card-actions>
-            </mat-card>
-            <div *ngIf="ques.showAnswers">
-              <div class="my-2" *ngFor="let ans of ques.answers">
-                <mat-card class=" border-t-2">
+            <div *ngFor="let ques of questions" class=" pb-3" >
+              <mat-card >
+                <div (click)="showAns(ques)" class=" cursor-pointer">
                   <mat-card-header>
+
                     <div>
-                      <p class="text-gray-400">{{ans.user}}</p>
+                      <div>
+                        <p class="text-gray-400">{{user?.firstName}}</p>
+                      </div>
+                      <mat-card-title>{{ques?.question}}</mat-card-title>
+                      <!-- <mat-card-subtitle>{{Date.now()}}</mat-card-subtitle> -->
                     </div>
                   </mat-card-header>
-                  <mat-card-content>
-                    <p>{{ans.answer}}</p>
-                  </mat-card-content>
+                  <mat-card-content>{{ques?.description}}</mat-card-content>
+                  <div class="pl-3 pt-2 flex items-center space-x-2">
+                    <mat-chip *ngFor="let tag of ques.tags">#{{tag}}</mat-chip>
 
-                </mat-card>
+                  </div>
+                </div>
+
+                <mat-card-actions>
+                  <div class="space-x-3 flex items-center justify-center">
+                    <button mat-icon-button  color="primary" (click)="addLikes()">
+                      <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteQuestion(ques._id)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+
+                    <div class="flex items-center justify-center">
+                      <button mat-icon-button (click)="showAns(ques)">
+                        <mat-icon>question_answer</mat-icon>
+                      </button>
+                      <p class=" text-xs -ml-2">{{ques.answers.length}}</p>
+
+                    </div>
+
+
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+              <div *ngIf="ques.showAnswers">
+                <div class="my-2" *ngFor="let ans of ques.answers">
+                  <mat-card class=" border-t-2">
+                    <mat-card-header>
+                      <div>
+                        <p class="text-gray-400">{{ans.user}}</p>
+                      </div>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>{{ans.answer}}</p>
+                    </mat-card-content>
+
+                  </mat-card>
+                </div>
               </div>
-            </div>
 
+            </div>
+          </ng-template>
           </div>
         </div>
-      </div>
-      <!-- LIST OF QUESTIONS ENDS HERE -->
+        <!-- LIST OF QUESTIONS ENDS HERE -->
 
 
 
@@ -97,7 +113,7 @@
           <p>tags:</p>
           <div class="grid-cols-5 max-w-xs space-x-2">
 
-            <mat-chip-option *ngFor="let tag of tags" (click)="tagger(tag)">#{{tag}}</mat-chip-option>
+            <mat-chip-option *ngFor="let tag of tags" (click)="addTagFilter(tag)">#{{tag}}</mat-chip-option>
 
 
           </div>
@@ -110,8 +126,8 @@
     </div>
 
   </div>
-  <div class=" absolute right-96 bottom-28 z-40">
-    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon" (click)="openDialog()">
+  <div class="fixed right-96  bottom-52 z-40">
+    <button mat-fab color="warn" (click)="openDialog()">
       <mat-icon>add</mat-icon>
     </button>
   </div>

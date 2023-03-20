@@ -11,7 +11,7 @@ module.exports.findQuestionsByTags = async (classroomId, tag) => {
   const result = await questionsModel.find({
     classroomId,
     deletedAt: { $exists: false },
-    tags: { $in: [tag] },
+    tags: { $in: [...tag] },
   });
 
   return result;

@@ -67,7 +67,8 @@ module.exports.deleteQuestion = async (req, res, next) => {
 };
 module.exports.getAllQuestionsForATag = async (req, res, next) => {
   try {
-    const { tag } = req.params;
+    console.log(req.body.tags);
+    const  tag  = req.body.tags;
     const { classroomId } = req.params;
 
     const result = await findQuestionsByTags(classroomId, tag);
