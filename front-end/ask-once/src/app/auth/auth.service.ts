@@ -1,13 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, retry, throwError } from 'rxjs';
-
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 import ILoginResponse from '../interface/ILoginResponse';
 
 @Injectable({
   providedIn: 'any',
 })
 export class AuthService {
+  private tokenSubject = new BehaviorSubject<string | null>(null);
+  private showingLogin = new BehaviorSubject(true);
+
+  token$ = this.tokenSubject.asObservable();
+  showLogin$ = this.showingLogin.asObservable();
+
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') public baseUrl: string
@@ -15,10 +21,6 @@ export class AuthService {
     this.tokenSubject.next(localStorage.getItem('token'));
   }
 
-  private tokenSubject = new BehaviorSubject<string | null>(null);
-  public token$ = this.tokenSubject.asObservable();
-  private showingLogin = new BehaviorSubject(true);
-  showLogin$ = this.showingLogin.asObservable();
   showSignup() {
     this.showingLogin.next(false);
   }

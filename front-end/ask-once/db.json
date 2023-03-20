@@ -1,0 +1,63 @@
+{
+    "user": {
+        "_id": "64152b652e66a08b1e5e03de",
+        "firstName": "professor",
+        "lastName": "professor",
+        "email": "professor@gmail.com",
+        "role": "PROFESSOR"
+    },
+    "class-room": [
+        {
+            "professor": {
+                "_id": "64152b652e66a08b1e5e03de",
+                "firstName": "Assad",
+                "lastName": "Saad",
+                "email": "professor@gmail.com",
+                "role": "PROFESSOR"
+            },
+            "_id": "6415e2d16452b251cfe91dda",
+            "name": "MWA",
+            "students": [],
+            "__v": 0
+        },
+        {
+            "professor": {
+                "_id": "64152b652e66a08b1e5e03de",
+                "firstName": "professor",
+                "lastName": "professor",
+                "email": "professor@gmail.com",
+                "role": "PROFESSOR"
+            },
+            "_id": "6415ed5953127a59aff269e4",
+            "name": "FPpP",
+            "students": [],
+            "__v": 0
+        },
+        {
+            "professor": {
+                "_id": "64152b652e66a08b1e5e03de",
+                "firstName": "Assad",
+                "lastName": "Saad",
+                "email": "professor@gmail.com",
+                "role": "PROFESSOR"
+            },
+            "_id": "6415e2d16452b251cfe91dda",
+            "name": "MWA",
+            "students": [],
+            "__v": 0
+        },
+        {
+            "professor": {
+                "_id": "64152b652e66a08b1e5e03de",
+                "firstName": "Assad",
+                "lastName": "Saad",
+                "email": "professor@gmail.com",
+                "role": "PROFESSOR"
+            },
+            "_id": "6415e2d16452b251cfe91dda",
+            "name": "MWA",
+            "students": [],
+            "__v": 0
+        }
+    ]
+}
