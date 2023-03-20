@@ -1,4 +1,3 @@
 export interface DialogData {
-  animal: string;
-  name: string;
+  classroom_id: string;
 }
