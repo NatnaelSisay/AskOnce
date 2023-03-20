@@ -5,6 +5,7 @@ import IQuestion from 'src/app/interface/IQuestion';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DiscussionService } from './discussion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import IAnswerData from 'src/app/interface/IAnswerData';
 
 @Component({
   selector: 'app-discussion-dialog',
@@ -16,12 +17,28 @@ export class DiscussionDialogComponent {
     answer: ['', Validators.required],
   });
   tinyApi = TINY_API_KEY;
+  answers: IAnswerData[] = [];
   constructor(
     private _snackBar: MatSnackBar,
     private discussionService: DiscussionService,
     public dialogRef: MatDialogRef<DiscussionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public question: { question: IQuestion }
-  ) {}
+  ) {
+    try {
+      this.discussionService.getAnswers(this.question.question._id).subscribe({
+        next: (value) => {
+          this.answers = value.data.answers;
+        },
+        error: (err) => {
+          console.log(err);
+          this.formGroup.enable();
+          this._snackBar.open(err[0]);
+        },
+      });
+    } catch (error) {
+      this.formGroup.enable();
+    }
+  }
 
   submitAnswer() {
     if (this.formGroup.invalid) {

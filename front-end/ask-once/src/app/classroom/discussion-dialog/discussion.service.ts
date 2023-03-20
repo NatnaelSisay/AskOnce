@@ -26,6 +26,15 @@ export class DiscussionService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
+  getAnswers(questionId: string) {
+    return this.http
+      .get<{
+        success: true;
+        data: { answers: IAnswerData[] };
+      }>(this.baseUrl + `/questions/${questionId}/answers`)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.log(error);
 
