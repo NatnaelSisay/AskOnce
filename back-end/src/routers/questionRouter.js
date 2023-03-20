@@ -6,6 +6,7 @@ const {
   searchForQuestionsByTitle,
   deleteQuestion,
   getAllQuestionsForATag,
+  getAllTagsForClass,
 } = require("../controllers/questionController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const AnswerRouter = require("./answerRouter");
@@ -20,6 +21,7 @@ QuestionRouter.get("/search",authMiddleWare(),express.json(),searchForQuestionsB
 QuestionRouter.get("/:tag",authMiddleWare(),express.json(),getAllQuestionsForATag);
 QuestionRouter.delete("/:questionId", authMiddleWare(), deleteQuestion);
 QuestionRouter.use("/:questionId/answers",authMiddleWare(), AnswerRouter);
+QuestionRouter.get("/tags/list",authMiddleWare(),getAllTagsForClass)
 
 
 module.exports = QuestionRouter;

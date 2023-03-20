@@ -4,6 +4,7 @@ const {
   findQuestionsByTags,
   deleteAquestion,
   findAquestionsByTitle,
+  getAllTags,
 } = require("../respository/questionRepository");
 
 module.exports.getAllQuestionInClassRoom = async (req, res, next) => {
@@ -78,4 +79,12 @@ module.exports.getAllQuestionsForATag = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+module.exports.getAllTagsForClass = async (req, res, next) => {
+  const { classroomId } = req.params;
+  const result = await getAllTags(classroomId);
+  res.json({
+    success:true,
+    data:result
+  })
 };
