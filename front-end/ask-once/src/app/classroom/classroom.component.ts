@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { QuestionService } from '../class/question.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import IUser from '../interface/IUser';
 import IQuestion from '../interface/IQuestion';
 import {
@@ -19,6 +19,8 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+  activatedRouter= inject(ActivatedRoute);
+
   tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
@@ -35,7 +37,13 @@ export class ClassroomComponent {
   questions?: IQuestion[];
   tags!: string[];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    this.activatedRouter.params.subscribe((params) => {
+      console.log(params);
+
+    });
+
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
       width: '500px',
