@@ -1,0 +1,23 @@
+.dialog-responsive {
+  position: relative;
+  overflow: auto;
+  width: 500px;
+
+  @media (max-width: 568px) {
+    width: 440px;
+  }
+
+  @media (max-width: 468px) {
+    width: 340px;
+  }
+
+  @media (max-width: 368px) {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .dialog-responsive {
+    width: 100%;
+  }
+}

@@ -1,11 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { QuestionService } from '../class/question.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import IUser from '../interface/IUser';
 import IQuestion from '../interface/IQuestion';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
+import { FormBuilder, Validators } from '@angular/forms';
+import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 
 @Component({
   selector: 'app-classroom',
@@ -13,13 +19,9 @@ import { QuestionDialogComponent } from '../class/question-dialog/question-dialo
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+  activatedRouter= inject(ActivatedRoute);
 
-  animal: string="animal"
-  name: string="name"
-
-
-
-
+  tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
@@ -35,22 +37,33 @@ export class ClassroomComponent {
   questions?: IQuestion[];
   tags!: string[];
 
-  constructor(public dialog:MatDialog) {}
-  openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionDialogComponent, {
-      data: {name: this.name, animal: this.animal},
+  constructor(public dialog: MatDialog) {
+    this.activatedRouter.params.subscribe((params) => {
+      console.log(params);
+
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(QuestionDialogComponent, {
+      width: '500px',
+      height: 'px',
+
+
     });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+      if(result!=null || result!=undefined)
+      this.questions?.unshift(result);});
+
+
   }
   tagger(tag: string) {}
 
   onKey(event: any) {
     this.searchKey = event.target.value as string;
-    console.log(this.searchKey);
+
   }
   answer_router() {
     this.router.navigateByUrl('question');
@@ -60,19 +73,60 @@ export class ClassroomComponent {
       .searchQuestions(this.searchKey)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
-        console.log(this.questions);
+
       });
   }
+
   ngOnInit() {
     this.questionService.loadQuestions().subscribe((res: any) => {
       this.questions = res.data as IQuestion[];
-      console.log(res);
+
       this.questionService.loadAllTags().subscribe((res: any) => {
         this.tags = res.data[0].tags as string[];
       });
     });
   }
   showAns(ques: IQuestion) {
-    ques.showAnswers = !ques.showAnswers;
+    this.dialog.open(DiscussionDialogComponent, {
+      panelClass: 'dialog-responsive',
+      width: '75%',
+      height: '100%',
+      data: { question: ques },
+    });
   }
+  addTagFilter(tag: string) {
+    if(!this.tagFilters.includes(tag)) {
+      this.tagFilters.push(tag);
+    }else{
+      this.tagFilters = this.tagFilters.filter((t) => t !== tag);
+    }
+    console.log(this.tagFilters);
+    if(this.tagFilters.length !== 0){
+
+    this.questionService.tagFilteredQuestions(this.tagFilters).subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+  }else{
+    this.questionService.loadQuestions().subscribe((res: any) => {
+      this.questions = res.data as IQuestion[];
+
+    });
+
+  }
+}
+deleteQuestion(id :string){
+  this.questionService.deleteQuestion(id).subscribe((res: any) => {
+    console.log(res);
+  });
+  this.questionService.loadQuestions().subscribe((res: any) => {
+    this.questions = res.data as IQuestion[];});
+    this.questionService.loadAllTags().subscribe((res: any) => {
+      this.tags = res.data[0].tags as string[];
+    });
+}
+
+addLikes(){
+
+}
 }

@@ -4,44 +4,44 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { QeustionCardComponent } from './qeustion-card/qeustion-card.component';
-import { MatCardModule } from '@angular/material/card';
-import { TagsComponent } from './tags/tags.component';
+
+import { MatCard, MatCardModule } from '@angular/material/card';
+
 import { MatChipsModule } from '@angular/material/chips';
 import { MembersComponent } from './members/members.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { DiscussionComponent } from './discussion/discussion.component';
+
 import { ClassroomComponent } from './classroom/classroom.component';
-import { AnwserComponent } from './anwser/anwser.component';
 import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
-import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
-
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { DiscussionDialogComponent } from './classroom/discussion-dialog/discussion-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    QeustionCardComponent,
-    TagsComponent,
+
     MembersComponent,
-    DiscussionComponent,
     ClassroomComponent,
-    AnwserComponent,
+
+    DiscussionDialogComponent,
   ],
 
   imports: [
@@ -53,15 +53,20 @@ const getBaseUrl = () => 'http://localhost:3000';
     ReactiveFormsModule,
     MatToolbarModule,
     MatCardModule,
+    MatInputModule,
     MatChipsModule,
     MatListModule,
     MatDividerModule,
     MatIconModule,
+    MatCardModule,
     HttpClientModule,
     MatFormFieldModule,
-    MatInputModule,
     MatAutocompleteModule,
     MatCheckboxModule,
+
+    FormsModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },

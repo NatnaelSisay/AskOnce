@@ -3,9 +3,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Rlc
 Content-Type: application/json
 
 {
-  "question": "What is 1 + 1?",
-  "description": "I'm not sure if it's 2 or 3",
-    "tags": ["newTag", "tags", "here"],
+  "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget dolor et eli?",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget dolor et elit interdum suscipit vitae vitae nisi. Mauris dapibus sit amet quam sit amet sodales. Maecenas ut leo a lectus commodo tincidunt. Fusce odio velit, lobortis in egestas vel, fringilla vitae metus. Donec at diam ut nisl tempus tempus. In ut nulla commodo, cursus turpis ac, rhoncus sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer lacinia aliquam scelerisque. Integer id purus quis nisi gravida convallis. Phasellus eget gravida quam. Nunc vulputate mollis neque sed consequat. Curabitur pellentesque neque nec ex suscipit facilisis. Nulla eu neque eu urna volutpat tincidunt ac et arcu. Integer diam mi, mollis vel odio quis, hendrerit finibus justo. Vestibulum laoreet condimentum nisl et faucibus.",
+    "tags": ["some", "tags", "here"],
+    
     "answers":[],
     
 }
@@ -14,10 +15,13 @@ GET http://localhost:3000/questions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
-GET http://localhost:3000/class-room/64152b652e66a08b1e5e03de/questions/some
+POST  http://localhost:3000/questions/tagfiltred/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
-
 Content-Type: application/json
+
+{
+    "tags": ["some"]
+}
 ###
 GET http://localhost:3000/questions/search?title=1+1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
@@ -27,20 +31,17 @@ DELETE  http://localhost:3000/questions/641619a355cdf11e9465066b
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
-GET http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
+GET http://localhost:3000/questions/6418b1e58f09fddeb8ef6e22/answers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 
 ###
-POST  http://localhost:3000/questions/6414f0dce1b1e59edb517f49/answers
+POST  http://localhost:3000/questions/6418b1e58f09fddeb8ef6e22/answers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJ0ZXN0ZXIiLCJsYXN0TmFtZSI6InRlc3RlciIsInJvbGUiOiJTVFVERU5UIiwiX2lkIjoiNjQxNWM4MzdmYTg4YjJhMTJhMzliYTFmIiwiaWF0IjoxNjc5MTUwMzkwfQ.uNOZKwpeHkN5mJQ_u3mu71pdEsFsBWuJXmJ8ywx9tLM
 Content-Type:  application/json
 
 {
-    "user":{
-        "firstName": "tester",
-        "lastName": "tester",
-        "email": "some@email.com"},
-    "answer": "2"
+ 
+    "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget dolor et elit interdum suscipit vitae vitae nisi. Mauris dapibus sit amet quam sit amet sodales. Maecenas ut leo a lectus commodo tincidunt. Fusce odio velit, lobortis in egestas vel"
     
 }
 ###
