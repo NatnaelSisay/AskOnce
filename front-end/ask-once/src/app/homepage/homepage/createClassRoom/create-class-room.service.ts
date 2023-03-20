@@ -1,12 +1,23 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { catchError, retry, throwError } from 'rxjs';
+import {
+  catchError,
+  Observable,
+  retry,
+  throwError,
+  of,
+  BehaviorSubject,
+} from 'rxjs';
+import IStudentResponse from 'src/app/interface/IStudentReponse';
 import IUser from 'src/app/interface/IUser';
 
 @Injectable({
   providedIn: 'any',
 })
 export class CreateClassRoomService {
+  membersSubject = new BehaviorSubject<IUser[]>([]);
+  members?: IUser[];
+
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') public baseUrl: string
@@ -36,10 +47,19 @@ export class CreateClassRoomService {
 
   addNewMember(member: IUser, classRoomId?: string) {
     const url = `${this.baseUrl}/class-room/${classRoomId}/students`;
-    // this.http
-    //   .post<IUser>(url, member)
-    //   .pipe(retry(3), catchError(this.handleError));
-    console.log(url);
-    console.log(member);
+    this.http.post<IUser>(url, member).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  getStudents(classRoomId?: string): Observable<IUser[]> {
+    const url = `${this.baseUrl}/class-room/${classRoomId}/students?limit=10&page=1`;
+
+    this.http.get<IStudentResponse>(url).subscribe((res) => {
+      this.members = res.students;
+      this.membersSubject.next(this.members);
+    });
+
+    return this.membersSubject.asObservable();
   }
 }

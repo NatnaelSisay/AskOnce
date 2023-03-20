@@ -15,13 +15,20 @@ export class MembersComponent implements OnInit {
   searchFormControl = new FormControl<string>('');
   searchService = inject(CreateClassRoomService);
 
+  members?: IUser[];
+
   filterdOptions?: Observable<IUser[]>;
+  classStudentsObservable?: Observable<IUser[]>;
 
   ngOnInit() {
     this.searchFormControl.valueChanges.subscribe((value) => {
       if (value != null && value.length > 0) {
         this.filterdOptions = this.searchService.search(value);
       }
+    });
+
+    this.searchService.getStudents(this.classRoomId).subscribe((res) => {
+      this.members = res;
     });
   }
 

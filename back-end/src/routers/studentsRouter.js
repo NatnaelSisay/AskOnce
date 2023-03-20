@@ -6,6 +6,7 @@ const {
   removeStudent,
 } = require("../controllers/studentController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
+
 const StudentsRouter = express.Router({ mergeParams: true });
 StudentsRouter.use(express.json());
 StudentsRouter.get("/", authMiddleWare(), getStudents);
