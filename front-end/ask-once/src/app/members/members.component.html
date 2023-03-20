@@ -39,7 +39,7 @@
           <mat-list-item
             >{{ member.firstName }} {{ member.lastName }}</mat-list-item
           >
-          <button>
+          <button (click)="deleteMember(member)">
             <i class="material-icons">delete</i>
           </button>
         </div>

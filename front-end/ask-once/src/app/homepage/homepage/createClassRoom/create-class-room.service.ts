@@ -38,18 +38,14 @@ export class CreateClassRoomService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
-
     return throwError(() => [
       'Something bad happened; please try again later.',
     ]);
   }
 
-  addNewMember(member: IUser, classRoomId?: string) {
+  addNewMember(member: IUser, classRoomId?: string): Observable<any> {
     const url = `${this.baseUrl}/class-room/${classRoomId}/students`;
-    this.http.post<IUser>(url, member).subscribe((res) => {
-      console.log(res);
-    });
+    return this.http.post<IUser>(url, member);
   }
 
   getStudents(classRoomId?: string): Observable<IUser[]> {
@@ -61,5 +57,15 @@ export class CreateClassRoomService {
     });
 
     return this.membersSubject.asObservable();
+  }
+
+  deleteMember(classRoomId: string, member: IUser): Observable<any> {
+    let url: string = `${this.baseUrl}/class-room`;
+
+    if (member.role.toLocaleLowerCase() === 'student') {
+      url = `${url}/${classRoomId}/students/${member._id}`;
+    }
+
+    return this.http.delete<any>(url);
   }
 }

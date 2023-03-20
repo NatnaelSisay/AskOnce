@@ -11,7 +11,7 @@ import IUser from '../interface/IUser';
   styleUrls: ['./members.component.css'],
 })
 export class MembersComponent implements OnInit {
-  @Input() classRoomId?: string;
+  @Input() classRoomId: string = '';
   searchFormControl = new FormControl<string>('');
   searchService = inject(CreateClassRoomService);
 
@@ -34,11 +34,18 @@ export class MembersComponent implements OnInit {
 
   optionSelected(option: MatAutocompleteSelectedEvent) {
     const member = option.option.value as IUser;
-    this.searchService.addNewMember(member, this.classRoomId);
-    console.log(option);
+    this.searchService.addNewMember(member, this.classRoomId).subscribe(() => {
+      this.members?.push(member);
+    });
   }
 
   displayFunction(option: IUser) {
     return option.firstName;
+  }
+
+  deleteMember(member: IUser) {
+    this.searchService.deleteMember(this.classRoomId, member).subscribe(() => {
+      this.members = this.members?.filter((m) => m._id !== member._id);
+    });
   }
 }
