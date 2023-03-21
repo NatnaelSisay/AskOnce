@@ -6,12 +6,10 @@ import IUser from '../../interface/IUser';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
 
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -20,11 +18,11 @@ import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.compo
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   http = inject(DataService);
-
+  router = inject(Router);
   user?: IUser;
   classRooms: IClassRoom[] = [];
   classRoomSubscriptioin?: Subscription;
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
     this.classRoomSubscriptioin = this.http.getClassRooms().subscribe((res) => {
@@ -43,7 +41,14 @@ export class HomepageComponent implements OnInit, OnDestroy {
   onAddButtonClick() {
     const dialogRef = this.dialog.open(CreatClassRoomComponent, {});
     dialogRef.afterClosed().subscribe((result) => {
-      this.classRooms = [result.data, ...this.classRooms];
+      if (result?.data) {
+        this.classRooms = [result.data, ...this.classRooms];
+      }
     });
+  }
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['', 'auth']);
   }
 }

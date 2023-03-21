@@ -13,6 +13,7 @@ module.exports.authMiddleWare = (role) => async (req, res, next) => {
     // }
     next();
   } catch (error) {
+    console.log(error);
     next(new ResponseError(401, { message: "unauthorized user" }));
   }
 };
