@@ -11,6 +11,7 @@ import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.compo
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import userFromToken from 'src/app/utils/decodeJwt';
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
@@ -18,6 +19,7 @@ import userFromToken from 'src/app/utils/decodeJwt';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit, OnDestroy {
+  tags!: string[];
   dataService = inject(DataService);
   router = inject(Router);
   user?: IUser;
@@ -28,7 +30,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   constructor(private dialog: MatDialog, private authService: AuthService) {
     console.log(this.imageFileName);
-    
+
     this.userSubsctiption = this.dataService.user$.subscribe((data) => {
       if (data) {
         this.user = data;
@@ -44,6 +46,17 @@ export class HomepageComponent implements OnInit, OnDestroy {
       });
 
     this.user = userFromToken();
+
+  }
+
+  tagger (id: string):string[] {
+    let tags :string[] =["some","tags","here"]
+    // this.dataService.addTags(id).subscribe((res: any) => {
+    //   console.log(res);
+
+    // })
+
+    return tags
   }
 
   ngOnDestroy(): void {

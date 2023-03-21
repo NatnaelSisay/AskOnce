@@ -35,4 +35,9 @@ export class DataService {
 
     return this.classRoomSubject.asObservable();
   }
+
+  addTags(classRoomId: string){
+    return this.http.get(`${this.baseUrl}/class-room/${classRoomId}/questions/limitedTags`);
+
+  }
 }

@@ -1,39 +1,47 @@
 <div class="homepage">
-  <mat-toolbar color="primary" class="nav">
-    <app-display-profile-pic [imageFileName]="imageFileName" />
-    <div class="container nav-content">
-      <span>Welcome, {{ user?.firstName }} </span>
+  <div class=" flex sticky top-0 z-20 border-b bg-white  mx-auto">
+    <div class="flex w-full max-w-7xl mx-auto items-center justify-center">
+
+      <app-display-profile-pic [imageFileName]="imageFileName" />
+      <div
+      class="w-full flex  px-10 py-2 space-x-3 max-w-5xl mx-auto items-center"
+      >
+      <img src="../../assets/images/png/logo-no-background.png" alt="ask-once logo" class="h-20 hidden md:inline-block">
+      <div class="flex-1">
+        <h1 class="text-xl text-indigo-800">Welcome to Ask-Once</h1>
+        <p class="text-indigo-800 text-sm">{{user?.firstName}}</p>
+
+
+
+      </div>
+
       <button mat-icon-button (click)="logOut()">
-        <mat-icon>logout</mat-icon>
+        <mat-icon class="text-indigo-800">logout</mat-icon>
       </button>
     </div>
-  </mat-toolbar>
+  </div>
+  </div>
 
   <div class="container main-content">
     <div class="card" routerLink="" *ngFor="let class of classRooms">
       <a [routerLink]="'classroom/' + class._id" class="classroom-card">
-        <mat-card class="">
-          <mat-card-header>
-            <mat-card-subtitle>{{
-              class.professor.firstName
-            }}</mat-card-subtitle>
-            <mat-card-title>{{ class.name }}</mat-card-title>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content>
-            <p>Enrolled: {{ class.students.length }}</p>
-          </mat-card-content>
-        </mat-card>
+       <app-classroom-card [classRoom]="class" />
       </a>
     </div>
 
+
+
     <button
-      *ngIf="user?.role !== 'STUDENT'"
+
       mat-fab
       (click)="onAddButtonClick()"
       class="fab-button"
+      color="primary"
     >
       <mat-icon>add</mat-icon>
     </button>
   </div>
 </div>
+<footer>
+  <app-footer></app-footer>
+</footer>
