@@ -31,6 +31,7 @@ import { DiscussionDialogComponent } from './classroom/discussion-dialog/discuss
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FooterComponent } from './footer/footer.component';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -42,6 +43,7 @@ const getBaseUrl = () => 'http://localhost:3000';
     ClassroomComponent,
 
     DiscussionDialogComponent,
+     FooterComponent,
   ],
 
   imports: [

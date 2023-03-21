@@ -40,6 +40,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.classRooms = res;
       });
+
+    this.user = userFromToken();
   }
 
   ngOnDestroy(): void {

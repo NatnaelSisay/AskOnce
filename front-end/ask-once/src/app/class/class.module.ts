@@ -11,9 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [QuestionDialogComponent],
+  declarations: [QuestionDialogComponent, FooterComponent],
   imports: [
     MatIconModule,
     HttpClientModule,

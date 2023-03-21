@@ -6,11 +6,11 @@ module.exports.authMiddleWare = (role) => async (req, res, next) => {
   try {
     const reqJwt = req.headers?.authorization?.split(" ")[1];
     const decoded = verifyJwt(reqJwt);
-    if (role) {
-      if (decoded.role !== role) {
-        next(new ResponseError(403, { message: "User has no priviledge" }));
-      }
-    }
+    // if (role) {
+    //   if (decoded.role !== role) {
+    //     next(new ResponseError(403, { message: "User has no priviledge" }));
+    //   }
+    // }
     next();
   } catch (error) {
     console.log(error);

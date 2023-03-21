@@ -30,6 +30,7 @@ const questionSchema = new mongoose.Schema({
   },
   classroomId: String,
   deletedAt: Date,
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true }],
 });
 questionSchema.index({ question: "text" });
 

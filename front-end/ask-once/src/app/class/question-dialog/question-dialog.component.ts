@@ -11,6 +11,8 @@ import {
 import { DialogData } from 'src/app/interface/IDialogData';
 import { QuestionService } from '../question.service';
 import IQuestion from 'src/app/interface/IQuestion';
+import IUser from 'src/app/interface/IUser';
+import userFromToken from 'src/app/utils/decodeJwt';
 
 @Component({
   selector: 'app-question-dialog',
@@ -18,6 +20,7 @@ import IQuestion from 'src/app/interface/IQuestion';
   styleUrls: ['./question-dialog.component.css'],
 })
 export class QuestionDialogComponent {
+  user : IUser= userFromToken()
   questoinService = inject(QuestionService);
   QuestionForm = inject(FormBuilder).group({
     title: ['', [Validators.required]],
@@ -78,25 +81,22 @@ export class QuestionDialogComponent {
         this.QuestionForm.get('title')?.value ?? '',
         this.QuestionForm.get('description')?.value ?? '',
         this.tags,
-        this.data.classroom_id
+        this.data.classroom_id,
+        this.user
       )
       .subscribe({
         next: (data: any) => {
+
+
           this.dialogRef.close({
             _id: data.data._id,
             question: this.QuestionForm.get('title')?.value ?? '',
             description: this.QuestionForm.get('description')?.value ?? '',
             tags: this.tags,
-            answers: [],
-            askedBy: {
-              _id: '1',
-              firstName: 'john',
-              lastName: 'Doe',
-              email: 'johnDoe@email.com',
-              role: 'student',
-              profileImage: null,
-            },
+            answer_count: 0,
+            askedBy:this.user,
             showAnswers: false,
+            likes: [],
           } as IQuestion);
         },
         error: (error) => {

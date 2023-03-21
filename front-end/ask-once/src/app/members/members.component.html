@@ -1,7 +1,7 @@
-<div class="max-w-xs border p-3 rounded-xl">
+<div class="max-w-xs border-l p-3 ">
   <p>Members</p>
   <div>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="user?.role === 'PROFESSOR'">
       <input
         matInput
         placeholder="Add member"
@@ -32,14 +32,17 @@
         <div class="flex pt-2">
           <img
             mat-card-avatar
-            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-            alt="Photo of a Shiba Inu"
+            src="../../assets/images/user.webp"
+            alt="Photo of user"
             class="h-10 w-10 rounded-full"
           />
           <mat-list-item
             >{{ member.firstName }} {{ member.lastName }}</mat-list-item
           >
-          <button (click)="deleteMember(member)">
+          <button
+            *ngIf="user?.role === 'PROFESSOR'"
+            (click)="deleteMember(member)"
+          >
             <i class="material-icons">delete</i>
           </button>
         </div>
