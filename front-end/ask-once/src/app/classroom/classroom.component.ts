@@ -22,11 +22,10 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
-
-  classRoomName: string='Sample class'
+  classRoomName: string = 'Sample class';
   classRoomId!: string;
   activatedRouter = inject(ActivatedRoute);
-  user: IUser= userFromToken()
+  user: IUser = userFromToken();
   tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
@@ -74,12 +73,12 @@ export class ClassroomComponent {
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
 
-        this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
-          this.tags = res.data[0].tags as string[];
-        });
-      })
-
-
+        this.questionService
+          .loadAllTags(this.classRoomId)
+          .subscribe((res: any) => {
+            this.tags = res.data[0].tags as string[];
+          });
+      });
   }
   showAns(ques: IQuestion) {
     this.dialog.open(DiscussionDialogComponent, {
@@ -125,23 +124,26 @@ export class ClassroomComponent {
 
   addLikes(ques: IQuestion) {
     const isliked = ques.likes.includes(this.user._id);
-    const token= readTokenFromStorage()
+    const token = readTokenFromStorage();
     console.log(this.user);
 
-    if(!isliked){
-
-      this.questionService.likeAQuestion(ques._id,this.classRoomId).subscribe((res: any) => {
-       ques.likes.push(this.user._id)
-      });
-
+    if (!isliked) {
+      this.questionService
+        .likeAQuestion(ques._id, this.classRoomId)
+        .subscribe((res: any) => {
+          ques.likes.push(this.user._id);
+        });
+    } else {
+      this.questionService
+        .removeAlike(ques._id, this.classRoomId)
+        .subscribe((res: any) => {
+          ques.likes = ques.likes.filter((like) => like !== this.user._id);
+        });
     }
-    else{
-      this.questionService.removeAlike(ques._id,this.classRoomId).subscribe((res: any) => {
-        ques.likes=ques.likes.filter(like=> like!==this.user._id)
-      } );
-    }
-
   }
 
-  logOut() {}
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['', 'auth']);
+  }
 }
