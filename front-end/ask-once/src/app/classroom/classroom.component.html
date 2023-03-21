@@ -22,7 +22,7 @@
         search
       </button>
       <button mat-icon-button (click)="logOut()">
-        <mat-icon class="text-white" >logout</mat-icon>
+        <mat-icon class="text-white">logout</mat-icon>
       </button>
     </div>
   </div>
@@ -119,7 +119,7 @@
         <!-- tags end here -->
       </div>
       <div>
-        <app-members></app-members>
+        <app-members [classRoomId]="classRoomId"></app-members>
       </div>
     </div>
   </div>

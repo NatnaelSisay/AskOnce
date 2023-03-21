@@ -34,7 +34,6 @@ export class DiscussionDialogComponent {
         .getAnswers(this.data.question._id, this.data.classId)
         .subscribe({
           next: (value) => {
-            console.log(typeof value.data);
             if (value.data.length === 0) {
               return;
             }
@@ -42,7 +41,6 @@ export class DiscussionDialogComponent {
             this.answers = value.data[0].answers;
           },
           error: (err) => {
-            console.log(err);
             this.formGroup.enable();
             this._snackBar.open(err[0]);
           },
@@ -68,8 +66,6 @@ export class DiscussionDialogComponent {
           )
           .subscribe({
             next: (value) => {
-              console.log(value);
-
               let i = this.answers.findIndex(
                 (answer) => answer.user.role === 'STUDENT'
               );

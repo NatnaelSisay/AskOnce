@@ -1,6 +1,6 @@
 # class-room students
 ###
-GET http://localhost:3000/class-room/64152b96cbc5750d75efb4cb/students?limit=10&page=1
+GET http://localhost:3000/class-room/6415e2d16452b251cfe91dda/students?limit=10&page=1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpbnNhZUBtaXUuZWR1Iiwicm9sZSI6IlNUVURFTlQiLCJmaXJzdE5hbWUiOiJUaW5zYWUiLCJsYXN0TmFtZSI6IllhcmVkIiwiX2lkIjoiNjQxNTJiZDJmYjUyMjUyZjMyYzZjYjZmIiwiaWF0IjoxNjc5MTA5MDc0fQ.NGPkMg3UZpyceVupy69ILhieKg--Z3KKH8pQSyLaRbs
 
@@ -8,7 +8,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpbnNhZ
 
 
 
-POST http://localhost:3000/class-room/64152b96cbc5750d75efb4cb/students/ HTTP/1.1
+POST http://localhost:3000/class-room/6415e2d16452b251cfe91dda/students
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtaXUuZWR1Iiwicm9sZSI6IlBST0ZFU1NPUiIsImZpcnN0TmFtZSI6IkFzYWFkIiwibGFzdE5hbWUiOiJTYWFkIiwiX2lkIjoiNjQxNGQ4NWVmYTg0MjA0ODk3YzAxYzYzIiwiaWF0IjoxNjc5MDg3NzExfQ.0GfbgXm2TNhCAhRUL2tOvvZV9ciEAVsHTxV8v35dZqU
 

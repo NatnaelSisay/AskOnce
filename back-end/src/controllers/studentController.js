@@ -2,7 +2,6 @@ const ResponseError = require("../errors/ResponseError");
 const studentRepository = require("../respository/studentRepository");
 
 module.exports.getStudents = async (req, res, next) => {
-  console.log("getStudents");
   try {
     const { class_id } = req.params;
     const { limit, page } = req.query;

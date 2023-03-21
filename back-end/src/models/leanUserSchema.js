@@ -7,14 +7,17 @@ module.exports.leanUserSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
+    sparse: true,
   },
   lastName: {
     type: String,
     required: true,
+    sparse: true,
   },
   email: {
     type: String,
     required: true,
+    sparse: true,
   },
 
   role: {

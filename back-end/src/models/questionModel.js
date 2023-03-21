@@ -30,17 +30,7 @@ const questionSchema = new mongoose.Schema({
   },
   classroomId: String,
   deletedAt: Date,
-  
 });
 questionSchema.index({ question: "text" });
-
-// const answerSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-//   answeredBy: userSchema,
-//   followUp: [questionSchema],
-// });
 
 module.exports = mongoose.model("Question", questionSchema);

@@ -20,6 +20,10 @@ import readTokenFromStorage from './utils/readTokenFromStorage';
 import { Router } from '@angular/router';
 import { AppGuardInterceptor } from './app-guard.interceptor';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { HttpRequestInterceptor } from 'src/httpInterceptors/httpRequestInterceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -46,6 +50,7 @@ const getBaseUrl = () => 'http://localhost:3000';
     BrowserAnimationsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
@@ -55,8 +60,11 @@ const getBaseUrl = () => 'http://localhost:3000';
     MatIconModule,
     MatCardModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+
     FormsModule,
-    ReactiveFormsModule,
     MatProgressBarModule,
     MatSnackBarModule,
   ],
