@@ -7,12 +7,21 @@ const {
 } = require("../controllers/userController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const { logginMiddleware } = require("../middlewares/loginMiddleware");
+const {
+  profileImageUploadMiddleware,
+} = require("../middlewares/profileImageUploadMiddleware");
 const { signupMiddleware } = require("../middlewares/signupMiddleware");
 const UserRouter = new express.Router();
 
-UserRouter.get("/", authMiddleWare(), searchUser);
-UserRouter.post("/login", logginMiddleware, loginController);
-UserRouter.post("/signup", signupMiddleware, signupController);
+UserRouter.post(
+  "/signup",
+  profileImageUploadMiddleware.single("profileImage"),
+  signupMiddleware,
+  signupController
+);
+
+UserRouter.get("/", express.json(), authMiddleWare(), searchUser);
+UserRouter.post("/login", express.json(), logginMiddleware, loginController);
 
 // example routes for auth middleware
 UserRouter.get("/professor", authMiddleWare(ROLES_ENUM.professor), (req, res) =>

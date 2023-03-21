@@ -11,9 +11,9 @@ connectDb();
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
 app.use("/users", UserRouter);
+app.use(express.json());
 app.use("/class-room", ClassRoomRouter);
 app.use("/questions", questionRouter);
 

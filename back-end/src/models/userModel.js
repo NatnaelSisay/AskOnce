@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profileImage: {
+    type: String,
+  },
 });
 userSchema.index({ firstName: "text", email: "text" });
 
