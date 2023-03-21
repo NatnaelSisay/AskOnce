@@ -24,9 +24,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
   userSubsctiption?: Subscription;
   classRooms: IClassRoom[] = [];
   classRoomSubscriptioin?: Subscription;
-  imageFileName: string | null = null;
+  imageFileName: string | null = userFromToken().profileImage;
+
   constructor(private dialog: MatDialog, private authService: AuthService) {
-    this.imageFileName = userFromToken().profileImage;
+    console.log(this.imageFileName);
+    
     this.userSubsctiption = this.dataService.user$.subscribe((data) => {
       if (data) {
         this.user = data;
