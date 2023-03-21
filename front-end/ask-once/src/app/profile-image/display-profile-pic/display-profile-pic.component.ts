@@ -9,11 +9,11 @@ import { DisplayImageService } from './display-image.service';
 export class DisplayProfilePicComponent {
   imageBlob?: Blob | null = null;
   previewSignsrc: string | null = null;
-  @Input() imageFileName: string | null = null;
+  @Input() imageFileName?: string | null;
 
-  constructor(private displayImageService: DisplayImageService) {
+  ngOnInit() {
     if (this.imageFileName)
-      displayImageService.getImage(this.imageFileName).subscribe({
+      this.displayImageService.getImage(this.imageFileName).subscribe({
         next: (response) => {
           if (!response) return;
           const imageUrl = URL.createObjectURL(response);
@@ -23,5 +23,8 @@ export class DisplayProfilePicComponent {
           imgElement.src = imageUrl;
         },
       });
+  }
+  constructor(private displayImageService: DisplayImageService) {
+    // console.log(this.imageFileName);
   }
 }
