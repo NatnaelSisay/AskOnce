@@ -85,7 +85,7 @@ export class DiscussionDialogComponent {
       } catch (error) {
         this.formGroup.enable();
       }
-    }, 1000);
+    }, 500);
   }
 
   canDelete(answer: IAnswerData) {
