@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, inject, Injectable } from '@angular/core';
-import { Observable, Subject, of, BehaviorSubject } from 'rxjs';
-import userFromToken from 'src/app/utils/decodeJwt';
-
-//
+import { Observable, BehaviorSubject } from 'rxjs';
 import IClassRoom, {
   IClassRoomSuccessReponse,
-} from '../..//interface/IClassRoom.interface';
-import IUser from '../../interface/IUser';
+} from 'src/app/interface/IClassRoom.interface';
+import IUser from 'src/app/interface/IUser';
+import userFromToken from 'src/app/utils/decodeJwt';
 
 @Injectable({
   providedIn: 'root',
