@@ -1,17 +1,18 @@
 <div>
   <!-- HEADERRRRRRR -->
 
-  <div class=" sticky top-0 z-20 border-b bg-white">
+  <div class="sticky top-0 z-20 border-b bg-white">
     <div
-      class="w-full flex  px-10 py-2 space-x-3 max-w-5xl mx-auto items-center"
+      class="w-full flex px-10 py-2 space-x-3 max-w-7xl mx-auto items-center"
     >
-    <img src="../../assets/images/png/logo-no-background.png" alt="ask-once logo" class="h-20">
+      <img
+        src="../../assets/images/png/logo-no-background.png"
+        alt="ask-once logo"
+        class="h-20 hidden md:inline-block"
+      />
       <div class="flex-1">
-        <h1 class="text-xl text-indigo-800">Welcome to {{classRoomName}}</h1>
-        <p class="text-indigo-800 text-sm">{{user.firstName}}</p>
-
-
-
+        <h1 class="text-xl text-indigo-800">Welcome to {{ classRoomName }}</h1>
+        <p class="text-indigo-800 text-sm">{{ user.firstName }}</p>
       </div>
 
       <button mat-icon-button (click)="logOut()">
@@ -21,38 +22,42 @@
   </div>
 
   <!-- HEADERRR ENDS HERE-->
-  <div class="second-header  flex py-1 justify-center max-w-5xl mx-auto">
+  <div
+    class="second-header flex pt-7 justify-center px-3 md:px-0 md:max-w-5xl mx-auto"
+  >
     <input
-          type="text"
-          class="flex-1 rounded-md font-thin px-10 w-full border-2 border-indigo-300 max-w-3xl"
-          placeholder="search for questions"
-          (keyup)="onKey($event)"
-
-        />
-        <button
-        class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:text-indigo-600"
-        (click)="search()"
-        mat-icon-button
-      >
-        <mat-icon class="text-black text-2l">
-          search
-        </mat-icon>
-      </button>
+      type="text"
+      class="flex-1 rounded-3xl font-thin px-10 w-full border-2 border-indigo-300 max-w-3xl"
+      placeholder="search for questions"
+      (keyup)="onKey($event)"
+    />
+    <button
+      class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:text-indigo-600"
+      (click)="search()"
+      mat-icon-button
+    >
+      <mat-icon class="text-black text-2l"> search </mat-icon>
+    </button>
   </div>
 
   <!-- BODY -->
 
-  <div class="flex max-w-5xl mx-auto mt-20 space-x-10">
-    <div class="flex-1">
+  <div
+    class="flex flex-col-reverse md:flex-row md:max-w-5xl md:mx-auto md:mt-20 md:space-x-10"
+  >
+    <div class="md:flex-1">
       <!-- LIST OF QUESTOINS -->
 
       <div class="">
         <div class="mb-10">
           <div *ngIf="questions?.length === 0; else bod">
-            <img src="../../assets/images/empty.jpg" alt="the images">
+            <img src="../../assets/images/empty.jpg" alt="the images" />
           </div>
           <ng-template #bod>
-            <div *ngFor="let ques of questions" class="pt-3 border-l-2 border-indigo-700 pl-3">
+            <div
+              *ngFor="let ques of questions"
+              class="pt-2 md:border-l-2 border-indigo-700 px-3"
+            >
               <mat-card>
                 <div (click)="showAns(ques)" class="cursor-pointer">
                   <mat-card-header>
@@ -74,21 +79,33 @@
 
                 <mat-card-actions>
                   <div class="space-x-3 flex items-center justify-center">
-
-                      <button mat-icon-button *ngIf="!ques.likes.includes(user._id); else likedButton"  (click)="addLikes(ques)">
+                    <button
+                      mat-icon-button
+                      *ngIf="!ques.likes.includes(user._id); else likedButton"
+                      (click)="addLikes(ques)"
+                    >
+                      <mat-icon>arrow_upward</mat-icon>
+                    </button>
+                    <ng-template #likedButton>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="addLikes(ques)"
+                      >
                         <mat-icon>arrow_upward</mat-icon>
                       </button>
-                        <ng-template #likedButton>
-                          <button mat-icon-button color="primary"  (click)="addLikes(ques)">
-                            <mat-icon>arrow_upward</mat-icon>
-                            </button>
+                    </ng-template>
 
-                        </ng-template>
+                    <p class="text-xs -ml-2">{{ ques.likes.length }}</p>
 
-                        <p class=" text-xs -ml-2">{{ques.likes.length}}</p>
-
-
-                    <button mat-icon-button *ngIf="user._id===ques.askedBy._id || user.role==='PROFESSOR'" (click)="deleteQuestion(ques._id)">
+                    <button
+                      mat-icon-button
+                      *ngIf="
+                        user._id === ques.askedBy._id ||
+                        user.role === 'PROFESSOR'
+                      "
+                      (click)="deleteQuestion(ques._id)"
+                    >
                       <mat-icon>delete</mat-icon>
                     </button>
 
@@ -96,24 +113,34 @@
                       <button mat-icon-button (click)="showAns(ques)">
                         <mat-icon>question_answer</mat-icon>
                       </button>
-                      <p class=" text-xs -ml-2">{{ques.answer_count}}</p>
-
+                      <p class="text-xs -ml-2">{{ ques.answer_count }}</p>
                     </div>
                   </div>
                 </mat-card-actions>
               </mat-card>
-
-
             </div>
           </ng-template>
         </div>
       </div>
       <!-- LIST OF QUESTIONS ENDS HERE -->
     </div>
-    <div class="space-y-10">
+    <div class="space-y-10 p-2">
+      <!-- button -->
+      <div class="">
+        <button
+          color="primary"
+          mat-raised-button
+          (click)="openDialog()"
+          class="flex items-center"
+          color="primary"
+        >
+          <mat-icon>add</mat-icon>
+          create new question
+        </button>
+      </div>
       <div class="flex-shrink">
         <!-- tags section  -->
-        <div class="border-l p-2 ">
+        <div class="md:border-l p-2">
           <p>Topics:</p>
           <div class="grid-cols-5 max-w-xs space-x-2">
             <mat-chip-option
@@ -123,31 +150,20 @@
             >
           </div>
           <div class="h-52 w-52" *ngIf="!tags">
-            <img src="../../assets/images/empty-tag.webp" alt="the images">
-
-
+            <img src="../../assets/images/empty-tag.webp" alt="the images" />
           </div>
         </div>
         <!-- tags end here -->
       </div>
-      <div>
+      <div class="hidden md:inline-block">
         <app-members [classRoomId]="classRoomId"></app-members>
-      </div>
-      <div class="py-5" >
-        <button mat-fab color="primary" (click)="openDialog()" >
-          <mat-icon>add</mat-icon>
-        </button>
       </div>
     </div>
   </div>
 
   <div></div>
-
 </div>
+
 <footer>
-  <app-footer>
-
-  </app-footer>
-
+  <app-footer> </app-footer>
 </footer>
-

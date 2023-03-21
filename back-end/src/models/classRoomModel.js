@@ -9,6 +9,7 @@ const classRoomSchema = new mongoose.Schema({
   professor: leanUserSchema,
   students: [leanUserSchema],
   deletedAt: Number,
+  description: String,
 });
 
 module.exports = mongoose.model("ClassRoom", classRoomSchema);
