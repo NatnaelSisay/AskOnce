@@ -71,10 +71,18 @@
           </button>
         </mat-form-field>
       </div>
-      <div>
-        <img class="image-preview"  [src]="imageSrc" *ngIf="imageSrc" />
+      <img class="image-preview" [src]="imageSrc" *ngIf="imageSrc" />
+      <button *ngIf="imageSrc" mat-button (click)="removeImage()">
+        Remove image
+      </button>
+      <div *ngIf="!imageSrc">
         <mat-label>Select profile image</mat-label>
-        <input type="file" (change)="onFileSelected($event)" />
+        <input
+          type="file"
+          accept=".jpg, .jpeg"
+          formControlName="profileImage"
+          (change)="onFileSelected($event)"
+        />
       </div>
       <div>
         <mat-radio-group aria-label="Select an option" formControlName="role">

@@ -12,12 +12,15 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent {
   imageSrc?: string;
+  formData: FormData = new FormData();
+  imageFile: File | null = null;
   tokenSubscription?: Subscription | null = null;
   signupForm = inject(FormBuilder).group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
+    profileImage: [],
     passwordConfirmation: [
       '',
       [
@@ -52,27 +55,37 @@ export class SignupComponent {
     if (!this.signupForm.valid) return;
     this.signupForm.disable();
     try {
-      this.authService
-        .signup(
-          this.signupForm.controls.firstName.value!,
-          this.signupForm.controls.lastName.value!,
-          this.signupForm.controls.email.value!,
-          this.signupForm.controls.password.value!,
-          this.signupForm.controls.passwordConfirmation.value!,
-          this.signupForm.controls.role.value!
-        )
-        .subscribe({
-          next: (value) => {
-            this.signupForm.enable();
-            this.authService.setToken(value.token);
-          },
-          error: (err) => {
-            console.log(err);
+      this.formData.append(
+        'firstName',
+        this.signupForm.controls.firstName.value!
+      );
+      this.formData.append(
+        'lastName',
+        this.signupForm.controls.lastName.value!
+      );
+      this.formData.append('email', this.signupForm.controls.email.value!);
+      this.formData.append(
+        'password',
+        this.signupForm.controls.password.value!
+      );
+      this.formData.append(
+        'passwordConfirmation',
+        this.signupForm.controls.passwordConfirmation.value!
+      );
+      this.formData.append('role', this.signupForm.controls.role.value!);
+      if (this.imageFile) this.formData.append('profileImage', this.imageFile);
 
-            this.signupForm.enable();
-            this.openSnackBar(err[0]);
-          },
-        });
+      this.authService.signup(this.formData).subscribe({
+        next: (value) => {
+          this.signupForm.enable();
+          this.authService.setToken(value.token);
+        },
+        error: (err) => {
+          this.signupForm.enable();
+
+          this.openSnackBar(err[0]);
+        },
+      });
     } catch (error) {
       this.signupForm.enable();
     }
@@ -88,11 +101,16 @@ export class SignupComponent {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
+    this.imageFile = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.imageSrc = e.target.result;
     };
-    reader.readAsDataURL(file);
+    if (this.imageFile) reader.readAsDataURL(this.imageFile);
+  }
+
+  removeImage() {
+    this.imageFile = null;
+    this.imageSrc = '';
   }
 }
