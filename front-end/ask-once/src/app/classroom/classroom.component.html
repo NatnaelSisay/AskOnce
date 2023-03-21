@@ -1,22 +1,29 @@
 <div>
-
   <!-- HEADERRRRRRR -->
 
-  <div class=" bg-indigo-800 sticky top-0 z-20">
-    <div class="w-full flex py-5 px-10 space-x-3 max-w-5xl mx-auto items-center ">
-      <div class="flex flex-1  justify-between space-x-40 items-center">
-        <h1 class=" text-xl text-white">Modern Web Programing-Assad Saad</h1>
+  <div class="bg-indigo-800 sticky top-0 z-20">
+    <div
+      class="w-full flex py-5 px-10 space-x-3 max-w-5xl mx-auto items-center"
+    >
+      <div class="flex flex-1 justify-between space-x-40 items-center">
+        <h1 class="text-xl text-white">Modern Web Programing-Assad Saad</h1>
 
-        <input type="text" class=" flex-1 flex-grow h-12 rounded-md font-thin px-10" placeholder="search for questions"
-          (keyup)="onKey($event)">
-
-
+        <input
+          type="text"
+          class="flex-1 flex-grow h-12 rounded-md font-thin px-10"
+          placeholder="search for questions"
+          (keyup)="onKey($event)"
+        />
       </div>
       <button
         class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:bg-indigo-800 hover:text-white hover:ring-white hover:ring-1"
-        (click)="search()">search</button>
-      <button
-        class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:bg-indigo-800 hover:text-white hover:ring-white hover:ring-1">Logout</button>
+        (click)="search()"
+      >
+        search
+      </button>
+      <button mat-icon-button (click)="logOut()">
+        <mat-icon class="text-white" >logout</mat-icon>
+      </button>
     </div>
   </div>
 
@@ -24,41 +31,43 @@
 
   <!-- BODY -->
 
-  <div class=" flex max-w-5xl mx-auto mt-20 space-x-10">
+  <div class="flex max-w-5xl mx-auto mt-20 space-x-10">
     <div class="flex-1">
       <!-- LIST OF QUESTOINS -->
 
       <div>
         <div class="mb-10">
-          <div *ngIf="questions?.length===0  else bod">
-              <p class="h-full text-center">no questions</p>
+          <div *ngIf="questions?.length === 0; else bod">
+            <p class="h-full text-center">no questions</p>
           </div>
           <ng-template #bod>
-
-
-            <div *ngFor="let ques of questions" class=" pb-3" >
-              <mat-card >
-                <div (click)="showAns(ques)" class=" cursor-pointer">
+            <div *ngFor="let ques of questions" class="pb-3">
+              <mat-card>
+                <div (click)="showAns(ques)" class="cursor-pointer">
                   <mat-card-header>
-
                     <div>
                       <div>
-                        <p class="text-gray-400">{{user?.firstName}}</p>
+                        <p class="text-gray-400">{{ user?.firstName }}</p>
                       </div>
-                      <mat-card-title>{{ques?.question}}</mat-card-title>
+                      <mat-card-title>{{ ques?.question }}</mat-card-title>
                       <!-- <mat-card-subtitle>{{Date.now()}}</mat-card-subtitle> -->
                     </div>
                   </mat-card-header>
-                  <mat-card-content>{{ques?.description}}</mat-card-content>
+                  <mat-card-content>{{ ques?.description }}</mat-card-content>
                   <div class="pl-3 pt-2 flex items-center space-x-2">
-                    <mat-chip *ngFor="let tag of ques.tags">#{{tag}}</mat-chip>
-
+                    <mat-chip *ngFor="let tag of ques.tags"
+                      >#{{ tag }}</mat-chip
+                    >
                   </div>
                 </div>
 
                 <mat-card-actions>
                   <div class="space-x-3 flex items-center justify-center">
-                    <button mat-icon-button  color="primary" (click)="addLikes()">
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      (click)="addLikes()"
+                    >
                       <mat-icon>favorite</mat-icon>
                     </button>
                     <button mat-icon-button (click)="deleteQuestion(ques._id)">
@@ -69,53 +78,42 @@
                       <button mat-icon-button (click)="showAns(ques)">
                         <mat-icon>question_answer</mat-icon>
                       </button>
-                      <p class=" text-xs -ml-2">{{ques.answers.length}}</p>
-
+                      <p class="text-xs -ml-2">{{ ques.answers.length }}</p>
                     </div>
-
-
                   </div>
                 </mat-card-actions>
               </mat-card>
               <div *ngIf="ques.showAnswers">
                 <div class="my-2" *ngFor="let ans of ques.answers">
-                  <mat-card class=" border-t-2">
+                  <mat-card class="border-t-2">
                     <mat-card-header>
                       <div>
-                        <p class="text-gray-400">{{ans.user}}</p>
+                        <p class="text-gray-400">{{ ans.user }}</p>
                       </div>
                     </mat-card-header>
                     <mat-card-content>
-                      <p>{{ans.answer}}</p>
+                      <p>{{ ans.answer }}</p>
                     </mat-card-content>
-
                   </mat-card>
                 </div>
               </div>
-
             </div>
           </ng-template>
-          </div>
         </div>
-        <!-- LIST OF QUESTIONS ENDS HERE -->
-
-
-
-
-
-
-
+      </div>
+      <!-- LIST OF QUESTIONS ENDS HERE -->
     </div>
     <div class="space-y-10">
-      <div class=" flex-shrink">
+      <div class="flex-shrink">
         <!-- tags section  -->
         <div class="border p-2 rounded-xl">
           <p>tags:</p>
           <div class="grid-cols-5 max-w-xs space-x-2">
-
-            <mat-chip-option *ngFor="let tag of tags" (click)="addTagFilter(tag)">#{{tag}}</mat-chip-option>
-
-
+            <mat-chip-option
+              *ngFor="let tag of tags"
+              (click)="addTagFilter(tag)"
+              >#{{ tag }}</mat-chip-option
+            >
           </div>
         </div>
         <!-- tags end here -->
@@ -124,11 +122,11 @@
         <app-members></app-members>
       </div>
     </div>
-
   </div>
-  <div class="fixed right-96  bottom-52 z-40">
+  <div class="fixed right-96 bottom-52 z-40">
     <button mat-fab color="warn" (click)="openDialog()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div>
+  <div></div>
+</div>

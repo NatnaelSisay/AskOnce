@@ -47,6 +47,8 @@ export class CreatClassRoomComponent {
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent) {
+    if (this.selectedUsers?.value.find((x) => x._id === event.option.value._id))
+      return;
     this.selectedUsers?.next([
       ...this.selectedUsers?.value,
       event.option.value,
