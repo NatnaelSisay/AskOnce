@@ -1,33 +1,44 @@
 <div>
   <!-- HEADERRRRRRR -->
 
-  <div class="bg-indigo-800 sticky top-0 z-20">
+  <div class=" sticky top-0 z-20 border-b bg-white">
     <div
-      class="w-full flex py-5 px-10 space-x-3 max-w-5xl mx-auto items-center"
+      class="w-full flex  px-10 py-2 space-x-3 max-w-5xl mx-auto items-center"
     >
-      <div class="flex flex-1 justify-between space-x-40 items-center">
-        <h1 class="text-xl text-white">Modern Web Programing-Assad Saad</h1>
+    <img src="../../assets/images/png/logo-no-background.png" alt="ask-once logo" class="h-20">
+      <div class="flex-1">
+        <h1 class="text-xl text-indigo-800">Welcome to {{classRoomName}}</h1>
+        <p class="text-indigo-800 text-sm">{{user.firstName}}</p>
 
-        <input
-          type="text"
-          class="flex-1 flex-grow h-12 rounded-md font-thin px-10"
-          placeholder="search for questions"
-          (keyup)="onKey($event)"
-        />
+
+
       </div>
-      <button
-        class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:bg-indigo-800 hover:text-white hover:ring-white hover:ring-1"
-        (click)="search()"
-      >
-        search
-      </button>
+
       <button mat-icon-button (click)="logOut()">
-        <mat-icon class="text-white">logout</mat-icon>
+        <mat-icon class="text-indigo-800">logout</mat-icon>
       </button>
     </div>
   </div>
 
   <!-- HEADERRR ENDS HERE-->
+  <div class="second-header  flex py-1 justify-center max-w-5xl mx-auto">
+    <input
+          type="text"
+          class="flex-1 rounded-md font-thin px-10 w-full border-2 border-indigo-300 max-w-3xl"
+          placeholder="search for questions"
+          (keyup)="onKey($event)"
+
+        />
+        <button
+        class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:text-indigo-600"
+        (click)="search()"
+        mat-icon-button
+      >
+        <mat-icon class="text-black text-2l">
+          search
+        </mat-icon>
+      </button>
+  </div>
 
   <!-- BODY -->
 
@@ -35,13 +46,13 @@
     <div class="flex-1">
       <!-- LIST OF QUESTOINS -->
 
-      <div>
+      <div class="">
         <div class="mb-10">
           <div *ngIf="questions?.length === 0; else bod">
-            <p class="h-full text-center">no questions</p>
+            <img src="../../assets/images/empty.jpg" alt="the images">
           </div>
           <ng-template #bod>
-            <div *ngFor="let ques of questions" class="pb-3">
+            <div *ngFor="let ques of questions" class="pt-3 border-l-2 border-indigo-700 pl-3">
               <mat-card>
                 <div (click)="showAns(ques)" class="cursor-pointer">
                   <mat-card-header>
@@ -77,7 +88,7 @@
                         <p class=" text-xs -ml-2">{{ques.likes.length}}</p>
 
 
-                    <button mat-icon-button (click)="deleteQuestion(ques._id)">
+                    <button mat-icon-button *ngIf="user._id===ques.askedBy._id || user.role==='PROFESSOR'" (click)="deleteQuestion(ques._id)">
                       <mat-icon>delete</mat-icon>
                     </button>
 
@@ -102,8 +113,8 @@
     <div class="space-y-10">
       <div class="flex-shrink">
         <!-- tags section  -->
-        <div class="border p-2 rounded-xl">
-          <p>tags:</p>
+        <div class="border-l p-2 ">
+          <p>Topics:</p>
           <div class="grid-cols-5 max-w-xs space-x-2">
             <mat-chip-option
               *ngFor="let tag of tags"
@@ -111,18 +122,32 @@
               >#{{ tag }}</mat-chip-option
             >
           </div>
+          <div class="h-52 w-52" *ngIf="!tags">
+            <img src="../../assets/images/empty-tag.webp" alt="the images">
+
+
+          </div>
         </div>
         <!-- tags end here -->
       </div>
       <div>
         <app-members [classRoomId]="classRoomId"></app-members>
       </div>
+      <div class="py-5" >
+        <button mat-fab color="primary" (click)="openDialog()" >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="fixed right-96 bottom-52 z-40">
-    <button mat-fab color="warn" (click)="openDialog()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+
   <div></div>
+
 </div>
+<footer>
+  <app-footer>
+
+  </app-footer>
+
+</footer>
+

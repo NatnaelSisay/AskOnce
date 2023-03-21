@@ -14,6 +14,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 import readTokenFromStorage from '../utils/readTokenFromStorage';
 import userFromToken from '../utils/decodeJwt';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-classroom',
@@ -22,7 +23,7 @@ import userFromToken from '../utils/decodeJwt';
 })
 export class ClassroomComponent {
 
-
+  classRoomName: string='Sample class'
   classRoomId!: string;
   activatedRouter = inject(ActivatedRoute);
   user: IUser= userFromToken()
@@ -137,6 +138,7 @@ export class ClassroomComponent {
       this.questionService.likeAQuestion(ques._id,this.classRoomId).subscribe((res: any) => {
        ques.likes.push(this.user._id)
       });
+
     }
     else{
       this.questionService.removeAlike(ques._id,this.classRoomId).subscribe((res: any) => {
@@ -145,4 +147,6 @@ export class ClassroomComponent {
     }
 
   }
+
+  logOut() {}
 }
