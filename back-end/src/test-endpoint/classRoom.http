@@ -2,7 +2,7 @@ GET http://localhost:3000/class-room/
 Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 
 ###
-GET http://localhost:3000/class-room/64152b652e66a08b1e5e03de
+GET http://localhost:3000/class-room/641a13a15aeb11ee99967bc9
 Authorization: Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJwcm9mZXNzb3IiLCJsYXN0TmFtZSI6InByb2Zlc3NvciIsInJvbGUiOiJQUk9GRVNTT1IiLCJfaWQiOiI2NDE1MmI2NTJlNjZhMDhiMWU1ZTAzZGUiLCJpYXQiOjE2NzkxNTUyMDZ9.f0wZKAc3kt8VDCyDOKXBbHsKJyJ0gK-mnqlCyM2tCs0
 
 ###
@@ -12,7 +12,8 @@ Content-Type: application/json
 Accept: : application/json
 
 {
-    "name": "ggg"
+    "name": "Angular For Beginners",
+    "description": "Detail thing about angular and related angular technologies"
 }
 
 ###
