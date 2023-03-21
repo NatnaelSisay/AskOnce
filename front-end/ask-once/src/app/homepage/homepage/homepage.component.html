@@ -1,5 +1,6 @@
 <div class="homepage">
   <mat-toolbar color="primary" class="nav">
+    <app-display-profile-pic [imageFileName]="imageFileName" />
     <div class="container nav-content">
       <span>Welcome, {{ user?.firstName }} </span>
       <button mat-icon-button (click)="logOut()">

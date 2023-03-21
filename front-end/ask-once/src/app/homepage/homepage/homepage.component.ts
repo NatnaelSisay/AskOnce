@@ -18,17 +18,28 @@ import userFromToken from 'src/app/utils/decodeJwt';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  http = inject(DataService);
+  dataService = inject(DataService);
   router = inject(Router);
   user?: IUser;
+  userSubsctiption?: Subscription;
   classRooms: IClassRoom[] = [];
   classRoomSubscriptioin?: Subscription;
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
+  imageFileName: string | null = null;
+  constructor(private dialog: MatDialog, private authService: AuthService) {
+    this.imageFileName = userFromToken().profileImage;
+    this.userSubsctiption = this.dataService.user$.subscribe((data) => {
+      if (data) {
+        this.user = data;
+      }
+    });
+  }
 
   ngOnInit() {
-    this.classRoomSubscriptioin = this.http.getClassRooms().subscribe((res) => {
-      this.classRooms = res;
-    });
+    this.classRoomSubscriptioin = this.dataService
+      .getClassRooms()
+      .subscribe((res) => {
+        this.classRooms = res;
+      });
 
     this.user = userFromToken();
   }

@@ -32,7 +32,6 @@ export class ClassroomComponent {
   searchKey!: string;
   questionService = inject(QuestionService);
   router = inject(Router);
-
   questions?: IQuestion[];
   tags!: string[];
 

@@ -13,6 +13,7 @@ module.exports.loginController = async (req, res, next) => {
       lastName: user.lastName,
       role: user.role,
       _id: user._id,
+      profileImage: user.profileImage,
     });
     res.statusCode = 200;
     res.json({ token: token });
@@ -23,7 +24,8 @@ module.exports.loginController = async (req, res, next) => {
 
 module.exports.signupController = async (req, res, next) => {
   try {
-    const newUser = req.body;
+    const newUser = { ...req.body, profileImage: req.file?.filename };
+    console.log(newUser);
     const passHash = await hashPassword(newUser.password);
     newUser.password = passHash;
     const result = await createUser(newUser);
@@ -33,6 +35,7 @@ module.exports.signupController = async (req, res, next) => {
       firstName: result.firstName,
       lastName: result.lastName,
       _id: result._id,
+      profileImage: result.profileImage,
     });
     res.statusCode = 201;
     res.json({ token: token });
@@ -49,6 +52,14 @@ module.exports.searchUser = async (req, res, next) => {
     res.json(result);
   } catch (error) {
     console.log(error);
+    next(error);
+  }
+};
+
+module.exports.profileImage = async (req, res, next) => {
+  try {
+    res.sendFile(req.params.filename, { root: "uploads" });
+  } catch (error) {
     next(error);
   }
 };

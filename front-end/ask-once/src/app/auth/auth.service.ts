@@ -42,6 +42,8 @@ export class AuthService {
       return throwError(() => ['network error']);
     }
     if (error.status === 400) {
+      console.log(error.error);
+
       return throwError(() =>
         error.error.errors.map((e: any) => e.param + ' : ' + e.msg)
       );
@@ -62,22 +64,29 @@ export class AuthService {
   }
 
   signup(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    passwordConfirmation: string,
-    role: string
+    // firstName: string,
+    // lastName: string,
+    // email: string,
+    // password: string,
+    // passwordConfirmation: string,
+    // role: string
+    formData: FormData
   ) {
     return this.http
-      .post<ILoginResponse>(`${this.baseUrl}/users/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
-        passwordConfirmation,
-        role,
-      })
+      .post<ILoginResponse>(
+        `${this.baseUrl}/users/signup`,
+        formData
+
+        // {
+
+        //   firstName,
+        //   lastName,
+        //   email,
+        //   password,
+        //   passwordConfirmation,
+        //   role,
+        // }
+      )
       .pipe(retry(3), catchError(this.handleError));
   }
 }

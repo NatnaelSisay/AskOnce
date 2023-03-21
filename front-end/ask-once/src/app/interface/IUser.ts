@@ -4,4 +4,5 @@ export default interface IUser {
   firstName: string;
   lastName: string;
   role: string;
+  profileImage: string | null;
 }

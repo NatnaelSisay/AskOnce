@@ -8,6 +8,7 @@ module.exports.createUser = async (data) => {
     email: data.email,
     password: data.password,
     role: data.role,
+    profileImage: data.profileImage,
   });
   const result = await newUser.save();
   return result.toObject();
