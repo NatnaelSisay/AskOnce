@@ -14,7 +14,6 @@ export class AuthComponent {
     this.subscription = authService.showLogin$.subscribe((showLogin) => {
       this.showLogin = showLogin;
     });
-    console.log(this.showLogin);
   }
 
   ngOnDestroy() {
