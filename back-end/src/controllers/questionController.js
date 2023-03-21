@@ -1,3 +1,4 @@
+const { verifyJwt } = require("../jwtUtil");
 const {
   findAllQuestions,
   createQuestion,
@@ -5,6 +6,8 @@ const {
   deleteAquestion,
   findAquestionsByTitle,
   getAllTags,
+  addLikes,
+  removeLikes,
 } = require("../respository/questionRepository");
 
 module.exports.getAllQuestionInClassRoom = async (req, res, next) => {
@@ -90,3 +93,38 @@ module.exports.getAllTagsForClass = async (req, res, next) => {
     data:result
   })
 };
+module.exports.addlikes= async (req,res,next)=>{
+  try{
+    
+    const likedBy = verifyJwt(req.headers.authorization.split(" ")[1]);
+    const userId= likedBy._id
+
+    
+      
+    const {classroomId, questionId}=req.params;
+ 
+    const result= await addLikes(classroomId,questionId,userId);
+    res.json({
+      success:true,
+      data:result
+    })
+  }catch(err){
+    next(err);
+  }
+}
+module.exports.removelikes= async (req,res,next)=>{
+  try{
+    const likedBy = verifyJwt(req.headers.authorization.split(" ")[1]);
+    const userId= likedBy._id
+      
+    const {classroomId, questionId}=req.params;
+   
+    const result= await removeLikes(classroomId,questionId,userId);
+    res.json({
+      success:true,
+      data:result
+    })
+  }catch(err){
+    next(err);
+  }
+}

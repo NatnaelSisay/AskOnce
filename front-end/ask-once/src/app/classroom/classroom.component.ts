@@ -12,6 +12,8 @@ import {
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
+import readTokenFromStorage from '../utils/readTokenFromStorage';
+import userFromToken from '../utils/decodeJwt';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -20,21 +22,16 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+
+  classRoomName: string='Sample class'
   classRoomId!: string;
   activatedRouter = inject(ActivatedRoute);
-
+  user: IUser= userFromToken()
   tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
   router = inject(Router);
-  user?: IUser = {
-    _id: '1',
-    email: 'JohnDoe@gmail.com ',
-    firstName: 'John',
-    lastName: 'Doe',
-    role: 'Student',
-  };
 
   questions?: IQuestion[];
   tags!: string[];
@@ -79,12 +76,12 @@ export class ClassroomComponent {
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
 
-        this.questionService
-          .loadAllTags(this.classRoomId)
-          .subscribe((res: any) => {
-            this.tags = res.data.length > 0 && res.data[0].tags;
-          });
-      });
+        this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
+          this.tags = res.data[0].tags as string[];
+        });
+      })
+
+
   }
   showAns(ques: IQuestion) {
     this.dialog.open(DiscussionDialogComponent, {
@@ -131,10 +128,25 @@ export class ClassroomComponent {
     });
   }
 
-  addLikes() {}
+  addLikes(ques: IQuestion) {
+    const isliked = ques.likes.includes(this.user._id);
+    const token= readTokenFromStorage()
+    console.log(this.user);
 
-  logOut() {
-    this.authService.logout();
-    this.router.navigate(['', 'auth']);
+    if(!isliked){
+
+      this.questionService.likeAQuestion(ques._id,this.classRoomId).subscribe((res: any) => {
+       ques.likes.push(this.user._id)
+      });
+
+    }
+    else{
+      this.questionService.removeAlike(ques._id,this.classRoomId).subscribe((res: any) => {
+        ques.likes=ques.likes.filter(like=> like!==this.user._id)
+      } );
+    }
+
   }
+
+  logOut() {}
 }
