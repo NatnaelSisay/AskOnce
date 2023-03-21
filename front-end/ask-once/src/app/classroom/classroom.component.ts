@@ -41,7 +41,6 @@ export class ClassroomComponent {
 
   constructor(public dialog: MatDialog, private authService: AuthService) {
     this.activatedRouter.params.subscribe((params: any) => {
-      console.log(params.classroom_id);
       this.classRoomId = params.classroom_id;
     });
   }
@@ -100,7 +99,6 @@ export class ClassroomComponent {
     } else {
       this.tagFilters = this.tagFilters.filter((t) => t !== tag);
     }
-    console.log(this.tagFilters);
     if (this.tagFilters.length !== 0) {
       this.questionService
         .tagFilteredQuestions(this.tagFilters, this.classRoomId)
@@ -118,9 +116,7 @@ export class ClassroomComponent {
   deleteQuestion(id: string) {
     this.questionService
       .deleteQuestion(id, this.classRoomId)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+      .subscribe((res: any) => {});
     this.questionService
       .loadQuestions(this.classRoomId)
       .subscribe((res: any) => {
