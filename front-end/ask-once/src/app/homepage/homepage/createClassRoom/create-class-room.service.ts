@@ -38,6 +38,8 @@ export class CreateClassRoomService {
   }
 
   private handleError(error: HttpErrorResponse) {
+    console.log(error);
+    
     return throwError(() => [
       'Something bad happened; please try again later.',
     ]);
