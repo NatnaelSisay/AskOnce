@@ -19,6 +19,17 @@ module.exports.profileImageUploadMiddleware = multer({
   fileFilter: (req, file, cb) => {
     if (file.mimetype === "image/jpg" || file.mimetype == "image/jpeg")
       cb(null, true);
-    else cb(new ResponseError(400, "Unsupported image file"));
+    else
+      cb(
+        new ResponseError(400, {
+          errors: [
+            {
+              msg: "Unsupported image file. must be jpg or jpeg",
+              param: "profileImage",
+              location: "body",
+            },
+          ],
+        })
+      );
   },
 });
