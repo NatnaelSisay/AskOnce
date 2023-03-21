@@ -1,7 +1,7 @@
 <div class="max-w-xs border p-3 rounded-xl">
   <p>Members</p>
   <div>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="user?.role === 'PROFESSOR'">
       <input
         matInput
         placeholder="Add member"
