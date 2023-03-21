@@ -1,5 +1,4 @@
 <div class="container">
-  
   <div class="title">
     <h1 mat-dialog-title>Create a class room</h1>
   </div>
@@ -7,9 +6,15 @@
   <div class="content">
     <form [formGroup]="createClassForm">
       <div>
-        <mat-form-field class="example-form-field">
+        <mat-form-field>
           <mat-label>Class name</mat-label>
           <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Class description</mat-label>
+          <input matInput type="text" formControlName="description" />
         </mat-form-field>
       </div>
 

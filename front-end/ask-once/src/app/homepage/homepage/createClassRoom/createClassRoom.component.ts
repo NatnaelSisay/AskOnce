@@ -22,6 +22,7 @@ export class CreatClassRoomComponent {
 
   createClassForm = inject(FormBuilder).group({
     name: ['', [Validators.required]],
+    description: [''],
   });
 
   constructor(
@@ -70,10 +71,14 @@ export class CreatClassRoomComponent {
     this.createClassRoomService
       .createClassRoom(
         this.createClassForm.controls.name.value!,
+        this.createClassForm.controls.description.value!,
+
         this.selectedUsers?.value ?? []
       )
       .subscribe({
         next: (value) => {
+          console.log(value);
+
           this.dialogRef.close(value);
           this.createClassForm.enable();
         },

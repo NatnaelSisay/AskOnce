@@ -7,24 +7,21 @@ module.exports.findAllQuestions = async (classroomId) => {
   //   deletedAt: { $exists: false },
   // });
   return questionsModel.aggregate([
-    {$match: { classroomId, deletedAt: { $exists: false } }},
+    { $match: { classroomId, deletedAt: { $exists: false } } },
     {
-    
       $project: {
         question: 1,
         tags: 1,
         description: 1,
         askedBy: 1,
         calssroomId: 1,
-        likes:1,
+        likes: 1,
         likes_count: { $size: "$likes" },
         answers: { $size: "$answers" },
-        
       },
     },
     { $sort: { likes_count: -1 } },
   ]);
-  
 };
 module.exports.findQuestionsByTags = async (classroomId, tag) => {
   const result = await questionsModel.find({
@@ -85,6 +82,13 @@ module.exports.findAllAnswers = async (classroomId, questionId) => {
       { $unwind: "$answers" },
       { $match: { "answers.deletedAt": { $exists: false } } },
       { $group: { _id: "$_id", answers: { $push: "$answers" } } },
+      {
+        $project: {
+          answers: {
+            $sortArray: { input: "$answers", sortBy: { "user.role": 1 } },
+          },
+        },
+      },
     ],
   ]);
 
