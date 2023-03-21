@@ -3,41 +3,37 @@
     <div class="flex w-full max-w-7xl mx-auto items-center justify-center">
 
       <app-display-profile-pic [imageFileName]="imageFileName" />
-      <div
-      class="w-full flex  px-10 py-2 space-x-3 max-w-5xl mx-auto items-center"
-      >
-      <img src="../../assets/images/png/logo-no-background.png" alt="ask-once logo" class="h-20 hidden md:inline-block">
-      <div class="flex-1">
-        <h1 class="text-xl text-indigo-800">Welcome to Ask-Once</h1>
-        <p class="text-indigo-800 text-sm">{{user?.firstName}}</p>
+      <div class="w-full flex  px-10 py-2 space-x-3 max-w-5xl mx-auto items-center">
+        <img src="../../assets/images/png/logo-no-background.png" alt="ask-once logo"
+          class="h-20 hidden md:inline-block">
+        <div class="flex-1">
+          <h1 class="text-xl text-indigo-800">Welcome to Ask-Once</h1>
+          <p class="text-indigo-800 text-sm">{{user?.firstName}}</p>
+        </div>
 
-
-
+        <button mat-icon-button (click)="logOut()">
+          <mat-icon class="text-indigo-800">logout</mat-icon>
+        </button>
       </div>
-
-      <button mat-icon-button (click)="logOut()">
-        <mat-icon class="text-indigo-800">logout</mat-icon>
-      </button>
     </div>
-  </div>
   </div>
 
   <div class="container main-content">
-    <div class="card" routerLink="" *ngFor="let class of classRooms">
-      <a [routerLink]="'classroom/' + class._id" class="classroom-card">
-       <app-classroom-card [classRoom]="class" />
-      </a>
+    <div *ngIf="classRooms.length > 0; else empty">
+      <div class="card" *ngFor="let class of classRooms">
+        <a [routerLink]="'classroom/' + class._id" class="classroom-card">
+          <app-classroom-card [classRoom]="class" />
+        </a>
+      </div>
     </div>
+    <ng-template #empty>
+      <div class="w-full  flex flex-col justify-center items-center">
+        <img src="../../../assets/images/2422454.png" class=" max-w-5xl" alt="empty classroom">
+        <p class="text-4xl text-indigo-400">Not a member of any classroms yet!</p>
+      </div>
+    </ng-template>
 
-
-
-    <button
-      *ngIf="user?.role === 'PROFESSOR'"
-      mat-fab
-      (click)="onAddButtonClick()"
-      class="fab-button"
-      color="primary"
-    >
+    <button *ngIf="user?.role === 'PROFESSOR'" mat-fab (click)="onAddButtonClick()" class="fab-button" color="primary">
       <mat-icon>add</mat-icon>
     </button>
   </div>
