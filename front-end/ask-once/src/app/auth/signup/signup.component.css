@@ -23,3 +23,7 @@
   color: indigo;
   text-decoration: none;
 }
+
+.image-preview {
+  max-width: 100px;
+}

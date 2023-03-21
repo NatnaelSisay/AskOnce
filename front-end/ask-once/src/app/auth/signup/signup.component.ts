@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
+  imageSrc?: string;
   tokenSubscription?: Subscription | null = null;
   signupForm = inject(FormBuilder).group({
     firstName: ['', Validators.required],
@@ -84,5 +85,14 @@ export class SignupComponent {
   }
   ngOnDestroy() {
     this.tokenSubscription?.unsubscribe();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imageSrc = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 }

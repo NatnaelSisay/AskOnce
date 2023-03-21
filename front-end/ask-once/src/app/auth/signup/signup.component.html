@@ -72,6 +72,11 @@
         </mat-form-field>
       </div>
       <div>
+        <img class="image-preview"  [src]="imageSrc" *ngIf="imageSrc" />
+        <mat-label>Select profile image</mat-label>
+        <input type="file" (change)="onFileSelected($event)" />
+      </div>
+      <div>
         <mat-radio-group aria-label="Select an option" formControlName="role">
           <mat-radio-button value="STUDENT">Student</mat-radio-button>
           <mat-radio-button value="PROFESSOR">Professor</mat-radio-button>
