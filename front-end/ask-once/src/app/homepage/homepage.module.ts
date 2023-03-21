@@ -8,15 +8,20 @@ import { AppGuardInterceptor } from '../app-guard.interceptor';
 import { CreatClassRoomComponent } from './homepage/createClassRoom/createClassRoom.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileImageModule } from '../profile-image/profile-image.module';
+import { ComponentsModule } from '../components/components.module';
+import {MatChipsModule} from '@angular/material/chips';
+import { ClassroomCardComponenet } from './homepage/classroom-card.component';
 
 @NgModule({
-  declarations: [HomepageComponent, CreatClassRoomComponent],
+  declarations: [HomepageComponent, CreatClassRoomComponent, ClassroomCardComponenet],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HomepageMaterialModules,
     HttpClientModule,
     ProfileImageModule,
+    ComponentsModule,
+    MatChipsModule,
     RouterModule.forChild([
       {
         path: '',

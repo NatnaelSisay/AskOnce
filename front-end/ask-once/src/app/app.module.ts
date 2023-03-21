@@ -32,6 +32,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileImageModule } from './profile-image/profile-image.module';
+import { ComponentsModule } from './components/components.module';
 
 const getBaseUrl = () => 'http://localhost:3000';
 
@@ -43,7 +45,6 @@ const getBaseUrl = () => 'http://localhost:3000';
     ClassroomComponent,
 
     DiscussionDialogComponent,
-     FooterComponent,
   ],
 
   imports: [
@@ -65,10 +66,11 @@ const getBaseUrl = () => 'http://localhost:3000';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-
+    ProfileImageModule,
     FormsModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    ComponentsModule
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
@@ -88,5 +90,6 @@ const getBaseUrl = () => 'http://localhost:3000';
     },
   ],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

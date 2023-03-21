@@ -6,6 +6,8 @@ import IUser from 'src/app/interface/IUser';
 import IClassRoom from 'src/app/interface/IClassRoom.interface';
 
 import { AuthService } from 'src/app/auth/auth.service';
+import userFromToken from 'src/app/utils/decodeJwt';
+import { SlicePipe } from '@angular/common';
 import { DataService } from '../services/data.service';
 
 import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
@@ -16,14 +18,22 @@ import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.compo
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
+  tags!: string[];
   dataService = inject(DataService);
   router = inject(Router);
 
+  constructor(private dialog: MatDialog, private authService: AuthService) {
+    console.log(this.imageFileName);
+
+    this.dataService.user$.subscribe((data) => {
+      if (data) {
+        this.user = data;
+      }
+    });
+  }
   user?: IUser;
   classRooms: IClassRoom[] = [];
   imageFileName?: string | null = this.user?.profileImage;
-
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
     this.dataService.classRoomSubject.subscribe((res) => {

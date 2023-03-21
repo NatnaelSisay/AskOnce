@@ -1,0 +1,29 @@
+<div class="max-w-sm rounded overflow-hidden shadow-lg border-t-indigo-600 border-t-2 rounded-t-xl p-1 ">
+
+  <div class="px-6 py-4">
+    <p class=" text-gray-500 mb-2">created By: {{classRoom.professor.firstName}}</p>
+    <div class="font-bold text-xl mb-2">{{classRoom.name}}</div>
+    <p class="text-gray-700 text-base pb-1 line-clamp-2">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+    </p>
+    <mat-divider></mat-divider>
+    <p class="py-1">
+      members: {{classRoom.students.length}}
+    </p>
+    <div *ngIf="tags" class="flex space-x-2">
+
+      <div *ngFor=" let t of tags" >
+        <mat-chip >
+          {{t}}
+        </mat-chip>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="px-6 pt-4 pb-2">
+
+  </div>
+</div>

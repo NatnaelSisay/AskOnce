@@ -30,4 +30,9 @@ export class DataService {
         this.classRoomSubject.next(res.data);
       });
   }
+
+  addTags(classRoomId: string){
+    return this.http.get(`${this.baseUrl}/class-room/${classRoomId}/questions/limitedTags`);
+
+  }
 }
