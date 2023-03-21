@@ -5,6 +5,7 @@ export default interface IClassRoom {
   _id: string;
   name: string;
   students: [IUser];
+  description: string;
 }
 
 export interface IClassRoomSuccessReponse {

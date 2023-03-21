@@ -18,20 +18,15 @@ module.exports.getClassRoomById = async (classroom_id) => {
   });
 };
 
-module.exports.addClassRoom = async (
-  classRoomName,
-  professorDetail,
-  students
-) => {
+module.exports.addClassRoom = async (classRoom, professorDetail) => {
   let result = await ClassRoomModel.findOne({
-    name: classRoomName,
+    name: classRoom.name,
   });
 
   if (!result) {
     const newClassRoom = new ClassRoomModel({
-      name: classRoomName,
+      ...classRoom,
       professor: professorDetail,
-      students,
     });
     result = await newClassRoom.save();
   }
@@ -46,7 +41,12 @@ module.exports.updateClassRoom = async (classroom_id, classroom_update) => {
   if (result) {
     result = await ClassRoomModel.updateOne(
       { _id: classroom_id },
-      { $set: { name: classroom_update.name } }
+      {
+        $set: {
+          ...classroom_update,
+          _id: classroom_id,
+        },
+      }
     );
   }
 

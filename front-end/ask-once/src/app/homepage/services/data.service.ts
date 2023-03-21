@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, inject, Injectable } from '@angular/core';
-import { Observable, Subject, of, BehaviorSubject } from 'rxjs';
-import userFromToken from 'src/app/utils/decodeJwt';
-
-//
+import { Observable, BehaviorSubject } from 'rxjs';
 import IClassRoom, {
   IClassRoomSuccessReponse,
-} from '../..//interface/IClassRoom.interface';
-import IUser from '../../interface/IUser';
+} from 'src/app/interface/IClassRoom.interface';
+import IUser from 'src/app/interface/IUser';
+import userFromToken from 'src/app/utils/decodeJwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   http = inject(HttpClient);
-  classRooms: IClassRoom[] = [];
+
   classRoomSubject = new BehaviorSubject<IClassRoom[]>([]);
   userSubject = new BehaviorSubject<IUser | null>(null);
 
@@ -25,14 +23,11 @@ export class DataService {
     this.userSubject.next(userFromToken());
   }
 
-  getClassRooms(): Observable<IClassRoom[]> {
+  getClassRooms() {
     this.http
       .get<IClassRoomSuccessReponse>(`${this.baseUrl}/class-room`)
       .subscribe((res) => {
-        this.classRooms = res.data;
-        this.classRoomSubject.next(this.classRooms);
+        this.classRoomSubject.next(res.data);
       });
-
-    return this.classRoomSubject.asObservable();
   }
 }

@@ -1,53 +1,41 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-
-import IClassRoom from '../../interface/IClassRoom.interface';
-import IUser from '../../interface/IUser';
-
-import { DataService } from '../services/data.service';
-import { Subscription } from 'rxjs';
-
-import { MatDialog } from '@angular/material/dialog';
-import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
+import IUser from 'src/app/interface/IUser';
+import IClassRoom from 'src/app/interface/IClassRoom.interface';
+
 import { AuthService } from 'src/app/auth/auth.service';
-import userFromToken from 'src/app/utils/decodeJwt';
+import { DataService } from '../services/data.service';
+
+import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit, OnDestroy {
+export class HomepageComponent implements OnInit {
   dataService = inject(DataService);
   router = inject(Router);
-  user?: IUser;
-  userSubsctiption?: Subscription;
-  classRooms: IClassRoom[] = [];
-  classRoomSubscriptioin?: Subscription;
-  imageFileName: string | null = userFromToken().profileImage;
 
-  constructor(private dialog: MatDialog, private authService: AuthService) {
-    console.log(this.imageFileName);
-    
-    this.userSubsctiption = this.dataService.user$.subscribe((data) => {
-      if (data) {
-        this.user = data;
-      }
-    });
-  }
+  user?: IUser;
+  classRooms: IClassRoom[] = [];
+  imageFileName?: string | null = this.user?.profileImage;
+
+  constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
-    this.classRoomSubscriptioin = this.dataService
-      .getClassRooms()
-      .subscribe((res) => {
-        this.classRooms = res;
-      });
+    this.dataService.classRoomSubject.subscribe((res) => {
+      this.classRooms = res;
+    });
 
-    this.user = userFromToken();
-  }
+    this.dataService.userSubject.subscribe((data) => {
+      if (!data) return;
+      this.user = data;
+    });
 
-  ngOnDestroy(): void {
-    this.classRoomSubscriptioin?.unsubscribe();
+    this.dataService.getClassRooms();
   }
 
   onAddButtonClick() {

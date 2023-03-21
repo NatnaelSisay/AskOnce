@@ -75,11 +75,7 @@ const addClassRoom = async (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decode = decodeJwt(token);
 
-    const result = await ClassRoomRepository.addClassRoom(
-      req.body.name,
-      decode,
-      req.body.students
-    );
+    const result = await ClassRoomRepository.addClassRoom(req.body, decode);
 
     res.json({ success: true, data: result });
   } catch (error) {
