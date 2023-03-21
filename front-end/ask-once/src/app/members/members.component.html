@@ -39,7 +39,10 @@
           <mat-list-item
             >{{ member.firstName }} {{ member.lastName }}</mat-list-item
           >
-          <button (click)="deleteMember(member)">
+          <button
+            *ngIf="user?.role === 'PROFESSOR'"
+            (click)="deleteMember(member)"
+          >
             <i class="material-icons">delete</i>
           </button>
         </div>

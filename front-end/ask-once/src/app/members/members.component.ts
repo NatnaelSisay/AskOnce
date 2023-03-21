@@ -4,6 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { CreateClassRoomService } from '../homepage/homepage/createClassRoom/create-class-room.service';
 import IUser from '../interface/IUser';
+import userFromToken from '../utils/decodeJwt';
 
 @Component({
   selector: 'app-members',
@@ -16,6 +17,7 @@ export class MembersComponent implements OnInit {
   searchService = inject(CreateClassRoomService);
 
   members?: IUser[];
+  user?: IUser;
 
   filterdOptions?: Observable<IUser[]>;
   classStudentsObservable?: Observable<IUser[]>;
@@ -30,6 +32,7 @@ export class MembersComponent implements OnInit {
     this.searchService.getStudents(this.classRoomId).subscribe((res) => {
       this.members = res;
     });
+    this.user = userFromToken();
   }
 
   optionSelected(option: MatAutocompleteSelectedEvent) {
