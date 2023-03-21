@@ -4,6 +4,7 @@ const {
   loginController,
   signupController,
   searchUser,
+  profileImage,
 } = require("../controllers/userController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const { logginMiddleware } = require("../middlewares/loginMiddleware");
@@ -21,6 +22,7 @@ UserRouter.post(
 );
 
 UserRouter.get("/", express.json(), authMiddleWare(), searchUser);
+UserRouter.get("/profile-image/:filename", authMiddleWare(), profileImage);
 UserRouter.post("/login", express.json(), logginMiddleware, loginController);
 
 // example routes for auth middleware

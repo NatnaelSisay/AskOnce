@@ -55,3 +55,11 @@ module.exports.searchUser = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.profileImage = async (req, res, next) => {
+  try {
+    res.sendFile(req.params.filename, { root: "uploads" });
+  } catch (error) {
+    next(error);
+  }
+};

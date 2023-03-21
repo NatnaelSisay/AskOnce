@@ -5,12 +5,14 @@ const { connectDb } = require("./dbConnect");
 const UserRouter = require("./routers/userRouter");
 const questionRouter = require("./routers/questionRouter");
 const ClassRoomRouter = require("./routers/classRoomRouter");
+const { authMiddleWare } = require("./middlewares/authMiddleware");
 
 connectDb();
 
 const app = express();
 
 app.use(cors());
+
 
 app.use("/users", UserRouter);
 app.use(express.json());
