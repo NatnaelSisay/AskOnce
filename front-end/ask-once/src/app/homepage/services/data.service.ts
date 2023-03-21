@@ -12,7 +12,7 @@ import userFromToken from 'src/app/utils/decodeJwt';
 })
 export class DataService {
   http = inject(HttpClient);
-  classRooms: IClassRoom[] = [];
+
   classRoomSubject = new BehaviorSubject<IClassRoom[]>([]);
   userSubject = new BehaviorSubject<IUser | null>(null);
 
@@ -23,14 +23,11 @@ export class DataService {
     this.userSubject.next(userFromToken());
   }
 
-  getClassRooms(): Observable<IClassRoom[]> {
+  getClassRooms() {
     this.http
       .get<IClassRoomSuccessReponse>(`${this.baseUrl}/class-room`)
       .subscribe((res) => {
-        this.classRooms = res.data;
-        this.classRoomSubject.next(this.classRooms);
+        this.classRoomSubject.next(res.data);
       });
-
-    return this.classRoomSubject.asObservable();
   }
 }
