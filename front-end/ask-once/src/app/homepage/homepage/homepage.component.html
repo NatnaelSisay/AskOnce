@@ -2,14 +2,14 @@
   <mat-toolbar color="primary" class="nav">
     <div class="container nav-content">
       <span>Welcome, {{ user?.firstName }} </span>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="logOut()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>
   </mat-toolbar>
 
   <div class="container main-content">
-    <div class="card" routerLink="" *ngFor="let class of classRooms" >
+    <div class="card" routerLink="" *ngFor="let class of classRooms">
       <a [routerLink]="'classroom/' + class._id" class="classroom-card">
         <mat-card class="">
           <mat-card-header>
