@@ -8,6 +8,7 @@ import {
   of,
   BehaviorSubject,
 } from 'rxjs';
+import IClassRoom from 'src/app/interface/IClassRoom.interface';
 import IStudentResponse from 'src/app/interface/IStudentReponse';
 import IUser from 'src/app/interface/IUser';
 
@@ -28,18 +29,22 @@ export class CreateClassRoomService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
-  createClassRoom(name: string, users: IUser[]) {
+  createClassRoom(name: string, description: string, users: IUser[]) {
     return this.http
-      .post<IUser[]>(`${this.baseUrl}/class-room/`, {
-        name,
-        students: users ?? [],
-      })
+      .post<{ success: boolean; data: IClassRoom }>(
+        `${this.baseUrl}/class-room/`,
+        {
+          name,
+          description,
+          students: users ?? [],
+        }
+      )
       .pipe(retry(3), catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
     console.log(error);
-    
+
     return throwError(() => [
       'Something bad happened; please try again later.',
     ]);
