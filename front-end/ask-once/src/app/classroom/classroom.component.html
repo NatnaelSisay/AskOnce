@@ -59,13 +59,16 @@
                 <mat-card-actions>
                   <div class="space-x-3 flex items-center justify-center">
 
-                      <button mat-icon-button   (click)="addLikes(ques)">
-                        <mat-icon>favorite</mat-icon>
+                      <button mat-icon-button *ngIf="!ques.likes.includes(user._id); else likedButton"  (click)="addLikes(ques)">
+                        <mat-icon>arrow_upward</mat-icon>
                       </button>
+                        <ng-template #likedButton>
+                          <button mat-icon-button color="primary"  (click)="addLikes(ques)">
+                            <mat-icon>arrow_upward</mat-icon>
+                            </button>
 
-                      <!-- <button mat-icon-button color="primary" *ngIf="isliked"  (click)="addLikes(ques)">
-                        <mat-icon>favorite</mat-icon>
-                        </button> -->
+                        </ng-template>
+
                         <p class=" text-xs -ml-2">{{ques.likes.length}}</p>
 
 
@@ -77,7 +80,7 @@
                       <button mat-icon-button (click)="showAns(ques)">
                         <mat-icon>question_answer</mat-icon>
                       </button>
-                      <p class=" text-xs -ml-2">{{ques.answers.length}}</p>
+                      <p class=" text-xs -ml-2">{{ques.answer_count}}</p>
 
                     </div>
 
@@ -85,21 +88,7 @@
                   </div>
                 </mat-card-actions>
               </mat-card>
-              <div *ngIf="ques.showAnswers">
-                <div class="my-2" *ngFor="let ans of ques.answers">
-                  <mat-card class=" border-t-2">
-                    <mat-card-header>
-                      <div>
-                        <p class="text-gray-400">{{ans.user}}</p>
-                      </div>
-                    </mat-card-header>
-                    <mat-card-content>
-                      <p>{{ans.answer}}</p>
-                    </mat-card-content>
 
-                  </mat-card>
-                </div>
-              </div>
 
             </div>
           </ng-template>

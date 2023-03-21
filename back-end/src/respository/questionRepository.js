@@ -2,11 +2,29 @@ const { default: mongoose } = require("mongoose");
 const questionsModel = require("../models/questionModel");
 
 module.exports.findAllQuestions = async (classroomId) => {
-  const result = await questionsModel.find({
-    classroomId,
-    deletedAt: { $exists: false },
-  });
-  return result;
+  // const result = await questionsModel.find({
+  //   classroomId,
+  //   deletedAt: { $exists: false },
+  // });
+  return questionsModel.aggregate([
+    {$match: { classroomId, deletedAt: { $exists: false } }},
+    {
+    
+      $project: {
+        question: 1,
+        tags: 1,
+        description: 1,
+        askedBy: 1,
+        calssroomId: 1,
+        likes:1,
+        likes_count: { $size: "$likes" },
+        answers: { $size: "$answers" },
+        
+      },
+    },
+    { $sort: { likes_count: -1 } },
+  ]);
+  
 };
 module.exports.findQuestionsByTags = async (classroomId, tag) => {
   const result = await questionsModel.find({
@@ -47,13 +65,13 @@ module.exports.deleteAquestion = async (classroomId, id) => {
     { _id: id, classroomId },
     { $set: { deletedAt: Date.now() } }
   );
-  
+
   return result;
 };
 module.exports.getAllTags = async (classroomId) => {
   const result = await questionsModel.aggregate([
     { $match: { classroomId } },
-    {$match: {deletedAt: {$exists: false}}},
+    { $match: { deletedAt: { $exists: false } } },
     { $unwind: "$tags" },
     { $group: { _id: null, tags: { $addToSet: "$tags" } } },
     { $project: { _id: 0 } },
@@ -98,13 +116,15 @@ module.exports.pullAnswer = async (classroomId, questionId, answerId) => {
   return result;
 };
 
-module.exports.addLikes= async (classroomId, questionId, userId) => {
+module.exports.addLikes = async (classroomId, questionId, userId) => {
   const result = await questionsModel.updateOne(
     { classroomId, _id: questionId },
-    { $addToSet: { likes: userId } });
-}
-module.exports.removeLikes= async (classroomId, questionId, userId) => {
-  const result= await questionsModel.updateOne(
-    {classroomId, _id: questionId},
-    {$pull: {likes: userId}});
-}
+    { $addToSet: { likes: userId } }
+  );
+};
+module.exports.removeLikes = async (classroomId, questionId, userId) => {
+  const result = await questionsModel.updateOne(
+    { classroomId, _id: questionId },
+    { $pull: { likes: userId } }
+  );
+};

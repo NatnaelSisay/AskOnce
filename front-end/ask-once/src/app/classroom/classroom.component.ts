@@ -13,6 +13,7 @@ import { QuestionDialogComponent } from '../class/question-dialog/question-dialo
 import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
 import readTokenFromStorage from '../utils/readTokenFromStorage';
+import userFromToken from '../utils/decodeJwt';
 
 @Component({
   selector: 'app-classroom',
@@ -24,19 +25,12 @@ export class ClassroomComponent {
 
   classRoomId!: string;
   activatedRouter = inject(ActivatedRoute);
-
+  user: IUser= userFromToken()
   tagFilters: string[] = [];
   showAnswers = false;
   searchKey!: string;
   questionService = inject(QuestionService);
   router = inject(Router);
-  user?: IUser = {
-    _id: '1',
-    email: 'JohnDoe@gmail.com ',
-    firstName: 'John',
-    lastName: 'Doe',
-    role: 'Student',
-  };
 
   questions?: IQuestion[];
   tags!: string[];
@@ -85,6 +79,8 @@ export class ClassroomComponent {
           this.tags = res.data[0].tags as string[];
         });
       })
+
+
   }
   showAns(ques: IQuestion) {
     this.dialog.open(DiscussionDialogComponent, {
@@ -128,18 +124,19 @@ export class ClassroomComponent {
   }
 
   addLikes(ques: IQuestion) {
-    const isliked = ques.likes.length > 0 ? true :false;
+    const isliked = ques.likes.includes(this.user._id);
     const token= readTokenFromStorage()
-    console.log(token);
+    console.log(this.user);
 
     if(!isliked){
+
       this.questionService.likeAQuestion(ques._id,this.classRoomId).subscribe((res: any) => {
-        console.log(res);
+       ques.likes.push(this.user._id)
       });
     }
     else{
       this.questionService.removeAlike(ques._id,this.classRoomId).subscribe((res: any) => {
-        console.log(res);
+        ques.likes=ques.likes.filter(like=> like!==this.user._id)
       } );
     }
 

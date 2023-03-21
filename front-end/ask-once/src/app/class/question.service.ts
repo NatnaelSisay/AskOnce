@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import IQuestion from '../interface/IQuestion';
+import IUser from '../interface/IUser';
 
 @Injectable({
   providedIn: 'root',
@@ -18,21 +19,16 @@ export class QuestionService {
   loadAllTags(clasroomId: string){
     return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions/tags/list')
   }
-  addNewQuestion(title: string, description:string,tags :string[],clasroomId :string){
+  addNewQuestion(title: string, description:string,tags :string[],clasroomId :string,user :IUser){
     const reqFile={
 
           question:title,
           description:description,
           tags:tags,
           answers:[],
-          askedBy:{
-            _id:"1",
-            firstName:"john",
-            lastName:"Doe",
-            email:"johnDoe@email.com",
-            role:"student"
+          askedBy:user,
         }
-        }
+        console.log(reqFile);
     return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions',reqFile);
 
   }
