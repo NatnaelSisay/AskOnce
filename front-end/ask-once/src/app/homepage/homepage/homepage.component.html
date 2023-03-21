@@ -25,7 +25,13 @@
         </mat-card>
       </a>
     </div>
-    <button mat-fab (click)="onAddButtonClick()" class="fab-button">
+
+    <button
+      *ngIf="user?.role !== 'STUDENT'"
+      mat-fab
+      (click)="onAddButtonClick()"
+      class="fab-button"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
