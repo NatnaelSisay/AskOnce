@@ -12,11 +12,11 @@ export class QuestionService {
   loadQuestions(clasroomId: string) {
     return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions');
   }
-  searchQuestions(key :string){
-    return this.http.get('http://localhost:3000/questions/search?title='+key)
+  searchQuestions(key :string,clasroomId: string){
+    return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions/search?title='+key)
   }
-  loadAllTags(){
-    return this.http.get('http://localhost:3000/questions/tags/list')
+  loadAllTags(clasroomId: string){
+    return this.http.get('http://localhost:3000/class-room/'+clasroomId+'/questions/tags/list')
   }
   addNewQuestion(title: string, description:string,tags :string[],clasroomId :string){
     const reqFile={
@@ -36,12 +36,12 @@ export class QuestionService {
     return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions',reqFile);
 
   }
-  tagFilteredQuestions(tags :string[]){
-    return this.http.post('http://localhost:3000/questions/tagfiltred',{tags:tags})
+  tagFilteredQuestions(tags :string[],clasroomId: string){
+    return this.http.post('http://localhost:3000/class-room/'+clasroomId+'/questions/tagfiltred',{tags:tags})
 
   }
-  deleteQuestion(id :string){
-    return this.http.delete('http://localhost:3000/questions/'+id)
+  deleteQuestion(id :string,clasroomId: string){
+    return this.http.delete('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id)
   }
 
 }

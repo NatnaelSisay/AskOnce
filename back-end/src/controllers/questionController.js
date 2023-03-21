@@ -22,6 +22,7 @@ module.exports.getAllQuestionInClassRoom = async (req, res, next) => {
 };
 module.exports.createQuestion = async (req, res, next) => {
   try {
+    console.log("here");
     const { classroomId } = req.params;
     const data = req.body;
 

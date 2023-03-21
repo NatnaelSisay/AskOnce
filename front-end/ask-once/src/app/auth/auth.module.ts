@@ -23,6 +23,5 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       { path: '**', redirectTo: '' },
     ]),
   ],
-  providers: [AuthService],
 })
 export class AuthModule {}

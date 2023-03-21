@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import ILoginResponse from '../interface/ILoginResponse';
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class AuthService {
   private tokenSubject = new BehaviorSubject<string | null>(null);
@@ -58,6 +58,7 @@ export class AuthService {
   }
   logout() {
     this.setToken(null);
+    this.tokenSubject.next(localStorage.getItem('token'));
   }
 
   signup(

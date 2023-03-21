@@ -12,6 +12,7 @@ import {
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-classroom',
@@ -38,8 +39,9 @@ export class ClassroomComponent {
   questions?: IQuestion[];
   tags!: string[];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private authService: AuthService) {
     this.activatedRouter.params.subscribe((params: any) => {
+      console.log(params.classroom_id);
       this.classRoomId = params.classroom_id;
     });
   }
@@ -65,7 +67,7 @@ export class ClassroomComponent {
   }
   search() {
     this.questionService
-      .searchQuestions(this.searchKey)
+      .searchQuestions(this.searchKey, this.classRoomId)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
       });
@@ -77,9 +79,11 @@ export class ClassroomComponent {
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
 
-        this.questionService.loadAllTags().subscribe((res: any) => {
-          this.tags = res.data.length > 0 && res.data[0].tags;
-        });
+        this.questionService
+          .loadAllTags(this.classRoomId)
+          .subscribe((res: any) => {
+            this.tags = res.data.length > 0 && res.data[0].tags;
+          });
       });
   }
   showAns(ques: IQuestion) {
@@ -99,7 +103,7 @@ export class ClassroomComponent {
     console.log(this.tagFilters);
     if (this.tagFilters.length !== 0) {
       this.questionService
-        .tagFilteredQuestions(this.tagFilters)
+        .tagFilteredQuestions(this.tagFilters, this.classRoomId)
         .subscribe((res: any) => {
           this.questions = res.data as IQuestion[];
         });
@@ -112,18 +116,25 @@ export class ClassroomComponent {
     }
   }
   deleteQuestion(id: string) {
-    this.questionService.deleteQuestion(id).subscribe((res: any) => {
-      console.log(res);
-    });
+    this.questionService
+      .deleteQuestion(id, this.classRoomId)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
     this.questionService
       .loadQuestions(this.classRoomId)
       .subscribe((res: any) => {
         this.questions = res.data as IQuestion[];
       });
-    this.questionService.loadAllTags().subscribe((res: any) => {
+    this.questionService.loadAllTags(this.classRoomId).subscribe((res: any) => {
       this.tags = res.data[0].tags as string[];
     });
   }
 
   addLikes() {}
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['', 'auth']);
+  }
 }
