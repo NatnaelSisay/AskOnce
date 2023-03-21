@@ -97,3 +97,14 @@ module.exports.pullAnswer = async (classroomId, questionId, answerId) => {
   );
   return result;
 };
+
+module.exports.addLikes= async (classroomId, questionId, userId) => {
+  const result = await questionsModel.updateOne(
+    { classroomId, _id: questionId },
+    { $addToSet: { likes: userId } });
+}
+module.exports.removeLikes= async (classroomId, questionId, userId) => {
+  const result= await questionsModel.updateOne(
+    {classroomId, _id: questionId},
+    {$pull: {likes: userId}});
+}

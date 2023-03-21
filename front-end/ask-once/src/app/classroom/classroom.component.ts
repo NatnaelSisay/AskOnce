@@ -12,6 +12,7 @@ import {
 import { QuestionDialogComponent } from '../class/question-dialog/question-dialog.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog.component';
+import readTokenFromStorage from '../utils/readTokenFromStorage';
 
 @Component({
   selector: 'app-classroom',
@@ -19,6 +20,8 @@ import { DiscussionDialogComponent } from './discussion-dialog/discussion-dialog
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
+
+
   classRoomId!: string;
   activatedRouter = inject(ActivatedRoute);
 
@@ -124,5 +127,21 @@ export class ClassroomComponent {
     });
   }
 
-  addLikes() { }
+  addLikes(ques: IQuestion) {
+    const isliked = ques.likes.length > 0 ? true :false;
+    const token= readTokenFromStorage()
+    console.log(token);
+
+    if(!isliked){
+      this.questionService.likeAQuestion(ques._id,this.classRoomId).subscribe((res: any) => {
+        console.log(res);
+      });
+    }
+    else{
+      this.questionService.removeAlike(ques._id,this.classRoomId).subscribe((res: any) => {
+        console.log(res);
+      } );
+    }
+
+  }
 }

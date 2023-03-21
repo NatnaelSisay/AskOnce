@@ -8,4 +8,5 @@ export default interface IQuestion {
   askedBy: IUser;
   answers: any[];
   showAnswers: boolean;
+  likes: string[];
 }

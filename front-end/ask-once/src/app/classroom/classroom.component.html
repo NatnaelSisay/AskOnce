@@ -58,9 +58,17 @@
 
                 <mat-card-actions>
                   <div class="space-x-3 flex items-center justify-center">
-                    <button mat-icon-button  color="primary" (click)="addLikes()">
-                      <mat-icon>favorite</mat-icon>
-                    </button>
+
+                      <button mat-icon-button   (click)="addLikes(ques)">
+                        <mat-icon>favorite</mat-icon>
+                      </button>
+
+                      <!-- <button mat-icon-button color="primary" *ngIf="isliked"  (click)="addLikes(ques)">
+                        <mat-icon>favorite</mat-icon>
+                        </button> -->
+                        <p class=" text-xs -ml-2">{{ques.likes.length}}</p>
+
+
                     <button mat-icon-button (click)="deleteQuestion(ques._id)">
                       <mat-icon>delete</mat-icon>
                     </button>

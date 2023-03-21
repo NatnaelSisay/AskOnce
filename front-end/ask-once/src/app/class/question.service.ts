@@ -43,6 +43,12 @@ export class QuestionService {
   deleteQuestion(id :string,clasroomId: string){
     return this.http.delete('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id)
   }
+  likeAQuestion(id :string,clasroomId: string){
+    return this.http.put('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id+'/like',{});
+  }
+  removeAlike(id :string,clasroomId: string){
+    return this.http.put('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id+'/rm-like',{});
+  }
 
 }
 

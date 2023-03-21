@@ -95,8 +95,10 @@ export class QuestionDialogComponent {
               lastName: 'Doe',
               email: 'johnDoe@email.com',
               role: 'student',
+
             },
             showAnswers: false,
+            likes: [],
           } as IQuestion);
         },
         error: (error) => {

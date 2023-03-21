@@ -7,6 +7,8 @@ const {
   deleteQuestion,
   getAllQuestionsForATag,
   getAllTagsForClass,
+  addlikes,
+  removelikes,
 } = require("../controllers/questionController");
 const { authMiddleWare } = require("../middlewares/authMiddleware");
 const AnswerRouter = require("./answerRouter");
@@ -22,6 +24,8 @@ QuestionRouter.post("/tagfiltred",authMiddleWare(),express.json(),getAllQuestion
 QuestionRouter.delete("/:questionId", authMiddleWare(), deleteQuestion);
 QuestionRouter.use("/:questionId/answers",authMiddleWare(), AnswerRouter);
 QuestionRouter.get("/tags/list",authMiddleWare(),getAllTagsForClass)
+QuestionRouter.put("/:questionId/like",authMiddleWare(),addlikes)
+QuestionRouter.put("/:questionId/rm-like",authMiddleWare(),removelikes)
 
 
 module.exports = QuestionRouter;
