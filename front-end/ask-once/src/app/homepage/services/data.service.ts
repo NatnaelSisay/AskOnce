@@ -31,8 +31,9 @@ export class DataService {
       });
   }
 
-  addTags(classRoomId: string){
-    return this.http.get(`${this.baseUrl}/class-room/${classRoomId}/questions/limitedTags`);
-
+  addTags(classRoomId: string) {
+    return this.http.get(
+      `${this.baseUrl}/class-room/${classRoomId}/questions/limitedTags`
+    );
   }
 }

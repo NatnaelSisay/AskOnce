@@ -18,31 +18,23 @@ import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.compo
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit {
-  tags!: string[];
   dataService = inject(DataService);
   router = inject(Router);
 
-  constructor(private dialog: MatDialog, private authService: AuthService) {
-    console.log(this.imageFileName);
-
-    this.dataService.user$.subscribe((data) => {
-      if (data) {
-        this.user = data;
-      }
-    });
-  }
   user?: IUser;
   classRooms: IClassRoom[] = [];
-  imageFileName?: string | null = this.user?.profileImage;
+  imageFileName?: string | null;
+  tags!: string[];
+
+  constructor(private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
+    console.log(this.imageFileName);
+    this.user = userFromToken();
+    this.imageFileName = this.user?.profileImage;
+
     this.dataService.classRoomSubject.subscribe((res) => {
       this.classRooms = res;
-    });
-
-    this.dataService.userSubject.subscribe((data) => {
-      if (!data) return;
-      this.user = data;
     });
 
     this.dataService.getClassRooms();

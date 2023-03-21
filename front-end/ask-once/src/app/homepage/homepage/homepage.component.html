@@ -32,7 +32,7 @@
 
 
     <button
-
+      *ngIf="user?.role === 'PROFESSOR'"
       mat-fab
       (click)="onAddButtonClick()"
       class="fab-button"
