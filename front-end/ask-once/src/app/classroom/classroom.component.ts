@@ -76,7 +76,7 @@ export class ClassroomComponent {
         this.questionService
           .loadAllTags(this.classRoomId)
           .subscribe((res: any) => {
-            this.tags = res.data[0].tags as string[];
+            this.tags = res.data.length > 0 && res.data[0].tags;
           });
       });
   }
