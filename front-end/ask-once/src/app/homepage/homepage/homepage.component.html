@@ -20,12 +20,18 @@
           </mat-card-header>
           <mat-divider></mat-divider>
           <mat-card-content>
-            <p>Number Of Questions: {{ class.students.length }}</p>
+            <p>Enrolled: {{ class.students.length }}</p>
           </mat-card-content>
         </mat-card>
       </a>
     </div>
-    <button mat-fab (click)="onAddButtonClick()" class="fab-button">
+
+    <button
+      *ngIf="user?.role !== 'STUDENT'"
+      mat-fab
+      (click)="onAddButtonClick()"
+      class="fab-button"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>

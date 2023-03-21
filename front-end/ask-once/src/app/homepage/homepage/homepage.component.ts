@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import userFromToken from 'src/app/utils/decodeJwt';
 
 @Component({
   selector: 'app-homepage',
@@ -29,9 +30,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.classRooms = res;
     });
 
-    this.http.getUser().subscribe((res) => {
-      this.user = res;
-    });
+    this.user = userFromToken();
   }
 
   ngOnDestroy(): void {

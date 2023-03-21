@@ -1,7 +1,7 @@
 <div class="max-w-xs border-l p-3 ">
   <p>Members</p>
   <div>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="user?.role === 'PROFESSOR'">
       <input
         matInput
         placeholder="Add member"
@@ -39,7 +39,10 @@
           <mat-list-item
             >{{ member.firstName }} {{ member.lastName }}</mat-list-item
           >
-          <button (click)="deleteMember(member)">
+          <button
+            *ngIf="user?.role === 'PROFESSOR'"
+            (click)="deleteMember(member)"
+          >
             <i class="material-icons">delete</i>
           </button>
         </div>
