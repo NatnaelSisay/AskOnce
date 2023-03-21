@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppGuardInterceptor } from '../app-guard.interceptor';
 import { CreatClassRoomComponent } from './homepage/createClassRoom/createClassRoom.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileImageModule } from '../profile-image/profile-image.module';
 
 @NgModule({
   declarations: [HomepageComponent, CreatClassRoomComponent],
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     HomepageMaterialModules,
     HttpClientModule,
+    ProfileImageModule,
     RouterModule.forChild([
       {
         path: '',

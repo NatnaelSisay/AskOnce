@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreatClassRoomComponent } from './createClassRoom/createClassRoom.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import userFromToken from 'src/app/utils/decodeJwt';
 
 @Component({
   selector: 'app-homepage',
@@ -17,21 +18,28 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  http = inject(DataService);
+  dataService = inject(DataService);
   router = inject(Router);
   user?: IUser;
+  userSubsctiption?: Subscription;
   classRooms: IClassRoom[] = [];
   classRoomSubscriptioin?: Subscription;
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
+  imageFileName: string | null = null;
+  constructor(private dialog: MatDialog, private authService: AuthService) {
+    this.imageFileName = userFromToken().profileImage;
+    this.userSubsctiption = this.dataService.user$.subscribe((data) => {
+      if (data) {
+        this.user = data;
+      }
+    });
+  }
 
   ngOnInit() {
-    this.classRoomSubscriptioin = this.http.getClassRooms().subscribe((res) => {
-      this.classRooms = res;
-    });
-
-    this.http.getUser().subscribe((res) => {
-      this.user = res;
-    });
+    this.classRoomSubscriptioin = this.dataService
+      .getClassRooms()
+      .subscribe((res) => {
+        this.classRooms = res;
+      });
   }
 
   ngOnDestroy(): void {

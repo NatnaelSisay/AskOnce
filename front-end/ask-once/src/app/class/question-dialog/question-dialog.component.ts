@@ -82,7 +82,6 @@ export class QuestionDialogComponent {
       )
       .subscribe({
         next: (data: any) => {
-
           this.dialogRef.close({
             _id: data.data._id,
             question: this.QuestionForm.get('title')?.value ?? '',
@@ -95,6 +94,7 @@ export class QuestionDialogComponent {
               lastName: 'Doe',
               email: 'johnDoe@email.com',
               role: 'student',
+              profileImage: null,
             },
             showAnswers: false,
           } as IQuestion);

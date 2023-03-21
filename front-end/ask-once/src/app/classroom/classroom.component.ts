@@ -28,14 +28,7 @@ export class ClassroomComponent {
   searchKey!: string;
   questionService = inject(QuestionService);
   router = inject(Router);
-  user?: IUser = {
-    _id: '1',
-    email: 'JohnDoe@gmail.com ',
-    firstName: 'John',
-    lastName: 'Doe',
-    role: 'Student',
-  };
-
+  user?: IUser | null;
   questions?: IQuestion[];
   tags!: string[];
 
