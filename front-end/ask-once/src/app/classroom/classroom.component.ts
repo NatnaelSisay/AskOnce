@@ -38,6 +38,7 @@ export class ClassroomComponent {
     this.activatedRouter.params.subscribe((params: any) => {
       this.classRoomId = params.classroom_id;
     });
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
@@ -78,6 +79,9 @@ export class ClassroomComponent {
           .subscribe((res: any) => {
             this.tags = res.data.length > 0 && res.data[0].tags;
           });
+      });
+      this.questionService.getClassRoomById(this.classRoomId).subscribe((res: any) => {
+        this.classRoomName=res.data.name;
       });
   }
   showAns(ques: IQuestion) {
