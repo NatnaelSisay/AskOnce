@@ -33,7 +33,7 @@
     />
     <button
       class="bg-white px-3 h-10 rounded-md text-indigo-800 hover:text-indigo-600"
-      (click)="search()"
+      (click)="search(searchKey)"
       mat-icon-button
     >
       <mat-icon class="text-black text-2l"> search </mat-icon>
@@ -50,12 +50,17 @@
 
       <div class="">
         <div class="mb-10">
-          <div *ngIf="questions?.length === 0; else bod">
+          <div
+            *ngIf="
+              questions?.length === 0 || this.searchResults?.length === 0;
+              else bod
+            "
+          >
             <img src="../../assets/images/empty.jpg" alt="the images" />
           </div>
           <ng-template #bod>
             <div
-              *ngFor="let ques of questions"
+              *ngFor="let ques of searchResults ?? questions"
               class="pt-2 md:border-l-2 border-indigo-700 px-3"
             >
               <mat-card>

@@ -32,7 +32,10 @@ export class ClassroomComponent {
   questionService = inject(QuestionService);
   router = inject(Router);
   questions?: IQuestion[];
+  searchResults?: IQuestion[] | null;
   tags!: string[];
+  debounceTime = 500;
+  debounceKey: any;
 
   constructor(public dialog: MatDialog, private authService: AuthService) {
     this.activatedRouter.params.subscribe((params: any) => {
@@ -55,16 +58,29 @@ export class ClassroomComponent {
   tagger(tag: string) {}
 
   onKey(event: any) {
-    this.searchKey = event.target.value as string;
+    if (this.debounceKey) clearTimeout(this.debounceKey);
+    this.searchKey = event.target.value;
+    if (this.searchKey.length <= 0) {
+      this.searchResults = null;
+    } else {
+      this.debounceKey = setTimeout(
+        () => this.search(event.target.value as string),
+        this.debounceTime
+      );
+    }
   }
   answer_router() {
     this.router.navigateByUrl('question');
   }
-  search() {
+  search(searchKey: string) {
+    console.log(searchKey);
+
     this.questionService
-      .searchQuestions(this.searchKey, this.classRoomId)
+      .searchQuestions(searchKey, this.classRoomId)
       .subscribe((res: any) => {
-        this.questions = res.data as IQuestion[];
+        console.log(res);
+
+        this.searchResults = res.data as IQuestion[];
       });
   }
 
