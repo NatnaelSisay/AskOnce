@@ -45,6 +45,9 @@ export class QuestionService {
   removeAlike(id :string,clasroomId: string){
     return this.http.put('http://localhost:3000/class-room/'+clasroomId+'/questions/'+id+'/rm-like',{});
   }
+  getClassRoomById(id :string){
+    return this.http.get('http://localhost:3000/class-room/'+id)
+  }
 
 }
 
