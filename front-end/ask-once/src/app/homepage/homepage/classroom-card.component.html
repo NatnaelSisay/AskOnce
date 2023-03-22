@@ -6,11 +6,11 @@
       created By: {{ classRoom.professor.firstName }}
     </p>
     <div class="font-bold text-xl mb-2">{{ classRoom.name }}</div>
-    <p class="text-gray-700 text-base pb-1 line-clamp-2">
+    <p class="text-gray-700 text-base pb-1 line-clamp-2 pb-1">
       {{ classRoom.description }}
     </p>
     <mat-divider></mat-divider>
-    <p class="py-1">members: {{ classRoom.students.length }}</p>
+    <p class="pt-3">Members: {{ classRoom.students.length }}</p>
     <div *ngIf="tags" class="flex space-x-2">
       <div *ngFor="let t of tags">
         <mat-chip>
