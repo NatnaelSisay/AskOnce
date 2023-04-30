@@ -1,5 +1,7 @@
 # AskOnce
 
+![Main-dashboard](./images/main-dashboard.png)
+
 For many years, most instructors teach the same subject with largely the same course materials. Each batch's students essentially ask the same questions, and each batch's teachers provide identical answers.
 
 Students who have questions during class sessions can post them on the site. The instructor responds. If the question wasn't asked earlier, the next group of students must ensure that it was, then ask it so the teacher can respond.
